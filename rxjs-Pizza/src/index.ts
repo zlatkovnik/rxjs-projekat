@@ -1,3 +1,4 @@
-const d = document.createElement("div");
-d.innerHTML = "k";
-document.body.appendChild(d);
+import View from "./view/View";
+
+const view = new View(document.body);
+view.render();
