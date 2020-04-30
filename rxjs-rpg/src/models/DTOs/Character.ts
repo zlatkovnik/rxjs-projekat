@@ -9,8 +9,8 @@ import {
   RACE_PATH,
 } from "../../util/paths";
 
-import { pipe, of, from } from "rxjs";
-import { switchMap } from "rxjs/operators";
+import { pipe, of, from, Observable } from "rxjs";
+import { switchMap, mapTo } from "rxjs/operators";
 import { fromFetch } from "rxjs/fetch";
 import { getImageLink } from "../../util/misc";
 
@@ -27,28 +27,14 @@ export interface ICharacter {
   armor: IArmor;
 }
 
-export async function fetchById(id: number) {
-  fromFetch(CHARACTER_PATH + `/${id}`)
-    .pipe(
-      switchMap(async (res) => await res.json()),
-      switchMap(async (characterDb: ICharacterDb) => {
-        const [race, armor, weapon] = await fetchItems(characterDb);
-        // const character: Character = {
-        //   id: characterDb.id,
-        //   image: getImageLink(race.name),
-        //   armor: armor,
-        //   weapon: weapon,
-        //   attack: race.attack + weapon.attack,
-        //   defence: race.defence + armor.defence,
-        //   gold: characterDb.gold,
-        //   hp: race.hp,
-        //   name: characterDb.name,
-        //   race: race.name,
-        // };
-        // return character;
-      })
-    )
-    .subscribe(async (character) => {});
+export async function getCharacterObservable(id: number) {
+  return fromFetch(CHARACTER_PATH + `/${id}`).pipe(
+    switchMap(async (res) => await res.json()),
+    switchMap(async (characterDb: ICharacterDb) => {
+      const [race, armor, weapon] = await fetchItems(characterDb);
+      return mapToCharacter(characterDb, race, armor, weapon);
+    })
+  );
 }
 
 export async function fetchItems(character: ICharacterDb) {
@@ -57,6 +43,27 @@ export async function fetchItems(character: ICharacterDb) {
     fetch(ARMOR_PATH + `/${character.armorId}`),
     fetch(WEAPON_PATH + `/${character.weaponId}`),
   ]).then((res) => Promise.all(res.map((r) => r.json())));
+}
+
+export function mapToCharacter(
+  characterDb: ICharacterDb,
+  race: IRace,
+  armor: IArmor,
+  weapon: IWeapon
+): ICharacter {
+  const character: ICharacter = {
+    id: characterDb.id,
+    image: getImageLink(race.name),
+    armor: armor,
+    weapon: weapon,
+    attack: race.attack + weapon.attack,
+    defence: race.defence + armor.defence,
+    gold: characterDb.gold,
+    hp: race.hp,
+    name: characterDb.name,
+    race: race.name,
+  };
+  return character;
 }
 
 export function changeWeapon(character: ICharacter, weapon: IWeapon) {

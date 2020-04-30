@@ -5,10 +5,14 @@ export default class ViewCreator {
   container: HTMLElement;
   racesPromise: Promise<IRace[]>;
   constructor(parent: HTMLElement) {
+    const row = document.createElement("div");
+    row.className = "row";
+    parent.appendChild(row);
+
     this.container = document.createElement("div");
     this.container.className = "d-flex flex-column";
     this.container.innerHTML = "<h1>Loading...</h1>";
-    parent.appendChild(this.container);
+    row.appendChild(this.container);
 
     this.racesPromise = getRaces();
   }

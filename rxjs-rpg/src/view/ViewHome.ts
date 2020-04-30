@@ -1,4 +1,4 @@
-export default class ViewCard {
+export default class ViewHome {
   container: HTMLElement;
   constructor(parent: HTMLElement) {
     this.container = document.createElement("div");

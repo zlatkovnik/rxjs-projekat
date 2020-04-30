@@ -1,29 +1,45 @@
 import ViewCreator from "./ViewCreator";
-import { ICharacter, fetchById } from "../models/DTOs/Character";
-import { getImageLink } from "../util/misc";
+import { ICharacter, getCharacterObservable } from "../models/DTOs/Character";
+import { Page } from "../util/pages";
+import ViewHome from "./ViewHome";
 
 export default class View {
   container: HTMLElement;
+  currentPage: Page;
+
   creator: ViewCreator;
+  home: ViewHome;
 
   myCharacter: ICharacter;
 
   constructor(parent: HTMLElement) {
+    //Kontejner div
     this.container = document.createElement("div");
     this.container.className = "container";
     parent.appendChild(this.container);
 
+    //Default stranica
+    this.currentPage = Page.Create;
+
+    //Home
+    this.home = new ViewHome(this.container);
+
     //Character creator
-    const createContainer = document.createElement("div");
-    createContainer.className = "row";
-    this.container.appendChild(createContainer);
-    this.creator = new ViewCreator(createContainer);
+    this.creator = new ViewCreator(this.container);
 
     //Character cards
   }
 
-  render() {
-    fetchById(1);
-    this.creator.render();
+  async render() {
+    switch (this.currentPage) {
+      case Page.Home:
+        this.home.render();
+        break;
+      case Page.Create:
+        this.creator.render();
+        break;
+      default:
+        break;
+    }
   }
 }
