@@ -1,0 +1,33 @@
+{
+  "name": "rxjs-rpg",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "serve": "webpack-dev-server",
+    "db": "json-server --watch db.json",
+    "dev": "concurrently --kill-others \"npm run watch\" \"npm run serve\" \"npm run db\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "file-loader": "^6.0.0",
+    "ts-loader": "^7.0.2",
+    "typescript": "^3.8.3",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "dependencies": {
+    "jquery": "^3.5.0",
+    "lodash": "^4.17.15",
+    "popper.js": "^1.16.1",
+    "rxjs": "^6.5.5"
+  }
+}

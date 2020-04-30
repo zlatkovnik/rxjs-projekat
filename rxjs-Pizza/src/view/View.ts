@@ -4,7 +4,7 @@ import { IOrder } from "../models/interfaces";
 
 export default class View {
   orders: IOrder[];
-  queues: ViewQueue;
+  queue: ViewQueue;
   container: HTMLElement;
   constructor(parent: HTMLElement) {
     this.orders = [];
@@ -18,7 +18,7 @@ export default class View {
     const progressRow = document.createElement("div");
     progressRow.className = "row";
     this.container.appendChild(progressRow);
-    this.queues = new ViewQueue(progressRow);
+    this.queue = new ViewQueue(progressRow);
 
     //subscribeForOrders(this.addOrder);
   }
@@ -27,7 +27,7 @@ export default class View {
     this.orders = await Promise.all(
       [1, 2, 3, 4, 5].map((num) => fetchOrder(num))
     );
-    this.queues.render(this.orders);
+    this.queue.render(this.orders);
   }
 
   addOrder = (order: IOrder) => {};
