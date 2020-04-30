@@ -15,62 +15,6 @@
       "armorId": 1,
       "weaponId": 1,
       "id": 2
-    },
-    {
-      "name": "",
-      "raceId": 1,
-      "gold": 0,
-      "armorId": 1,
-      "weaponId": 1,
-      "id": 3
-    },
-    {
-      "name": "",
-      "raceId": 1,
-      "gold": 0,
-      "armorId": 1,
-      "weaponId": 1,
-      "id": 4
-    },
-    {
-      "name": "",
-      "raceId": 1,
-      "gold": 0,
-      "armorId": 1,
-      "weaponId": 1,
-      "id": 5
-    },
-    {
-      "name": "",
-      "raceId": 1,
-      "gold": 0,
-      "armorId": 1,
-      "weaponId": 1,
-      "id": 6
-    },
-    {
-      "name": "",
-      "raceId": 1,
-      "gold": 0,
-      "armorId": 1,
-      "weaponId": 1,
-      "id": 7
-    },
-    {
-      "name": "",
-      "raceId": 1,
-      "gold": 0,
-      "armorId": 1,
-      "weaponId": 1,
-      "id": 8
-    },
-    {
-      "name": "",
-      "raceId": 1,
-      "gold": 0,
-      "armorId": 1,
-      "weaponId": 1,
-      "id": 9
     }
   ],
   "races": [

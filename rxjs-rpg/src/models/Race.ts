@@ -1,13 +1,12 @@
 import { RACE_PATH } from "../util/paths";
 
-export default class Race {
+export interface IRace {
   id: number;
   name: string;
   hp: number;
   attack: number;
   defence: number;
-
-  static async getRaces() {
-    return fetch(RACE_PATH).then((res) => res.json());
-  }
+}
+export async function getRaces() {
+  return fetch(RACE_PATH).then((res) => res.json());
 }

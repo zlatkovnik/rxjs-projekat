@@ -1,8 +1,7 @@
-import Race from "../Race";
-//import Item from "../Item";
-import Weapon from "../Weapon";
-import Armor from "../Armor";
-import CharacterDb from "../CharacterDb";
+import { IRace } from "../Race";
+import { IWeapon } from "../Weapon";
+import { IArmor } from "../Armor";
+import { ICharacterDb } from "../CharacterDb";
 import {
   CHARACTER_PATH,
   ARMOR_PATH,
@@ -15,7 +14,7 @@ import { switchMap } from "rxjs/operators";
 import { fromFetch } from "rxjs/fetch";
 import { getImageLink } from "../../util/misc";
 
-export default class Character {
+export interface ICharacter {
   id: number;
   name: string;
   gold: number;
@@ -24,51 +23,49 @@ export default class Character {
   hp: number;
   attack: number;
   defence: number;
-  //items?: Item[];
-  weapon: Weapon;
-  armor: Armor;
+  weapon: IWeapon;
+  armor: IArmor;
+}
 
-  static async fetchById(id: number) {
-    fromFetch(CHARACTER_PATH + `/${id}`)
-      .pipe(
-        switchMap(async (res) => await res.json()),
-        switchMap(async (characterDb: CharacterDb) => {
-          const [race, armor, weapon] = await Character.fetchItems(characterDb);
-          // const character: Character = {
-          //   id: characterDb.id,
-          //   image: getImageLink(race.name),
-          //   armor: armor,
-          //   weapon: weapon,
-          //   attack: race.attack + weapon.attack,
-          //   defence: race.defence + armor.defence,
-          //   gold: characterDb.gold,
-          //   hp: race.hp,
-          //   name: characterDb.name,
-          //   race: race.name,
-          // };
-          // return character;
-        })
-      )
-      .subscribe(async (character) => {});
-  }
+export async function fetchById(id: number) {
+  fromFetch(CHARACTER_PATH + `/${id}`)
+    .pipe(
+      switchMap(async (res) => await res.json()),
+      switchMap(async (characterDb: ICharacterDb) => {
+        const [race, armor, weapon] = await fetchItems(characterDb);
+        // const character: Character = {
+        //   id: characterDb.id,
+        //   image: getImageLink(race.name),
+        //   armor: armor,
+        //   weapon: weapon,
+        //   attack: race.attack + weapon.attack,
+        //   defence: race.defence + armor.defence,
+        //   gold: characterDb.gold,
+        //   hp: race.hp,
+        //   name: characterDb.name,
+        //   race: race.name,
+        // };
+        // return character;
+      })
+    )
+    .subscribe(async (character) => {});
+}
 
-  static async fetchItems(character: CharacterDb) {
-    return Promise.all([
-      fetch(RACE_PATH + `/${character.raceId}`),
-      fetch(ARMOR_PATH + `/${character.armorId}`),
-      fetch(WEAPON_PATH + `/${character.weaponId}`),
-    ]).then((res) => Promise.all(res.map((r) => r.json())));
-  }
+export async function fetchItems(character: ICharacterDb) {
+  return Promise.all([
+    fetch(RACE_PATH + `/${character.raceId}`),
+    fetch(ARMOR_PATH + `/${character.armorId}`),
+    fetch(WEAPON_PATH + `/${character.weaponId}`),
+  ]).then((res) => Promise.all(res.map((r) => r.json())));
+}
 
-  static changeWeapon(character: Character, weapon: Weapon) {
-    character.attack =
-      character.attack - character.weapon.attack + weapon.attack;
-    character.weapon = weapon;
-  }
+export function changeWeapon(character: ICharacter, weapon: IWeapon) {
+  character.attack = character.attack - character.weapon.attack + weapon.attack;
+  character.weapon = weapon;
+}
 
-  changeArmor(character: Character, armor: Armor) {
-    character.defence =
-      character.defence - character.armor.defence + armor.defence;
-    character.armor = armor;
-  }
+export function changeArmor(character: ICharacter, armor: IArmor) {
+  character.defence =
+    character.defence - character.armor.defence + armor.defence;
+  character.armor = armor;
 }

@@ -1,4 +1,4 @@
-export default class Weapon {
+export interface IWeapon {
   id: number;
   name: string;
   attack: number;

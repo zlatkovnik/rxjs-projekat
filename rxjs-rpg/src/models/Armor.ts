@@ -1,4 +1,4 @@
-export default class Armor {
+export interface IArmor {
   id: number;
   name: string;
   defence: number;

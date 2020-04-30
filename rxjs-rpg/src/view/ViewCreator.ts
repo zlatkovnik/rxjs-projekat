@@ -1,16 +1,16 @@
-import Race from "../models/Race";
-import CharacterDb from "../models/CharacterDb";
+import { IRace, getRaces } from "../models/Race";
+import { ICharacterDb, createCharacter } from "../models/CharacterDb";
 
 export default class ViewCreator {
   container: HTMLElement;
-  racesPromise: Promise<Race[]>;
+  racesPromise: Promise<IRace[]>;
   constructor(parent: HTMLElement) {
     this.container = document.createElement("div");
     this.container.className = "d-flex flex-column";
     this.container.innerHTML = "<h1>Loading...</h1>";
     parent.appendChild(this.container);
 
-    this.racesPromise = Race.getRaces();
+    this.racesPromise = getRaces();
   }
 
   async render() {
@@ -67,14 +67,14 @@ export default class ViewCreator {
   }
 
   handleSubmit(nameInput: HTMLInputElement, raceInput: HTMLSelectElement) {
-    const character: CharacterDb = {
+    const character: ICharacterDb = {
       name: nameInput.value,
       raceId: parseInt(raceInput.value),
       gold: 0,
       armorId: 1,
       weaponId: 1,
     };
-    CharacterDb.createCharacter(character).catch((err) =>
+    createCharacter(character).catch((err) =>
       console.log(
         "Error occured while inserting character in database",
         err.message

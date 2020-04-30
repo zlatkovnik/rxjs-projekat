@@ -1,12 +1,12 @@
 import ViewCreator from "./ViewCreator";
-import Character from "../models/DTOs/Character";
+import { ICharacter, fetchById } from "../models/DTOs/Character";
 import { getImageLink } from "../util/misc";
 
 export default class View {
   container: HTMLElement;
   creator: ViewCreator;
 
-  myCharacter: Character;
+  myCharacter: ICharacter;
 
   constructor(parent: HTMLElement) {
     this.container = document.createElement("div");
@@ -23,7 +23,7 @@ export default class View {
   }
 
   render() {
-    Character.fetchById(1);
+    fetchById(1);
     this.creator.render();
   }
 }

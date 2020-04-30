@@ -1,25 +1,24 @@
 import { CHARACTER_PATH } from "../util/paths";
 
-export default class CharacterDb {
+export interface ICharacterDb {
   id?: number;
   name: string;
   gold: number;
   raceId: number;
-  //itemIds: number[];
   weaponId: number;
   armorId: number;
+}
 
-  static async fetchCharacter(id: number): Promise<CharacterDb> {
-    return fetch(CHARACTER_PATH + `/${id}`).then((res) => res.json());
-  }
+export async function fetchCharacter(id: number): Promise<ICharacterDb> {
+  return fetch(CHARACTER_PATH + `/${id}`).then((res) => res.json());
+}
 
-  static async createCharacter(character: CharacterDb) {
-    return fetch(CHARACTER_PATH, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(character),
-    });
-  }
+export async function createCharacter(character: ICharacterDb) {
+  return fetch(CHARACTER_PATH, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(character),
+  });
 }

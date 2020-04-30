@@ -1,4 +1,4 @@
-export default class Item {
+export interface IItem {
   id: number;
   name: string;
   attack: number;
