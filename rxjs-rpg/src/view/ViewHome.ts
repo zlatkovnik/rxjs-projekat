@@ -1,18 +1,17 @@
 import { ICharacter } from "../models/DTOs/Character";
-import ViewCard from "./ViewCard";
+import renderCard from "./ViewCard";
 
-export default class ViewHome {
-  container: HTMLElement;
-  myCharacter: ICharacter;
-  constructor(parent: HTMLElement, myCharacter: ICharacter) {
-    this.myCharacter = myCharacter;
-    this.container = document.createElement("div");
-    this.container.className = "container";
-    parent.appendChild(this.container);
-  }
+export default function renderHome(
+  parent: HTMLElement,
+  myCharacter: ICharacter
+) {
+  const container = document.createElement("div");
+  container.className = "container";
+  parent.appendChild(container);
 
-  render() {
-    const card = new ViewCard(this.container, this.myCharacter);
-    card.render();
-  }
+  const row = document.createElement("div");
+  row.className = "row";
+  container.appendChild(row);
+
+  renderCard(row, myCharacter);
 }

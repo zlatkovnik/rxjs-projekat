@@ -1,0 +1,24 @@
+const cardTemplate = (
+  image: string,
+  name: string,
+  race: string,
+  gold: number,
+  hp: number,
+  attack: number,
+  defence: number
+) =>
+  `<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="${image}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">${name}</h5>
+        <p class="card-text">${race}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">${gold}</li>
+        <li class="list-group-item">${hp}</li>
+        <li class="list-group-item">${attack}</li>
+        <li class="list-group-item">${defence}</li>
+    </ul>
+</div>`;
+
+export default cardTemplate;

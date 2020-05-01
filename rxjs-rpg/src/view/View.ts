@@ -1,18 +1,21 @@
 import ViewCreator from "./ViewCreator";
 import { ICharacter, fetchCharacter } from "../models/DTOs/Character";
 import { Page } from "../util/pages";
-import ViewHome from "./ViewHome";
+import renderHome from "./ViewHome";
+import renderNavbar from "./ViewNavbar";
 
 export default class View {
   container: HTMLElement;
+  navbarContainer: HTMLElement;
   currentPage: Page;
 
   creator: ViewCreator;
-  home: ViewHome;
 
   myCharacter: ICharacter;
 
   constructor(parent: HTMLElement) {
+    this.navbarContainer = document.createElement("div");
+    parent.appendChild(this.navbarContainer);
     //Kontejner div
     this.container = document.createElement("div");
     this.container.className = "container";
@@ -22,11 +25,19 @@ export default class View {
   }
 
   async render() {
-    this.myCharacter = await fetchCharacter(2);
-    switch (this.currentPage) {
+    //document.body.innerHTML = "";
+    this.myCharacter = await fetchCharacter(1);
+
+    renderNavbar(this.navbarContainer, this.currentPage, this.render);
+
+    this.renderPage(this.currentPage);
+  }
+
+  renderPage(page: Page) {
+    this.currentPage = page;
+    switch (page) {
       case Page.Home:
-        this.home = new ViewHome(this.container, this.myCharacter);
-        this.home.render();
+        renderHome(this.container, this.myCharacter);
         break;
       case Page.Create:
         this.creator = new ViewCreator(this.container);
