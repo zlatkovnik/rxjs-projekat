@@ -1,5 +1,5 @@
 import ViewCreator from "./ViewCreator";
-import { ICharacter, getCharacterObservable } from "../models/DTOs/Character";
+import { ICharacter, fetchCharacter } from "../models/DTOs/Character";
 import { Page } from "../util/pages";
 import ViewHome from "./ViewHome";
 
@@ -17,25 +17,19 @@ export default class View {
     this.container = document.createElement("div");
     this.container.className = "container";
     parent.appendChild(this.container);
-
     //Default stranica
-    this.currentPage = Page.Create;
-
-    //Home
-    this.home = new ViewHome(this.container);
-
-    //Character creator
-    this.creator = new ViewCreator(this.container);
-
-    //Character cards
+    this.currentPage = Page.Home;
   }
 
   async render() {
+    this.myCharacter = await fetchCharacter(2);
     switch (this.currentPage) {
       case Page.Home:
+        this.home = new ViewHome(this.container, this.myCharacter);
         this.home.render();
         break;
       case Page.Create:
+        this.creator = new ViewCreator(this.container);
         this.creator.render();
         break;
       default:

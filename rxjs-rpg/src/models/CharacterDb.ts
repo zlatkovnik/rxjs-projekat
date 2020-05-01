@@ -9,8 +9,12 @@ export interface ICharacterDb {
   armorId: number;
 }
 
-export async function fetchCharacter(id: number): Promise<ICharacterDb> {
+export async function fetchCharacterDb(id: number): Promise<ICharacterDb> {
   return fetch(CHARACTER_PATH + `/${id}`).then((res) => res.json());
+}
+
+export async function fetchAllCharacters(): Promise<ICharacterDb[]> {
+  return fetch(CHARACTER_PATH).then((res) => res.json());
 }
 
 export async function createCharacter(character: ICharacterDb) {

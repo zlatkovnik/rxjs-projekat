@@ -9,9 +9,6 @@ import {
   RACE_PATH,
 } from "../../util/paths";
 
-import { pipe, of, from, Observable } from "rxjs";
-import { switchMap, mapTo } from "rxjs/operators";
-import { fromFetch } from "rxjs/fetch";
 import { getImageLink } from "../../util/misc";
 
 export interface ICharacter {
@@ -27,14 +24,13 @@ export interface ICharacter {
   armor: IArmor;
 }
 
-export async function getCharacterObservable(id: number) {
-  return fromFetch(CHARACTER_PATH + `/${id}`).pipe(
-    switchMap(async (res) => await res.json()),
-    switchMap(async (characterDb: ICharacterDb) => {
-      const [race, armor, weapon] = await fetchItems(characterDb);
-      return mapToCharacter(characterDb, race, armor, weapon);
-    })
-  );
+export async function fetchCharacter(id: number) {
+  return fetch(CHARACTER_PATH + `/${id}`)
+    .then((res) => res.json())
+    .then(async (character) => {
+      const [race, armor, weapon] = await fetchItems(character);
+      return mapToCharacter(character, race, armor, weapon);
+    });
 }
 
 export async function fetchItems(character: ICharacterDb) {
