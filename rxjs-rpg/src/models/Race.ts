@@ -7,6 +7,11 @@ export interface IRace {
   attack: number;
   defence: number;
 }
+
+export async function fetchRace(id: number): Promise<IRace> {
+  return fetch(RACE_PATH + `/${id}`).then((res) => res.json());
+}
+
 export async function fetchAllRaces(): Promise<IRace[]> {
   return fetch(RACE_PATH).then((res) => res.json());
 }

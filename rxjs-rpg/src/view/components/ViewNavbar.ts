@@ -1,9 +1,8 @@
-import { Page } from "../../util/pages";
 import navbarTemplate from "../templates/navbarTemplate";
+import { ICharacter } from "../../models/DTOs/Character";
 
 export default function renderNavbar(
   parent: HTMLElement,
-  currentPage: string,
   renderPage: Function
 ) {
   const div = document.createElement("div");

@@ -4,16 +4,18 @@ import { Subscription } from "rxjs";
 
 export default class ViewHome {
   container: HTMLDivElement;
+  cardColumn: HTMLElement;
+  infoColumn: HTMLElement;
   subscriber: Subscription;
   constructor(parent: HTMLElement) {
     this.container = document.createElement("div");
+    this.container.className = "";
     parent.appendChild(this.container);
   }
 
-  render() {
+  async render() {
     this.subscriber = pollingObservable(5000).subscribe((character) => {
-      this.container.innerHTML = "";
-      renderCard(this.container, character);
+      renderCard(this.container, character, 20);
     });
   }
 
@@ -22,5 +24,3 @@ export default class ViewHome {
     this.container.innerHTML = "";
   }
 }
-
-//TODO UNSUBSCRIBE

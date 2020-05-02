@@ -36,6 +36,20 @@ export async function fetchCharacter(id: number) {
   });
 }
 
+export async function fetchRandomCharacter() {
+  return fetchCharacterCount().then((count) =>
+    fetchCharacter(Math.floor(Math.random() * count) + 1)
+  );
+}
+
+export async function fetchRandomCharacterExcept(id: number) {
+  const characterCount = await fetchCharacterCount();
+  const ids = Array.from(Array(characterCount).keys())
+    .map((x) => x + 1)
+    .filter((num) => num != id);
+  return fetchCharacter(ids[Math.floor(Math.random() * ids.length)]);
+}
+
 export async function fetchAllCharacters() {
   const characterCount = await fetchCharacterCount();
   const ids = Array.from(Array(characterCount).keys()).map((x) => x + 1);

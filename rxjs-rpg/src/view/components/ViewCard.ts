@@ -1,17 +1,38 @@
 import { ICharacter } from "../../models/DTOs/Character";
 import cardTemplate from "../templates/cardTemplate";
 import notFoundTemplate from "../templates/notFoundTemplate";
+import cardTemplateFixed from "../templates/cardTemplateFixed";
 
 export default function renderCard(
   parent: HTMLElement,
-  character: ICharacter | null
+  character: ICharacter | null,
+  sizeInRem: number = 0
 ) {
-  const div = document.createElement("div");
-  parent.appendChild(div);
   if (character) {
     const { name, gold, attack, defence, image, race, hp } = character;
-    div.innerHTML = cardTemplate(image, name, race, gold, hp, attack, defence);
+    if (sizeInRem > 0)
+      parent.innerHTML = cardTemplateFixed(
+        sizeInRem,
+        image,
+        name,
+        race,
+        gold,
+        hp,
+        attack,
+        defence
+      );
+    else
+      parent.innerHTML = cardTemplate(
+        image,
+        name,
+        race,
+        gold,
+        hp,
+        attack,
+        defence
+      );
   } else {
-    div.innerHTML = notFoundTemplate();
+    parent.innerHTML = notFoundTemplate();
   }
+  return parent;
 }
