@@ -1,17 +1,16 @@
 import { ICharacter } from "../models/DTOs/Character";
 import renderCard from "./ViewCard";
+import { pollingObservable } from "../service/inputService";
 
-export default function renderHome(
-  parent: HTMLElement,
-  myCharacter: ICharacter
-) {
+export default function renderHome(parent: HTMLElement) {
   const container = document.createElement("div");
-  container.className = "container";
   parent.appendChild(container);
 
-  const row = document.createElement("div");
-  row.className = "row";
-  container.appendChild(row);
-
-  renderCard(row, myCharacter);
+  const polling$ = pollingObservable(5000);
+  polling$.subscribe((char) => {
+    container.innerHTML = "";
+    renderCard(container, char);
+  });
 }
+
+//TODO UNSUBSCRIBE

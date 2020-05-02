@@ -14,10 +14,10 @@ const cardTemplate = (
         <p class="card-text">${race}</p>
     </div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">${gold}</li>
-        <li class="list-group-item">${hp}</li>
-        <li class="list-group-item">${attack}</li>
-        <li class="list-group-item">${defence}</li>
+        <li class="list-group-item">gold: ${gold}</li>
+        <li class="list-group-item">hp: ${hp}</li>
+        <li class="list-group-item">attack: ${attack}</li>
+        <li class="list-group-item">defence: ${defence}</li>
     </ul>
 </div>`;
 

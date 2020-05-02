@@ -1,4 +1,4 @@
-import { CHARACTER_PATH } from "../util/paths";
+import { CHARACTER_PATH, CHARACTER_COUNT_PATH } from "../util/paths";
 
 export interface ICharacterDb {
   id?: number;
@@ -13,8 +13,14 @@ export async function fetchCharacterDb(id: number): Promise<ICharacterDb> {
   return fetch(CHARACTER_PATH + `/${id}`).then((res) => res.json());
 }
 
-export async function fetchAllCharacters(): Promise<ICharacterDb[]> {
+export async function fetchAllCharactersDb(): Promise<ICharacterDb[]> {
   return fetch(CHARACTER_PATH).then((res) => res.json());
+}
+
+export async function fetchCharacterCount(): Promise<number> {
+  return fetch(CHARACTER_COUNT_PATH)
+    .then((res) => res.json())
+    .then((data) => data.count);
 }
 
 export async function createCharacter(character: ICharacterDb) {

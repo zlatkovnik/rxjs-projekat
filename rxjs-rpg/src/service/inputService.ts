@@ -1,20 +1,31 @@
-import { fromEvent } from "rxjs";
-import { debounceTime, switchMap, map } from "rxjs/operators";
-import { ICharacterDb, fetchAllCharacters } from "../models/CharacterDb";
+import { fromEvent, interval, timer } from "rxjs";
+import { debounceTime, switchMap, map, tap } from "rxjs/operators";
+import {
+  ICharacterDb,
+  fetchAllCharactersDb,
+  fetchCharacterCount,
+} from "../models/CharacterDb";
+import { fetchCharacter } from "../models/DTOs/Character";
 
-export function checkForDuplicateName(
-  nameContainer: HTMLInputElement,
-  fn: Function
+export function checkForDuplicateNameObservable(
+  nameContainer: HTMLInputElement
 ) {
-  fromEvent(nameContainer, "input")
-    .pipe(
-      debounceTime(500),
-      switchMap(async () => await fetchAllCharacters()),
-      map((characters: ICharacterDb[]) =>
-        characters
-          .map((character) => character.name)
-          .includes(nameContainer.value)
-      )
+  return fromEvent(nameContainer, "input").pipe(
+    debounceTime(500),
+    switchMap(async () => await fetchAllCharactersDb()),
+    map((characters: ICharacterDb[]) =>
+      characters
+        .map((character) => character.name)
+        .includes(nameContainer.value)
     )
-    .subscribe((bool) => fn(bool));
+  );
+}
+
+export function pollingObservable(ms: number) {
+  return timer(0, ms).pipe(
+    switchMap(async (_) => await fetchCharacterCount()),
+    switchMap(
+      async (id) => await fetchCharacter(Math.floor(Math.random() * id))
+    )
+  );
 }

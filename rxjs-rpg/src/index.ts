@@ -1,4 +1,3 @@
-import View from "./view/View";
+import render from "./view/View";
 
-const view = new View(document.body);
-view.render();
+const view = render(document.body);

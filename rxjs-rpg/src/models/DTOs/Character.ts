@@ -1,7 +1,11 @@
 import { IRace } from "../Race";
 import { IWeapon } from "../Weapon";
 import { IArmor } from "../Armor";
-import { ICharacterDb } from "../CharacterDb";
+import {
+  ICharacterDb,
+  fetchCharacterDb,
+  fetchAllCharactersDb,
+} from "../CharacterDb";
 import {
   CHARACTER_PATH,
   ARMOR_PATH,
@@ -25,12 +29,23 @@ export interface ICharacter {
 }
 
 export async function fetchCharacter(id: number) {
-  return fetch(CHARACTER_PATH + `/${id}`)
-    .then((res) => res.json())
-    .then(async (character) => {
-      const [race, armor, weapon] = await fetchItems(character);
-      return mapToCharacter(character, race, armor, weapon);
-    });
+  return fetchCharacterDb(id).then(async (character: ICharacterDb) => {
+    const [race, armor, weapon] = await fetchItems(character);
+    return mapToCharacter(character, race, armor, weapon);
+  });
+}
+
+export async function fetchAllCharacters() {
+  // return fetchAllCharactersDb().then(
+  //   async (characters) =>
+  //     await Promise.all(
+  //       characters.map((character) => fetchItems(character))
+  //     ).then((items) => {
+  //       const weird = items
+  //         .map((item, index) => [characters[index], ...item])
+  //         .map((w) => mapToCharacter(w[0]));
+  //     })
+  // );
 }
 
 export async function fetchItems(character: ICharacterDb) {

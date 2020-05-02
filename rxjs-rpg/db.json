@@ -1,7 +1,8 @@
 {
+  "characterCount": { "count": 5 },
   "characters": [
     {
-      "name": "Dathomir",
+      "name": "Edwin",
       "gold": 5,
       "raceId": 1,
       "weaponId": 1,
@@ -15,6 +16,30 @@
       "armorId": 1,
       "weaponId": 1,
       "id": 2
+    },
+    {
+      "name": "Urag gro-Shub",
+      "raceId": 2,
+      "gold": 0,
+      "armorId": 1,
+      "weaponId": 1,
+      "id": 3
+    },
+    {
+      "name": "Arthas",
+      "raceId": 3,
+      "gold": 0,
+      "armorId": 1,
+      "weaponId": 1,
+      "id": 4
+    },
+    {
+      "name": "Filavandrel",
+      "raceId": 5,
+      "gold": 0,
+      "armorId": 1,
+      "weaponId": 1,
+      "id": 5
     }
   ],
   "races": [
