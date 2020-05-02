@@ -1,33 +1,55 @@
-import { ICharacter, fetchCharacter } from "../models/DTOs/Character";
 import { Page } from "../util/pages";
-import renderHome from "./ViewHome";
-import renderNavbar from "./ViewNavbar";
-import renderCreator from "./ViewCreator";
-import pageTemplate from "./templates/pageTemplate";
-import renderSelect from "./ViewSelect";
+import renderNavbar from "./pages/ViewNavbar";
+import renderCreator from "./pages/ViewCreator";
+import renderSelect from "./pages/ViewSelect";
+import ViewHome from "./pages/ViewHome";
+import ViewCreator from "./pages/ViewCreator";
+import ViewSelect from "./pages/ViewSelect";
 
-export default function render(parent: HTMLElement) {
-  parent.innerHTML = pageTemplate();
+export default class View {
+  navbarContainer: HTMLDivElement;
+  contentContainer: HTMLDivElement;
 
-  const container = document.querySelector("#container");
-  const navbar = <HTMLElement>document.querySelector("#navbar");
-  renderNavbar(navbar, Page.Home, renderPage);
-}
+  viewHome: ViewHome;
+  viewCreator: ViewCreator;
+  viewSelect: ViewSelect;
 
-const renderPage = async (page: string) => {
-  const container = <HTMLElement>document.querySelector("#container");
-  container.innerHTML = "";
-  switch (page) {
-    case Page.Home:
-      renderHome(container);
-      break;
-    case Page.Create:
-      renderCreator(container);
-      break;
-    case Page.Select:
-      renderSelect(container);
-      break;
-    default:
-      break;
+  constructor(parent: HTMLElement) {
+    this.navbarContainer = document.createElement("div");
+    parent.appendChild(this.navbarContainer);
+    this.contentContainer = document.createElement("div");
+    this.contentContainer.className = "container";
+    parent.appendChild(this.contentContainer);
+    //Pages
+    this.viewHome = new ViewHome(this.contentContainer);
+    this.viewCreator = new ViewCreator(this.contentContainer);
+    this.viewSelect = new ViewSelect(this.contentContainer);
   }
-};
+
+  render() {
+    renderNavbar(this.navbarContainer, Page.Home, this.renderPage);
+  }
+
+  renderPage = (page: string) => {
+    this.cleanUp();
+    switch (page) {
+      case Page.Home:
+        this.viewHome.render();
+        break;
+      case Page.Create:
+        this.viewCreator.render();
+        break;
+      case Page.Select:
+        this.viewSelect.render();
+        break;
+      default:
+        break;
+    }
+  };
+
+  cleanUp() {
+    this.viewHome.cleanup();
+    this.viewCreator.cleanUp();
+    this.viewSelect.cleanUp();
+  }
+}

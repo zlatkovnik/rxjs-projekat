@@ -7,7 +7,7 @@ const cardTemplate = (
   attack: number,
   defence: number
 ) =>
-  `<div class="card" style="width: 18rem;">
+  `<div class="card mt-5" style="width: 20rem;">
     <img class="card-img-top" src="${image}" alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title">${name}</h5>

@@ -1,5 +1,5 @@
-import { Page } from "../util/pages";
-import navbarTemplate from "./templates/navbarTemplate";
+import { Page } from "../../util/pages";
+import navbarTemplate from "../templates/navbarTemplate";
 
 export default function renderNavbar(
   parent: HTMLElement,

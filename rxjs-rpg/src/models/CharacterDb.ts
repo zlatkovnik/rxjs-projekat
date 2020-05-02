@@ -24,11 +24,23 @@ export async function fetchCharacterCount(): Promise<number> {
 }
 
 export async function createCharacter(character: ICharacterDb) {
+  await incrementCharacterCount();
   return fetch(CHARACTER_PATH, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(character),
+  });
+}
+
+async function incrementCharacterCount() {
+  const count = await fetchCharacterCount();
+  return fetch(CHARACTER_COUNT_PATH, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ count: count + 1 }),
   });
 }

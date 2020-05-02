@@ -5,6 +5,7 @@ import {
   ICharacterDb,
   fetchCharacterDb,
   fetchAllCharactersDb,
+  fetchCharacterCount,
 } from "../CharacterDb";
 import {
   CHARACTER_PATH,
@@ -36,16 +37,11 @@ export async function fetchCharacter(id: number) {
 }
 
 export async function fetchAllCharacters() {
-  // return fetchAllCharactersDb().then(
-  //   async (characters) =>
-  //     await Promise.all(
-  //       characters.map((character) => fetchItems(character))
-  //     ).then((items) => {
-  //       const weird = items
-  //         .map((item, index) => [characters[index], ...item])
-  //         .map((w) => mapToCharacter(w[0]));
-  //     })
-  // );
+  const characterCount = await fetchCharacterCount();
+  const ids = Array.from(Array(characterCount).keys()).map((x) => x + 1);
+  const promises = ids.map((id) => fetchCharacter(id));
+  const characters = await Promise.all(promises);
+  return characters;
 }
 
 export async function fetchItems(character: ICharacterDb) {

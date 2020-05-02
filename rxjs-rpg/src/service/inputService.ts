@@ -1,11 +1,11 @@
-import { fromEvent, interval, timer } from "rxjs";
+import { fromEvent, interval, timer, Observable } from "rxjs";
 import { debounceTime, switchMap, map, tap } from "rxjs/operators";
 import {
   ICharacterDb,
   fetchAllCharactersDb,
   fetchCharacterCount,
 } from "../models/CharacterDb";
-import { fetchCharacter } from "../models/DTOs/Character";
+import { fetchCharacter, ICharacter } from "../models/DTOs/Character";
 
 export function checkForDuplicateNameObservable(
   nameContainer: HTMLInputElement
@@ -21,11 +21,12 @@ export function checkForDuplicateNameObservable(
   );
 }
 
-export function pollingObservable(ms: number) {
+export function pollingObservable(ms: number): Observable<ICharacter> {
   return timer(0, ms).pipe(
     switchMap(async (_) => await fetchCharacterCount()),
     switchMap(
-      async (id) => await fetchCharacter(Math.floor(Math.random() * id))
+      async (count) =>
+        await fetchCharacter(Math.floor(Math.random() * count) + 1)
     )
   );
 }

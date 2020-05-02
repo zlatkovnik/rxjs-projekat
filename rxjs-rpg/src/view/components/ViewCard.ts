@@ -1,6 +1,6 @@
-import { ICharacter } from "../models/DTOs/Character";
-import cardTemplate from "./templates/cardTemplate";
-import notFoundTemplate from "./templates/notFoundTemplate";
+import { ICharacter } from "../../models/DTOs/Character";
+import cardTemplate from "../templates/cardTemplate";
+import notFoundTemplate from "../templates/notFoundTemplate";
 
 export default function renderCard(
   parent: HTMLElement,

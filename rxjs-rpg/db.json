@@ -1,5 +1,7 @@
 {
-  "characterCount": { "count": 5 },
+  "characterCount": {
+    "count": 7
+  },
   "characters": [
     {
       "name": "Edwin",
@@ -40,6 +42,22 @@
       "armorId": 1,
       "weaponId": 1,
       "id": 5
+    },
+    {
+      "name": "Lilith",
+      "raceId": 1,
+      "gold": 0,
+      "armorId": 1,
+      "weaponId": 1,
+      "id": 6
+    },
+    {
+      "name": "Skully",
+      "raceId": 3,
+      "gold": 0,
+      "armorId": 1,
+      "weaponId": 1,
+      "id": 7
     }
   ],
   "races": [
