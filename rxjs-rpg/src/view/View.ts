@@ -5,6 +5,7 @@ import ViewCreator from "./pages/ViewCreator";
 import ViewSelect from "./pages/ViewSelect";
 import { ICharacter } from "../models/DTOs/Character";
 import ViewCombat from "./pages/ViewCombat";
+import { randomIntervalObservable } from "../service/rxjsService";
 
 export default class View {
   navbarContainer: HTMLDivElement;

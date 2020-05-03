@@ -19,6 +19,7 @@ import {
   takeUntil,
   take,
   finalize,
+  concatMap,
 } from "rxjs/operators";
 import {
   ICharacterDb,
@@ -90,4 +91,28 @@ export function mergeInputsObservable(
   const press$ = fromEvent(body, "keydown");
 
   return merge(click$, press$).pipe(tap((ev) => console.log(ev)));
+}
+
+export function randomIntervalObservable(ms: number) {
+  return interval(0).pipe(
+    concatMap((i) => of(i).pipe(delay(1000 + Math.random() * ms)))
+  );
+}
+
+export function zipObservables(
+  interval: Observable<any>,
+  attack: Observable<any>
+) {
+  return zip(
+    interval.pipe(map((_) => Date.now())),
+    attack.pipe(map((_) => Date.now()))
+  ).pipe(map(([start, end]) => end - start));
+}
+
+export function intervalUntilClickObservable(
+  button: HTMLButtonElement,
+  ms: number
+) {
+  const click$ = fromEvent(button, "click");
+  return interval(ms).pipe(takeUntil(click$));
 }

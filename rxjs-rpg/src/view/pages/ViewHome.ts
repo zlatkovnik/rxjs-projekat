@@ -1,15 +1,13 @@
 import renderCard from "../components/ViewCard";
-import { pollingObservable } from "../../service/inputService";
+import { pollingObservable } from "../../service/rxjsService";
 import { Subscription } from "rxjs";
 
 export default class ViewHome {
   container: HTMLDivElement;
-  cardColumn: HTMLElement;
-  infoColumn: HTMLElement;
   subscriber: Subscription;
   constructor(parent: HTMLElement) {
     this.container = document.createElement("div");
-    this.container.className = "";
+    this.container.className = "row";
     parent.appendChild(this.container);
   }
 

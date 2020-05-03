@@ -9,16 +9,26 @@ import {
   countDownObservable,
   mergeInputsObservable,
   randomCharacterObservable,
-} from "../../service/inputService";
+  randomIntervalObservable,
+  zipObservables,
+  intervalUntilClickObservable,
+} from "../../service/rxjsService";
+import { Subscription, fromEvent } from "rxjs";
+import { tap } from "rxjs/operators";
 
 export default class ViewCombat {
   container: HTMLElement;
   myCharacter: ICharacter;
+  enemyCharacter: ICharacter;
 
   myHp: number;
   enemyHp: number;
 
   infoLabel: HTMLElement;
+  button: HTMLButtonElement;
+
+  subscription: Subscription;
+  subscription2: Subscription;
   constructor(parent: HTMLElement, character: ICharacter) {
     this.container = document.createElement("div");
     this.container.className = "d-flex align-items-center row";
@@ -40,7 +50,11 @@ export default class ViewCombat {
     this.container.appendChild(myCharacterContainer);
 
     const myBar = document.createElement("div");
-    myBar.innerHTML = hpBarTemplate(this.myCharacter.hp, this.myCharacter.hp);
+    myBar.innerHTML = hpBarTemplate(
+      "my-bar",
+      this.myCharacter.hp,
+      this.myCharacter.hp
+    );
     myCharacterContainer.appendChild(myBar);
   }
 
@@ -53,14 +67,19 @@ export default class ViewCombat {
     this.infoLabel.className = "h2 pb-5";
     middle.appendChild(this.infoLabel);
 
-    const button = document.createElement("button");
-    button.className = "btn btn-primary btn-lg";
-    button.innerHTML = "Press to start combat";
-    middle.appendChild(button);
-    button.onclick = this.handleStart;
+    this.button = document.createElement("button");
+    this.button.className = "btn btn-primary btn-lg";
+    this.button.innerHTML = "Press to start combat";
+    middle.appendChild(this.button);
+    this.button.onclick = this.handleStart;
   }
 
   async renderEnemy(enemy: ICharacter) {
+    //Trenutan hp
+    this.enemyCharacter = enemy;
+    this.enemyHp = enemy.hp;
+    this.myHp = this.myCharacter.hp;
+
     const enemyCharacterContainer = document.createElement("div");
     enemyCharacterContainer.innerHTML = "<h1>Loading enemy...</h1>";
     enemyCharacterContainer.className = "col-4";
@@ -70,24 +89,86 @@ export default class ViewCombat {
     renderCard(enemyCharacterContainer, enemy);
 
     const enemyBar = document.createElement("div");
-    enemyBar.innerHTML = hpBarTemplate(enemy.hp, enemy.hp);
+    enemyBar.innerHTML = hpBarTemplate("enemy-bar", enemy.hp, enemy.hp);
     enemyCharacterContainer.appendChild(enemyBar);
   }
 
   cleanUp() {
     this.container.innerHTML = "";
+    if (this.subscription) this.subscription.unsubscribe();
   }
 
   handleStart = (ev: any) => {
-    ev.target.disabled = true;
-    ev.target.innerHTML = "Get ready";
-    countDownObservable(1000).subscribe(
+    const button = ev.target;
+    button.disabled = true;
+    button.innerHTML = "Get ready";
+    countDownObservable(500).subscribe(
       (v: string) => (this.infoLabel.innerHTML = v),
       (err) => console.log(err),
       () => {
-        this.infoLabel.innerHTML = "Wait for prompt";
-        ev.target.disabled = false;
+        this.handleReset();
+        this.startCombat();
       }
     );
   };
+
+  startCombat() {
+    this.subscription = randomIntervalObservable(5000).subscribe(
+      () =>
+        (this.subscription2 = intervalUntilClickObservable(
+          this.button,
+          500
+        ).subscribe(
+          (v) => {
+            this.checkIfLose();
+            this.handleAttackPrompt();
+            this.myHp -= this.enemyCharacter.attack * 0.2;
+            this.setBarWidth("my-bar", this.myHp, this.myCharacter.hp);
+          },
+          (err) => console.log(err),
+          () => {
+            this.checkIfWin();
+            this.handleReset();
+            this.enemyHp -= this.myCharacter.attack;
+            this.setBarWidth("enemy-bar", this.enemyHp, this.enemyCharacter.hp);
+          }
+        ))
+    );
+  }
+
+  checkIfWin() {
+    if (this.enemyHp <= 0) {
+      this.subscription2.unsubscribe();
+      this.subscription.unsubscribe();
+      this.infoLabel.innerHTML = "You win! Select another character.";
+    }
+  }
+
+  checkIfLose() {
+    if (this.myHp <= 0) {
+      this.subscription2.unsubscribe();
+      this.subscription.unsubscribe();
+      this.infoLabel.innerHTML = "You lose, select another character";
+    }
+  }
+
+  setBarWidth(id: string, value: number, max: number) {
+    const bar = <HTMLDivElement>document.querySelector(`#${id}`);
+    bar.style.width = `${(value / max) * 100}%`;
+    bar.innerHTML = value.toString();
+  }
+
+  handleAttackPrompt() {
+    this.infoLabel.innerHTML = "Hurry attack!";
+    this.button.disabled = false;
+    this.button.className = "btn btn-danger btn-lg";
+    this.button.innerHTML = "NOW!";
+  }
+
+  handleReset() {
+    this.infoLabel.innerHTML = "Wait for prompt";
+    this.button.onclick = null;
+    this.button.className = "btn btn-secondary btn-lg";
+    this.button.innerHTML = "Get ready";
+  }
 }

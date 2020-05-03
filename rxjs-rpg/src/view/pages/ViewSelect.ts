@@ -39,4 +39,6 @@ export default class ViewSelect {
   handleSelect(ev: MouseEvent, character: ICharacter) {
     this.setSelectedCharacter(character);
   }
+
+  handleDelete(ev: MouseEvent, character: ICharacter) {}
 }

@@ -1,6 +1,6 @@
 import { IRace, fetchAllRaces } from "../../models/Race";
 import { ICharacterDb, createCharacter } from "../../models/CharacterDb";
-import { checkForDuplicateNameObservable } from "../../service/inputService";
+import { checkForDuplicateNameObservable } from "../../service/rxjsService";
 import createTemplate from "../templates/createTemplate";
 import { Subscription } from "rxjs";
 
