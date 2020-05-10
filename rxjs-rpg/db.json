@@ -4,44 +4,44 @@
   },
   "characters": [
     {
+      "id": 1,
       "name": "Edwin",
+      "weaponId": 1,
+      "armorId": 1,
       "gold": 5,
-      "raceId": 1,
-      "weaponId": 1,
-      "armorId": 1,
-      "id": 1
+      "raceId": 1
     },
     {
+      "id": 2,
       "name": "Stefano",
-      "raceId": 4,
-      "gold": 0,
-      "armorId": 1,
       "weaponId": 1,
-      "id": 2
+      "armorId": 1,
+      "gold": 0,
+      "raceId": 4
     },
     {
+      "id": 3,
       "name": "Urag gro-Shub",
-      "raceId": 2,
-      "gold": 0,
-      "armorId": 1,
       "weaponId": 1,
-      "id": 3
+      "armorId": 1,
+      "gold": 0,
+      "raceId": 2
     },
     {
+      "id": 4,
       "name": "Arthas",
-      "raceId": 3,
-      "gold": 0,
-      "armorId": 1,
       "weaponId": 1,
-      "id": 4
+      "armorId": 1,
+      "gold": 0,
+      "raceId": 3
     },
     {
+      "id": 5,
       "name": "Filavandrel",
-      "raceId": 5,
-      "gold": 0,
-      "armorId": 1,
       "weaponId": 1,
-      "id": 5
+      "armorId": 1,
+      "gold": 0,
+      "raceId": 5
     },
     {
       "name": "Lilith",
@@ -52,12 +52,12 @@
       "id": 6
     },
     {
+      "id": 7,
       "name": "Skully",
       "raceId": 3,
-      "gold": 0,
-      "armorId": 1,
       "weaponId": 1,
-      "id": 7
+      "armorId": 1,
+      "gold": 0
     }
   ],
   "races": [

@@ -6,6 +6,7 @@ import {
   fetchCharacterDb,
   fetchAllCharactersDb,
   fetchCharacterCount,
+  mapToCharacterDB,
 } from "../CharacterDb";
 import {
   CHARACTER_PATH,
@@ -85,6 +86,15 @@ export function mapToCharacter(
     race: race.name,
   };
   return character;
+}
+
+export async function updateCharacter(character: ICharacter) {
+  const characterDb = await mapToCharacterDB(character);
+  fetch(CHARACTER_PATH + `/${characterDb.id.toString()}`, {
+    method: "put",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(characterDb),
+  }).catch((err) => console.log(err));
 }
 
 export function changeWeapon(character: ICharacter, weapon: IWeapon) {

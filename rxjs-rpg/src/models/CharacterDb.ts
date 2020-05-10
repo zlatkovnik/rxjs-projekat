@@ -1,4 +1,6 @@
 import { CHARACTER_PATH, CHARACTER_COUNT_PATH } from "../util/paths";
+import { ICharacter } from "./DTOs/Character";
+import { fetchRaceIdByName } from "./Race";
 
 export interface ICharacterDb {
   id?: number;
@@ -43,4 +45,17 @@ async function incrementCharacterCount() {
     },
     body: JSON.stringify({ count: count + 1 }),
   });
+}
+
+export async function mapToCharacterDB(character: ICharacter) {
+  const raceid = await fetchRaceIdByName(character.race);
+  const characterDb: ICharacterDb = {
+    id: character.id,
+    name: character.name,
+    weaponId: character.weapon.id,
+    armorId: character.armor.id,
+    gold: character.gold,
+    raceId: raceid,
+  };
+  return characterDb;
 }

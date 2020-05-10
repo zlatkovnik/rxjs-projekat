@@ -15,3 +15,9 @@ export async function fetchRace(id: number): Promise<IRace> {
 export async function fetchAllRaces(): Promise<IRace[]> {
   return fetch(RACE_PATH).then((res) => res.json());
 }
+
+export async function fetchRaceIdByName(name: string): Promise<number> {
+  return fetch(RACE_PATH + `?name=${name}`)
+    .then((res) => res.json())
+    .then((races: IRace[]) => races[0].id);
+}

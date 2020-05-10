@@ -2,6 +2,7 @@ import {
   ICharacter,
   fetchRandomCharacter,
   fetchRandomCharacterExcept,
+  updateCharacter,
 } from "../../models/DTOs/Character";
 import renderCard from "../components/ViewCard";
 import hpBarTemplate from "../templates/hpBarTemplate";
@@ -122,7 +123,7 @@ export default class ViewCombat {
           (v) => {
             this.checkIfLose();
             this.handleAttackPrompt();
-            this.myHp -= this.enemyCharacter.attack * 0.2;
+            this.myHp -= this.enemyCharacter.attack * 0.3;
             this.setBarWidth("my-bar", this.myHp, this.myCharacter.hp);
           },
           (err) => console.log(err),
@@ -140,7 +141,7 @@ export default class ViewCombat {
     if (this.enemyHp <= 0) {
       this.subscription2.unsubscribe();
       this.subscription.unsubscribe();
-      this.infoLabel.innerHTML = "You win! Select another character.";
+      this.handleWin();
     }
   }
 
@@ -148,8 +149,27 @@ export default class ViewCombat {
     if (this.myHp <= 0) {
       this.subscription2.unsubscribe();
       this.subscription.unsubscribe();
-      this.infoLabel.innerHTML = "You lose, select another character";
+      console.log(this.subscription, this.subscription2);
+      this.handleLose();
     }
+  }
+
+  handleWin() {
+    console.log("Win");
+    this.infoLabel.innerHTML = "You win! Select another character.";
+    this.myCharacter.gold += 5 + this.enemyCharacter.gold;
+    this.enemyCharacter.gold = 0;
+    updateCharacter(this.myCharacter);
+    updateCharacter(this.enemyCharacter);
+  }
+
+  handleLose() {
+    console.log("Lose");
+    this.infoLabel.innerHTML = "You lose, select another character";
+    this.myCharacter.gold = 0;
+    this.enemyCharacter.gold += this.enemyCharacter.gold;
+    updateCharacter(this.myCharacter);
+    updateCharacter(this.enemyCharacter);
   }
 
   setBarWidth(id: string, value: number, max: number) {

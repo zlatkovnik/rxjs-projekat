@@ -1,6 +1,7 @@
 import renderCard from "../components/ViewCard";
 import { pollingObservable } from "../../service/rxjsService";
 import { Subscription } from "rxjs";
+import { fetchRaceIdByName } from "../../models/Race";
 
 export default class ViewHome {
   container: HTMLDivElement;
