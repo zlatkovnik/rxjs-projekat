@@ -1,5 +1,8 @@
 import renderCard from "../components/ViewCard";
 import { fetchAllCharacters, ICharacter } from "../../models/DTOs/Character";
+import { mergeAllCharactersObservable } from "../../service/rxjsService";
+import { Observable } from "rxjs";
+import { fetchCharacterCount } from "../../models/CharacterDb";
 
 export default class ViewSelect {
   container: HTMLElement;
@@ -14,22 +17,27 @@ export default class ViewSelect {
 
   async render() {
     this.container.innerHTML = "<h1>Loading...</h1>";
-    const characters = await fetchAllCharacters();
+    const count = await fetchCharacterCount();
+    mergeAllCharactersObservable(count).subscribe(async (character) =>
+      //this.renderCharacter(character)
+      //@ts-ignore
+      console.log(await character)
+    );
     this.container.innerHTML = "";
+  }
 
-    characters.forEach((char) => {
-      const col = document.createElement("div");
-      col.className = "col-6 col-lg-3";
-      this.container.appendChild(col);
-      renderCard(col, char);
+  renderCharacter(character: ICharacter) {
+    const col = document.createElement("div");
+    col.className = "col-6 col-lg-3";
+    this.container.appendChild(col);
+    renderCard(col, character);
 
-      const button = document.createElement("button");
-      button.value = char.id.toString();
-      button.className = "btn btn-primary btn-lg";
-      button.innerHTML = "Select";
-      button.onclick = (ev) => this.handleSelect(ev, char);
-      col.appendChild(button);
-    });
+    const button = document.createElement("button");
+    button.value = character.id.toString();
+    button.className = "btn btn-primary btn-lg";
+    button.innerHTML = "Select";
+    button.onclick = (ev) => this.handleSelect(ev, character);
+    col.appendChild(button);
   }
 
   cleanUp() {

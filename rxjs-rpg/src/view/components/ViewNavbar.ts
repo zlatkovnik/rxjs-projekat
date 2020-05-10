@@ -1,5 +1,4 @@
 import navbarTemplate from "../templates/navbarTemplate";
-import { ICharacter } from "../../models/DTOs/Character";
 
 export default function renderNavbar(
   parent: HTMLElement,

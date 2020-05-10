@@ -32,11 +32,12 @@ import {
   ICharacter,
   fetchRandomCharacter,
   mapToCharacter,
+  fetchAllCharacters,
 } from "../models/DTOs/Character";
 import { WEAPON_PATH, ARMOR_PATH, RACE_PATH } from "../util/paths";
-import { fetchArmor } from "../models/Armor";
+import { fetchArmor, fetchAllArmors } from "../models/Armor";
 import { fetchRace } from "../models/Race";
-import { fetchWeapon } from "../models/Weapon";
+import { fetchWeapon, fetchAllWeapons } from "../models/Weapon";
 
 export function checkForDuplicateNameObservable(
   nameContainer: HTMLInputElement
@@ -115,4 +116,14 @@ export function intervalUntilClickObservable(
 ) {
   const click$ = fromEvent(button, "click");
   return interval(ms).pipe(takeUntil(click$));
+}
+
+export function mergeAllCharactersObservable(count: number) {
+  const ids = Array.from(Array(count).keys()).map((x) => x + 1);
+  const characters$ = of(ids.map((id) => fetchCharacter(id)));
+  return merge(characters$);
+}
+
+export function allItemsObservable() {
+  return merge(from(fetchAllArmors()), from(fetchAllWeapons()));
 }

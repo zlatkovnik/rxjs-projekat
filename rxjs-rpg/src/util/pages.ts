@@ -3,6 +3,7 @@ interface IPage {
   Home: string;
   Select: string;
   Combat: string;
+  Shop: string;
 }
 
 export const Page: IPage = {
@@ -10,4 +11,5 @@ export const Page: IPage = {
   Home: "home",
   Select: "select",
   Combat: "combat",
+  Shop: "shop",
 };

@@ -5,7 +5,7 @@ import ViewCreator from "./pages/ViewCreator";
 import ViewSelect from "./pages/ViewSelect";
 import { ICharacter } from "../models/DTOs/Character";
 import ViewCombat from "./pages/ViewCombat";
-import { randomIntervalObservable } from "../service/rxjsService";
+import ViewShop from "./pages/ViewShop";
 
 export default class View {
   navbarContainer: HTMLDivElement;
@@ -15,6 +15,7 @@ export default class View {
   viewCreator: ViewCreator;
   viewSelect: ViewSelect;
   viewCombat: ViewCombat;
+  viewShop: ViewShop;
 
   myCharacter: ICharacter | null;
 
@@ -52,6 +53,9 @@ export default class View {
       case Page.Combat:
         this.viewCombat.render();
         break;
+      case Page.Shop:
+        this.viewShop.render();
+        break;
       default:
         break;
     }
@@ -67,6 +71,7 @@ export default class View {
   setCharacter = (character: ICharacter) => {
     this.myCharacter = character;
     this.viewCombat = new ViewCombat(this.contentContainer, this.myCharacter);
+    this.viewShop = new ViewShop(this.contentContainer, this.myCharacter);
 
     //Ovo su elementi sa navbara
     const characterLabel = document.querySelector("#nav-character");
@@ -74,5 +79,8 @@ export default class View {
 
     const combatButton = document.querySelector("#nav-combat");
     combatButton.innerHTML = "Combat";
+
+    const shopButton = document.querySelector("#nav-shop");
+    shopButton.innerHTML = "Shop";
   };
 }

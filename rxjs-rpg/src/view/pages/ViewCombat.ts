@@ -97,6 +97,7 @@ export default class ViewCombat {
   cleanUp() {
     this.container.innerHTML = "";
     if (this.subscription) this.subscription.unsubscribe();
+    if (this.subscription2) this.subscription2.unsubscribe();
   }
 
   handleStart = (ev: any) => {
@@ -104,7 +105,7 @@ export default class ViewCombat {
     button.disabled = true;
     button.innerHTML = "Get ready";
     countDownObservable(500).subscribe(
-      (v: string) => (this.infoLabel.innerHTML = v),
+      (number: string) => (this.infoLabel.innerHTML = number),
       (err) => console.log(err),
       () => {
         this.handleReset();
