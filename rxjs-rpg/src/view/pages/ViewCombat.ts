@@ -1,21 +1,13 @@
-import {
-  ICharacter,
-  fetchRandomCharacter,
-  fetchRandomCharacterExcept,
-  updateCharacter,
-} from "../../models/Character";
+import { ICharacter, updateCharacter } from "../../models/Character";
 import renderCard from "../components/ViewCard";
 import hpBarTemplate from "../templates/hpBarTemplate";
 import {
   countDownObservable,
-  mergeInputsObservable,
   randomCharacterObservable,
   randomIntervalObservable,
-  zipObservables,
   intervalUntilClickObservable,
 } from "../../service/rxjsService";
-import { Subscription, fromEvent } from "rxjs";
-import { tap } from "rxjs/operators";
+import { Subscription } from "rxjs";
 
 export default class ViewCombat {
   container: HTMLElement;
@@ -28,8 +20,10 @@ export default class ViewCombat {
   infoLabel: HTMLElement;
   button: HTMLButtonElement;
 
-  subscription: Subscription;
-  subscription2: Subscription;
+  countdownSubscriber: Subscription;
+  randomIntervalSubscription: Subscription;
+  clickSubscription: Subscription;
+
   constructor(parent: HTMLElement, character: ICharacter) {
     this.container = document.createElement("div");
     this.container.className = "d-flex align-items-center row";
@@ -47,15 +41,11 @@ export default class ViewCombat {
   renderCharacter() {
     const myCharacterContainer = document.createElement("div");
     myCharacterContainer.className = "col-4";
-    renderCard(myCharacterContainer, this.myCharacter);
+    myCharacterContainer.innerHTML = renderCard(this.myCharacter);
     this.container.appendChild(myCharacterContainer);
 
     const myBar = document.createElement("div");
-    myBar.innerHTML = hpBarTemplate(
-      "my-bar",
-      this.myCharacter.hp,
-      this.myCharacter.hp
-    );
+    myBar.innerHTML = hpBarTemplate("my-bar", this.myCharacter.hp, this.myCharacter.hp);
     myCharacterContainer.appendChild(myBar);
   }
 
@@ -86,8 +76,7 @@ export default class ViewCombat {
     enemyCharacterContainer.className = "col-4";
     this.container.appendChild(enemyCharacterContainer);
 
-    enemyCharacterContainer.innerHTML = "";
-    renderCard(enemyCharacterContainer, enemy);
+    enemyCharacterContainer.innerHTML = renderCard(enemy);
 
     const enemyBar = document.createElement("div");
     enemyBar.innerHTML = hpBarTemplate("enemy-bar", enemy.hp, enemy.hp);
@@ -96,15 +85,16 @@ export default class ViewCombat {
 
   cleanUp() {
     this.container.innerHTML = "";
-    if (this.subscription) this.subscription.unsubscribe();
-    if (this.subscription2) this.subscription2.unsubscribe();
+    if (this.countdownSubscriber) this.countdownSubscriber.unsubscribe();
+    if (this.randomIntervalSubscription) this.randomIntervalSubscription.unsubscribe();
+    if (this.clickSubscription) this.clickSubscription.unsubscribe();
   }
 
   handleStart = (ev: any) => {
     const button = ev.target;
     button.disabled = true;
     button.innerHTML = "Get ready";
-    countDownObservable(500).subscribe(
+    this.countdownSubscriber = countDownObservable(500).subscribe(
       (number: string) => (this.infoLabel.innerHTML = number),
       (err) => console.log(err),
       () => {
@@ -115,12 +105,9 @@ export default class ViewCombat {
   };
 
   startCombat() {
-    this.subscription = randomIntervalObservable(5000).subscribe(
+    this.randomIntervalSubscription = randomIntervalObservable(5000).subscribe(
       () =>
-        (this.subscription2 = intervalUntilClickObservable(
-          this.button,
-          500
-        ).subscribe(
+        (this.clickSubscription = intervalUntilClickObservable(this.button, 500).subscribe(
           (v) => {
             this.checkIfLose();
             this.handleAttackPrompt();
@@ -140,17 +127,17 @@ export default class ViewCombat {
 
   checkIfWin() {
     if (this.enemyHp <= 0) {
-      this.subscription2.unsubscribe();
-      this.subscription.unsubscribe();
+      this.clickSubscription.unsubscribe();
+      this.randomIntervalSubscription.unsubscribe();
       this.handleWin();
     }
   }
 
   checkIfLose() {
     if (this.myHp <= 0) {
-      this.subscription2.unsubscribe();
-      this.subscription.unsubscribe();
-      console.log(this.subscription, this.subscription2);
+      this.clickSubscription.unsubscribe();
+      this.randomIntervalSubscription.unsubscribe();
+      console.log(this.randomIntervalSubscription, this.clickSubscription);
       this.handleLose();
     }
   }

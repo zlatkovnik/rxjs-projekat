@@ -8,12 +8,7 @@ import {
   fetchCharacterCount,
   mapToCharacterDB,
 } from "./CharacterDb";
-import {
-  CHARACTER_PATH,
-  ARMOR_PATH,
-  WEAPON_PATH,
-  RACE_PATH,
-} from "../util/paths";
+import { CHARACTER_PATH, ARMOR_PATH, WEAPON_PATH, RACE_PATH } from "../util/paths";
 
 import { getImageLink } from "../util/misc";
 
@@ -38,9 +33,7 @@ export async function fetchCharacter(id: number) {
 }
 
 export async function fetchRandomCharacter() {
-  return fetchCharacterCount().then((count) =>
-    fetchCharacter(Math.floor(Math.random() * count) + 1)
-  );
+  return fetchCharacterCount().then((count) => fetchCharacter(Math.floor(Math.random() * count) + 1));
 }
 
 export async function fetchRandomCharacterExcept(id: number) {
@@ -67,12 +60,7 @@ export async function fetchItems(character: ICharacterDb) {
   ]).then((res) => Promise.all(res.map((r) => r.json())));
 }
 
-export function mapToCharacter(
-  characterDb: ICharacterDb,
-  race: IRace,
-  armor: IArmor,
-  weapon: IWeapon
-): ICharacter {
+export function mapToCharacter(characterDb: ICharacterDb, race: IRace, armor: IArmor, weapon: IWeapon): ICharacter {
   const character: ICharacter = {
     id: characterDb.id,
     image: getImageLink(race.name),
@@ -103,7 +91,6 @@ export function changeWeapon(character: ICharacter, weapon: IWeapon) {
 }
 
 export function changeArmor(character: ICharacter, armor: IArmor) {
-  character.defence =
-    character.defence - character.armor.defence + armor.defence;
+  character.defence = character.defence - character.armor.defence + armor.defence;
   character.armor = armor;
 }

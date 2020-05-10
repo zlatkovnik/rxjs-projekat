@@ -17,9 +17,7 @@ export default class ViewSelect {
   async render() {
     this.container.innerHTML = "<h1>Loading...</h1>";
     const count = await fetchCharacterCount();
-    mergeAllCharactersObservable(count).subscribe(async (character) =>
-      this.renderCharacter(await character)
-    );
+    mergeAllCharactersObservable(count).subscribe(async (character) => this.renderCharacter(await character));
     this.container.innerHTML = "";
   }
 
@@ -27,11 +25,12 @@ export default class ViewSelect {
     const col = document.createElement("div");
     col.className = "col-6 col-lg-3";
     this.container.appendChild(col);
-    renderCard(col, character);
+    col.innerHTML = renderCard(character);
 
     const button = document.createElement("button");
     button.value = character.id.toString();
-    button.className = "btn btn-primary btn-lg";
+    button.className = "cbtn btn btn-primary btn-lg";
+    button.id = "c" + character.id.toString();
     button.innerHTML = "Select";
     button.onclick = (ev) => this.handleSelect(ev, character);
     col.appendChild(button);
@@ -43,7 +42,19 @@ export default class ViewSelect {
 
   handleSelect(ev: MouseEvent, character: ICharacter) {
     this.setSelectedCharacter(character);
+    this.setSelected(character);
   }
 
-  handleDelete(ev: MouseEvent, character: ICharacter) {}
+  setSelected(character: ICharacter) {
+    const buttons: HTMLButtonElement[] = Array.from(document.querySelectorAll(".cbtn"));
+    buttons.forEach((btn) => {
+      btn.disabled = false;
+      btn.innerHTML = "Select";
+      btn.className = "cbtn btn btn-primary btn-lg";
+    });
+    const selectedButton = buttons.filter((btn) => btn.id === `c${character.id.toString()}`);
+    selectedButton[0].disabled = false;
+    selectedButton[0].innerHTML = "Chosen";
+    selectedButton[0].className = "cbtn btn btn-secondary btn-lg";
+  }
 }

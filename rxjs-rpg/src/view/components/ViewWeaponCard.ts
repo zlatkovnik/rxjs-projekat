@@ -3,16 +3,12 @@ import itemCardTemplate from "../templates/itemCardTemplate";
 import { getImageLink } from "../../util/misc";
 import { IWeapon } from "../../models/Weapon";
 
-export default function renderWeaponCard(
-  parent: HTMLElement,
-  weapon: IWeapon | null
-) {
+export default function renderWeaponCard(weapon: IWeapon | null): string {
   if (weapon) {
     const image = getImageLink("Weapon");
     const { name, attack, cost } = weapon;
-    parent.innerHTML = itemCardTemplate(image, "Weapon", name, attack, 0, cost);
+    return itemCardTemplate(image, "Weapon", name, attack, 0, cost);
   } else {
-    parent.innerHTML = notFoundTemplate();
+    return notFoundTemplate();
   }
-  return parent;
 }

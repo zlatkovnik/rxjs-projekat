@@ -8,7 +8,7 @@
       "name": "Edwin",
       "weaponId": 7,
       "armorId": 5,
-      "gold": 5,
+      "gold": 10,
       "raceId": 1
     },
     {
@@ -22,7 +22,7 @@
     {
       "id": 3,
       "name": "Urag gro-Shub",
-      "weaponId": 1,
+      "weaponId": 2,
       "armorId": 1,
       "gold": 0,
       "raceId": 2
@@ -54,10 +54,10 @@
     {
       "id": 7,
       "name": "Skully",
-      "raceId": 3,
       "weaponId": 1,
       "armorId": 1,
-      "gold": 0
+      "gold": 0,
+      "raceId": 3
     }
   ],
   "races": [

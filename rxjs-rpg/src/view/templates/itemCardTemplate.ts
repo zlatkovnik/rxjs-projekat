@@ -1,11 +1,4 @@
-const itemCardTemplate = (
-  image: string,
-  type: string,
-  name: string,
-  attack: number,
-  defence: number,
-  cost: number
-) =>
+const itemCardTemplate = (image: string, type: string, name: string, attack: number, defence: number, cost: number) =>
   `<div class="card mt-5">
         <img class="card-img-top" src="${image}" alt="Card image cap">
         <div class="card-body">

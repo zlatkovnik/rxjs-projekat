@@ -1,15 +1,5 @@
-import renderCard from "../components/ViewCard";
-import {
-  fetchAllCharacters,
-  ICharacter,
-  changeWeapon,
-  changeArmor,
-  updateCharacter,
-} from "../../models/Character";
-import {
-  allWeaponsObservable,
-  allArmorsObservable,
-} from "../../service/rxjsService";
+import { ICharacter, changeWeapon, changeArmor, updateCharacter } from "../../models/Character";
+import { allWeaponsObservable, allArmorsObservable } from "../../service/rxjsService";
 import { fetchWeaponCount, IWeapon } from "../../models/Weapon";
 import { fetchArmorCount, IArmor } from "../../models/Armor";
 import renderWeaponCard from "../components/ViewWeaponCard";
@@ -31,20 +21,16 @@ export default class ViewShop {
     this.container.innerHTML = "<h1>Loading...</h1>";
     const weaponCount = await fetchWeaponCount();
     const armorCount = await fetchArmorCount();
-    allWeaponsObservable(weaponCount).subscribe(async (promise) =>
-      this.renderWeapon(await promise)
-    );
-    allArmorsObservable(armorCount).subscribe(async (promise) =>
-      this.renderArmor(await promise)
-    );
+    allWeaponsObservable(weaponCount).subscribe(async (promise) => this.renderWeapon(await promise));
+    allArmorsObservable(armorCount).subscribe(async (promise) => this.renderArmor(await promise));
     this.container.innerHTML = "";
   }
 
   renderWeapon(weapon: IWeapon) {
     const col = document.createElement("div");
     col.className = "col-6 col-lg-3";
+    col.innerHTML = renderWeaponCard(weapon);
     this.container.appendChild(col);
-    renderWeaponCard(col, weapon);
 
     const button = document.createElement("button");
     button.value = weapon.id.toString();
@@ -64,8 +50,8 @@ export default class ViewShop {
   renderArmor(armor: IArmor) {
     const col = document.createElement("div");
     col.className = "col-6 col-lg-3";
+    col.innerHTML = renderArmorCard(armor);
     this.container.appendChild(col);
-    renderArmorCard(col, armor);
 
     const button = document.createElement("button");
     button.value = armor.id.toString();
@@ -77,7 +63,7 @@ export default class ViewShop {
 
     if (this.myCharacter.armor.id === armor.id) {
       button.className = "abtn btn btn-secondary btn-lg";
-      button.innerHTML = "Choosen";
+      button.innerHTML = "Chosen";
       button.disabled = true;
     }
   }
@@ -85,39 +71,24 @@ export default class ViewShop {
   handleSelectArmor(ev: MouseEvent, armor: IArmor) {
     changeArmor(this.myCharacter, armor);
     updateCharacter(this.myCharacter);
-
-    const buttons: HTMLButtonElement[] = Array.from(
-      document.querySelectorAll(".abtn")
-    );
-    buttons.forEach((button) => {
-      button.className = "abtn btn btn-primary btn-lg";
-      button.innerHTML = "Select";
-      button.disabled = false;
-    });
-    const button = buttons.filter(
-      (btn) => btn.id === `a${armor.id.toString()}`
-    );
-    button[0].className = "abtn btn btn-secondary btn-lg";
-    button[0].disabled = true;
-    button[0].innerHTML = "Choosen";
+    this.setChosen(armor.id, "a");
   }
 
   handleSelectWeapon(ev: MouseEvent, weapon: IWeapon) {
     changeWeapon(this.myCharacter, weapon);
     updateCharacter(this.myCharacter);
+    this.setChosen(weapon.id, "w");
+  }
 
-    const buttons: HTMLButtonElement[] = Array.from(
-      document.querySelectorAll(".wbtn")
-    );
+  setChosen(id: number, type: string) {
+    const buttons: HTMLButtonElement[] = Array.from(document.querySelectorAll(`.${type}btn`));
     buttons.forEach((button) => {
-      button.className = "wbtn btn btn-primary btn-lg";
+      button.className = type + "btn btn btn-primary btn-lg";
       button.innerHTML = "Select";
       button.disabled = false;
     });
-    const button = buttons.filter(
-      (btn) => btn.id === `w${weapon.id.toString()}`
-    );
-    button[0].className = "wbtn btn btn-secondary btn-lg";
+    const button = buttons.filter((btn) => btn.id === type + id.toString());
+    button[0].className = type + "btn btn btn-secondary btn-lg";
     button[0].disabled = true;
     button[0].innerHTML = "Choosen";
   }

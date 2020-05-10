@@ -2,10 +2,7 @@ import { IRace } from "../../models/Race";
 
 function fillOptions(races: IRace[]): string {
   let string: string = "";
-  races.forEach(
-    (race) =>
-      (string += `<option value="${race.id.toString()}">${race.name}</option>`)
-  );
+  races.forEach((race) => (string += `<option value="${race.id.toString()}">${race.name}</option>`));
   return string;
 }
 

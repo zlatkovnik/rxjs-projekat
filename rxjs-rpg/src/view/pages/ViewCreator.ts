@@ -22,9 +22,7 @@ export default class ViewCreator {
     submit.onclick = this.handleSubmit;
 
     const nameInput: HTMLInputElement = document.querySelector("#create-name");
-    this.subscriber = checkForDuplicateNameObservable(
-      nameInput
-    ).subscribe((bool) => this.setNameError(bool));
+    this.subscriber = checkForDuplicateNameObservable(nameInput).subscribe((bool) => this.setNameError(bool));
   }
 
   cleanUp() {
@@ -44,9 +42,7 @@ export default class ViewCreator {
       weaponId: 1,
     };
     nameInput.value = "";
-    createCharacter(character).catch((err) =>
-      console.log("Error creating character", err.message)
-    );
+    createCharacter(character).catch((err) => console.log("Error creating character", err.message));
   };
 
   setNameError = (bool: boolean) => {

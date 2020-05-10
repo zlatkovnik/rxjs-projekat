@@ -1,55 +1,16 @@
-import {
-  fromEvent,
-  interval,
-  timer,
-  Observable,
-  zip,
-  of,
-  from,
-  merge,
-} from "rxjs";
-import { fromFetch } from "rxjs/fetch";
-import {
-  debounceTime,
-  switchMap,
-  map,
-  tap,
-  delay,
-  mergeMap,
-  takeUntil,
-  take,
-  finalize,
-  concatMap,
-} from "rxjs/operators";
-import {
-  ICharacterDb,
-  fetchAllCharactersDb,
-  fetchCharacterCount,
-  fetchCharacterDb,
-} from "../models/CharacterDb";
-import {
-  fetchCharacter,
-  ICharacter,
-  fetchRandomCharacter,
-  mapToCharacter,
-  fetchAllCharacters,
-} from "../models/Character";
-import { WEAPON_PATH, ARMOR_PATH, RACE_PATH } from "../util/paths";
-import { fetchArmor, fetchAllArmors } from "../models/Armor";
+import { fromEvent, interval, timer, Observable, zip, of, from, merge } from "rxjs";
+import { debounceTime, switchMap, map, tap, delay, takeUntil, take, concatMap } from "rxjs/operators";
+import { ICharacterDb, fetchAllCharactersDb, fetchCharacterCount, fetchCharacterDb } from "../models/CharacterDb";
+import { fetchCharacter, ICharacter, mapToCharacter } from "../models/Character";
+import { fetchArmor } from "../models/Armor";
 import { fetchRace } from "../models/Race";
-import { fetchWeapon, fetchAllWeapons } from "../models/Weapon";
+import { fetchWeapon } from "../models/Weapon";
 
-export function checkForDuplicateNameObservable(
-  nameContainer: HTMLInputElement
-) {
+export function checkForDuplicateNameObservable(nameContainer: HTMLInputElement) {
   return fromEvent(nameContainer, "input").pipe(
     debounceTime(500),
     switchMap(async () => await fetchAllCharactersDb()),
-    map((characters: ICharacterDb[]) =>
-      characters
-        .map((character) => character.name)
-        .includes(nameContainer.value)
-    )
+    map((characters: ICharacterDb[]) => characters.map((character) => character.name).includes(nameContainer.value))
   );
 }
 
@@ -69,11 +30,7 @@ export function zipIntoCharacterObservable(characterDb: ICharacterDb) {
     from(fetchRace(characterDb.raceId)),
     from(fetchArmor(characterDb.armorId)),
     from(fetchWeapon(characterDb.weaponId))
-  ).pipe(
-    map(([race, armor, weapon]) =>
-      mapToCharacter(characterDb, race, armor, weapon)
-    )
-  );
+  ).pipe(map(([race, armor, weapon]) => mapToCharacter(characterDb, race, armor, weapon)));
 }
 
 export function randomCharacterObservable() {
@@ -84,36 +41,11 @@ export function randomCharacterObservable() {
   );
 }
 
-export function mergeInputsObservable(
-  button: HTMLButtonElement,
-  body: HTMLElement
-) {
-  const click$ = fromEvent(button, "onclick");
-  const press$ = fromEvent(body, "keydown");
-
-  return merge(click$, press$).pipe(tap((ev) => console.log(ev)));
-}
-
 export function randomIntervalObservable(ms: number) {
-  return interval(0).pipe(
-    concatMap((i) => of(i).pipe(delay(1000 + Math.random() * ms)))
-  );
+  return interval(0).pipe(concatMap((i) => of(i).pipe(delay(1000 + Math.random() * ms))));
 }
 
-export function zipObservables(
-  interval: Observable<any>,
-  attack: Observable<any>
-) {
-  return zip(
-    interval.pipe(map((_) => Date.now())),
-    attack.pipe(map((_) => Date.now()))
-  ).pipe(map(([start, end]) => end - start));
-}
-
-export function intervalUntilClickObservable(
-  button: HTMLButtonElement,
-  ms: number
-) {
+export function intervalUntilClickObservable(button: HTMLButtonElement, ms: number) {
   const click$ = fromEvent(button, "click");
   return interval(ms).pipe(takeUntil(click$));
 }
