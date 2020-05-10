@@ -6,8 +6,8 @@
     {
       "id": 1,
       "name": "Edwin",
-      "weaponId": 1,
-      "armorId": 1,
+      "weaponId": 7,
+      "armorId": 5,
       "gold": 5,
       "raceId": 1
     },
@@ -15,7 +15,7 @@
       "id": 2,
       "name": "Stefano",
       "weaponId": 1,
-      "armorId": 1,
+      "armorId": 5,
       "gold": 0,
       "raceId": 4
     },
@@ -97,6 +97,9 @@
       "defence": 0
     }
   ],
+  "weaponCount": {
+    "count": 7
+  },
   "weapons": [
     {
       "id": 1,
@@ -141,6 +144,9 @@
       "cost": 500
     }
   ],
+  "armorCount": {
+    "count": 5
+  },
   "armors": [
     {
       "id": 1,

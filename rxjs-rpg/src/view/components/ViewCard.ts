@@ -1,4 +1,4 @@
-import { ICharacter } from "../../models/DTOs/Character";
+import { ICharacter } from "../../models/Character";
 import cardTemplate from "../templates/cardTemplate";
 import notFoundTemplate from "../templates/notFoundTemplate";
 import cardTemplateFixed from "../templates/cardTemplateFixed";

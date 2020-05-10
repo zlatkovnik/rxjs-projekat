@@ -33,7 +33,7 @@ import {
   fetchRandomCharacter,
   mapToCharacter,
   fetchAllCharacters,
-} from "../models/DTOs/Character";
+} from "../models/Character";
 import { WEAPON_PATH, ARMOR_PATH, RACE_PATH } from "../util/paths";
 import { fetchArmor, fetchAllArmors } from "../models/Armor";
 import { fetchRace } from "../models/Race";
@@ -118,12 +118,22 @@ export function intervalUntilClickObservable(
   return interval(ms).pipe(takeUntil(click$));
 }
 
+//S obzirom da ne mogu Promise<any[]> da spreadujem moram ovako
+
 export function mergeAllCharactersObservable(count: number) {
   const ids = Array.from(Array(count).keys()).map((x) => x + 1);
-  const characters$ = of(ids.map((id) => fetchCharacter(id)));
+  const characters$ = from(ids.map((id) => fetchCharacter(id)));
   return merge(characters$);
 }
 
-export function allItemsObservable() {
-  return merge(from(fetchAllArmors()), from(fetchAllWeapons()));
+export function allWeaponsObservable(count: number) {
+  const ids = Array.from(Array(count).keys()).map((x) => x + 1);
+  const weapons$ = from(ids.map((id) => fetchWeapon(id)));
+  return from(weapons$);
+}
+
+export function allArmorsObservable(count: number) {
+  const ids = Array.from(Array(count).keys()).map((x) => x + 1);
+  const armor$ = from(ids.map((id) => fetchArmor(id)));
+  return from(armor$);
 }

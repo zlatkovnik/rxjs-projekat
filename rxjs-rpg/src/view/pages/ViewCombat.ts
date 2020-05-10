@@ -3,7 +3,7 @@ import {
   fetchRandomCharacter,
   fetchRandomCharacterExcept,
   updateCharacter,
-} from "../../models/DTOs/Character";
+} from "../../models/Character";
 import renderCard from "../components/ViewCard";
 import hpBarTemplate from "../templates/hpBarTemplate";
 import {

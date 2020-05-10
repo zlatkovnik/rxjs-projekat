@@ -1,21 +1,21 @@
-import { IRace } from "../Race";
-import { IWeapon } from "../Weapon";
-import { IArmor } from "../Armor";
+import { IRace } from "./Race";
+import { IWeapon } from "./Weapon";
+import { IArmor } from "./Armor";
 import {
   ICharacterDb,
   fetchCharacterDb,
   fetchAllCharactersDb,
   fetchCharacterCount,
   mapToCharacterDB,
-} from "../CharacterDb";
+} from "./CharacterDb";
 import {
   CHARACTER_PATH,
   ARMOR_PATH,
   WEAPON_PATH,
   RACE_PATH,
-} from "../../util/paths";
+} from "../util/paths";
 
-import { getImageLink } from "../../util/misc";
+import { getImageLink } from "../util/misc";
 
 export interface ICharacter {
   id: number;

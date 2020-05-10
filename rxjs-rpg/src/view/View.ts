@@ -3,7 +3,7 @@ import renderNavbar from "./components/ViewNavbar";
 import ViewHome from "./pages/ViewHome";
 import ViewCreator from "./pages/ViewCreator";
 import ViewSelect from "./pages/ViewSelect";
-import { ICharacter } from "../models/DTOs/Character";
+import { ICharacter } from "../models/Character";
 import ViewCombat from "./pages/ViewCombat";
 import ViewShop from "./pages/ViewShop";
 
@@ -66,6 +66,7 @@ export default class View {
     this.viewCreator.cleanUp();
     this.viewSelect.cleanUp();
     if (this.viewCombat) this.viewCombat.cleanUp();
+    if (this.viewShop) this.viewShop.cleanUp();
   }
 
   setCharacter = (character: ICharacter) => {

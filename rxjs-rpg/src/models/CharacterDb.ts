@@ -1,5 +1,5 @@
 import { CHARACTER_PATH, CHARACTER_COUNT_PATH } from "../util/paths";
-import { ICharacter } from "./DTOs/Character";
+import { ICharacter } from "./Character";
 import { fetchRaceIdByName } from "./Race";
 
 export interface ICharacterDb {

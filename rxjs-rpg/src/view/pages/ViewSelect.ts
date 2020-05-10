@@ -1,7 +1,6 @@
 import renderCard from "../components/ViewCard";
-import { fetchAllCharacters, ICharacter } from "../../models/DTOs/Character";
+import { ICharacter } from "../../models/Character";
 import { mergeAllCharactersObservable } from "../../service/rxjsService";
-import { Observable } from "rxjs";
 import { fetchCharacterCount } from "../../models/CharacterDb";
 
 export default class ViewSelect {
@@ -19,9 +18,7 @@ export default class ViewSelect {
     this.container.innerHTML = "<h1>Loading...</h1>";
     const count = await fetchCharacterCount();
     mergeAllCharactersObservable(count).subscribe(async (character) =>
-      //this.renderCharacter(character)
-      //@ts-ignore
-      console.log(await character)
+      this.renderCharacter(await character)
     );
     this.container.innerHTML = "";
   }
