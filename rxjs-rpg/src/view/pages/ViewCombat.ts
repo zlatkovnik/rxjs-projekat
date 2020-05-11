@@ -109,17 +109,17 @@ export default class ViewCombat {
       () =>
         (this.clickSubscription = intervalUntilClickObservable(this.button, 500).subscribe(
           (v) => {
+            this.myHp -= this.enemyCharacter.attack * 0.3 * (1 - this.myCharacter.defence / 100);
+            this.setBarWidth("my-bar", this.myHp, this.myCharacter.hp);
             this.checkIfLose();
             this.handleAttackPrompt();
-            this.myHp -= this.enemyCharacter.attack * 0.3;
-            this.setBarWidth("my-bar", this.myHp, this.myCharacter.hp);
           },
           (err) => console.log(err),
           () => {
+            this.enemyHp -= this.myCharacter.attack * (1 - this.enemyCharacter.defence / 100);
+            this.setBarWidth("enemy-bar", this.enemyHp, this.enemyCharacter.hp);
             this.checkIfWin();
             this.handleReset();
-            this.enemyHp -= this.myCharacter.attack;
-            this.setBarWidth("enemy-bar", this.enemyHp, this.enemyCharacter.hp);
           }
         ))
     );
@@ -142,28 +142,23 @@ export default class ViewCombat {
     }
   }
 
-  handleWin() {
-    console.log("Win");
-    this.infoLabel.innerHTML = "You win! Select another character.";
+  async handleWin() {
+    //Ovde sam stavio await jer this.infoLabel.innerHTML ne zeli da se promeni drugacije
+    await updateCharacter(this.myCharacter);
+    await updateCharacter(this.enemyCharacter);
+    this.infoLabel.innerHTML = "You win! To play again click on combat.";
     this.myCharacter.gold += 5 + this.enemyCharacter.gold;
     this.enemyCharacter.gold = 0;
-    updateCharacter(this.myCharacter);
-    updateCharacter(this.enemyCharacter);
+    this.button.innerHTML = "Winner";
   }
 
-  handleLose() {
-    console.log("Lose");
-    this.infoLabel.innerHTML = "You lose, select another character";
+  async handleLose() {
+    await updateCharacter(this.myCharacter);
+    await updateCharacter(this.enemyCharacter);
+    this.infoLabel.innerHTML = "You lose, select another character.";
     this.myCharacter.gold = 0;
     this.enemyCharacter.gold += this.enemyCharacter.gold;
-    updateCharacter(this.myCharacter);
-    updateCharacter(this.enemyCharacter);
-  }
-
-  setBarWidth(id: string, value: number, max: number) {
-    const bar = <HTMLDivElement>document.querySelector(`#${id}`);
-    bar.style.width = `${(value / max) * 100}%`;
-    bar.innerHTML = value.toString();
+    this.button.innerHTML = "Loser";
   }
 
   handleAttackPrompt() {
@@ -178,5 +173,11 @@ export default class ViewCombat {
     this.button.onclick = null;
     this.button.className = "btn btn-secondary btn-lg";
     this.button.innerHTML = "Get ready";
+  }
+
+  setBarWidth(id: string, value: number, max: number) {
+    const bar = <HTMLDivElement>document.querySelector(`#${id}`);
+    bar.style.width = `${(value / max) * 100}%`;
+    bar.innerHTML = Math.floor(value).toString();
   }
 }

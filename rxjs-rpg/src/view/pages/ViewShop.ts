@@ -34,8 +34,14 @@ export default class ViewShop {
 
     const button = document.createElement("button");
     button.value = weapon.id.toString();
-    button.className = "wbtn btn btn-primary btn-lg";
-    button.innerHTML = "Select";
+    if (this.myCharacter.gold >= weapon.cost) {
+      button.className = "wbtn btn btn-primary btn-lg";
+      button.innerHTML = "Select";
+    } else {
+      button.className = "wbtn btn btn-warning btn-lg";
+      button.innerHTML = "Not enough gold";
+      button.disabled = true;
+    }
     button.id = `w${weapon.id.toString()}`;
     button.onclick = (ev) => this.handleSelectWeapon(ev, weapon);
     col.appendChild(button);
@@ -55,8 +61,16 @@ export default class ViewShop {
 
     const button = document.createElement("button");
     button.value = armor.id.toString();
-    button.className = "abtn btn btn-primary btn-lg";
-    button.innerHTML = "Select";
+
+    if (this.myCharacter.gold >= armor.cost) {
+      button.className = "abtn btn btn-primary btn-lg";
+      button.innerHTML = "Select";
+    } else {
+      button.className = "abtn btn btn-warning btn-lg";
+      button.innerHTML = "Not enough gold";
+      button.disabled = true;
+    }
+
     button.id = `a${armor.id.toString()}`;
     button.onclick = (ev) => this.handleSelectArmor(ev, armor);
     col.appendChild(button);
@@ -69,28 +83,40 @@ export default class ViewShop {
   }
 
   handleSelectArmor(ev: MouseEvent, armor: IArmor) {
+    if (this.myCharacter.gold < armor.cost) return;
+
+    this.myCharacter.gold -= armor.cost;
     changeArmor(this.myCharacter, armor);
     updateCharacter(this.myCharacter);
-    this.setChosen(armor.id, "a");
+    this.setChosen(armor.id, "a", armor.cost);
   }
 
   handleSelectWeapon(ev: MouseEvent, weapon: IWeapon) {
+    if (this.myCharacter.gold < weapon.cost) return;
+
+    this.myCharacter.gold -= weapon.cost;
     changeWeapon(this.myCharacter, weapon);
     updateCharacter(this.myCharacter);
-    this.setChosen(weapon.id, "w");
+    this.setChosen(weapon.id, "w", weapon.cost);
   }
 
-  setChosen(id: number, type: string) {
+  setChosen(id: number, type: string, cost: number) {
     const buttons: HTMLButtonElement[] = Array.from(document.querySelectorAll(`.${type}btn`));
     buttons.forEach((button) => {
-      button.className = type + "btn btn btn-primary btn-lg";
-      button.innerHTML = "Select";
-      button.disabled = false;
+      if (this.myCharacter.gold >= cost) {
+        button.className = type + "btn btn btn-primary btn-lg";
+        button.innerHTML = "Select";
+        button.disabled = false;
+      } else {
+        button.className = type + "btn btn btn-warning btn-lg";
+        button.innerHTML = "Not enough gold";
+        button.disabled = true;
+      }
     });
     const button = buttons.filter((btn) => btn.id === type + id.toString());
     button[0].className = type + "btn btn btn-secondary btn-lg";
     button[0].disabled = true;
-    button[0].innerHTML = "Choosen";
+    button[0].innerHTML = "Chosen";
   }
 
   cleanUp() {

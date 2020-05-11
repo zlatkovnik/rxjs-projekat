@@ -7,8 +7,8 @@
       "id": 1,
       "name": "Edwin",
       "weaponId": 7,
-      "armorId": 5,
-      "gold": 10,
+      "armorId": 1,
+      "gold": 25,
       "raceId": 1
     },
     {
@@ -22,7 +22,7 @@
     {
       "id": 3,
       "name": "Urag gro-Shub",
-      "weaponId": 2,
+      "weaponId": 1,
       "armorId": 1,
       "gold": 0,
       "raceId": 2
@@ -44,12 +44,12 @@
       "raceId": 5
     },
     {
+      "id": 6,
       "name": "Lilith",
-      "raceId": 1,
-      "gold": 0,
-      "armorId": 1,
       "weaponId": 1,
-      "id": 6
+      "armorId": 1,
+      "gold": 0,
+      "raceId": 1
     },
     {
       "id": 7,
