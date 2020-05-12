@@ -1,6 +1,6 @@
 {
   "characterCount": {
-    "count": 7
+    "count": 8
   },
   "characters": [
     {
@@ -58,6 +58,14 @@
       "armorId": 1,
       "gold": 0,
       "raceId": 3
+    },
+    {
+      "id": 8,
+      "name": "Djura",
+      "weaponId": 2,
+      "armorId": 1,
+      "gold": 0,
+      "raceId": 5
     }
   ],
   "races": [
