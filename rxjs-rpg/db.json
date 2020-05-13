@@ -1,38 +1,38 @@
 {
   "characterCount": {
-    "count": 8
+    "count": 7
   },
   "characters": [
     {
       "id": 1,
       "name": "Edwin",
-      "weaponId": 7,
+      "weaponId": 1,
       "armorId": 1,
-      "gold": 25,
+      "gold": 100,
       "raceId": 1
     },
     {
       "id": 2,
       "name": "Stefano",
-      "weaponId": 1,
-      "armorId": 5,
+      "weaponId": 2,
+      "armorId": 2,
       "gold": 0,
       "raceId": 4
     },
     {
       "id": 3,
       "name": "Urag gro-Shub",
-      "weaponId": 1,
-      "armorId": 1,
-      "gold": 0,
+      "weaponId": 2,
+      "armorId": 2,
+      "gold": 10,
       "raceId": 2
     },
     {
       "id": 4,
       "name": "Arthas",
-      "weaponId": 1,
+      "weaponId": 3,
       "armorId": 1,
-      "gold": 0,
+      "gold": 40,
       "raceId": 3
     },
     {
@@ -40,7 +40,7 @@
       "name": "Filavandrel",
       "weaponId": 1,
       "armorId": 1,
-      "gold": 0,
+      "gold": 300,
       "raceId": 5
     },
     {
@@ -48,7 +48,7 @@
       "name": "Lilith",
       "weaponId": 1,
       "armorId": 1,
-      "gold": 0,
+      "gold": 10,
       "raceId": 1
     },
     {
@@ -58,14 +58,6 @@
       "armorId": 1,
       "gold": 0,
       "raceId": 3
-    },
-    {
-      "id": 8,
-      "name": "Djura",
-      "weaponId": 2,
-      "armorId": 1,
-      "gold": 0,
-      "raceId": 5
     }
   ],
   "races": [

@@ -45,7 +45,11 @@ export default class ViewCombat {
     this.container.appendChild(myCharacterContainer);
 
     const myBar = document.createElement("div");
-    myBar.innerHTML = hpBarTemplate("my-bar", this.myCharacter.hp, this.myCharacter.hp);
+    myBar.innerHTML = hpBarTemplate(
+      "my-bar",
+      this.myCharacter.hp,
+      this.myCharacter.hp
+    );
     myCharacterContainer.appendChild(myBar);
   }
 
@@ -86,7 +90,8 @@ export default class ViewCombat {
   cleanUp() {
     this.container.innerHTML = "";
     if (this.countdownSubscriber) this.countdownSubscriber.unsubscribe();
-    if (this.randomIntervalSubscription) this.randomIntervalSubscription.unsubscribe();
+    if (this.randomIntervalSubscription)
+      this.randomIntervalSubscription.unsubscribe();
     if (this.clickSubscription) this.clickSubscription.unsubscribe();
   }
 
@@ -107,16 +112,23 @@ export default class ViewCombat {
   startCombat() {
     this.randomIntervalSubscription = randomIntervalObservable(5000).subscribe(
       () =>
-        (this.clickSubscription = intervalUntilClickObservable(this.button, 500).subscribe(
+        (this.clickSubscription = intervalUntilClickObservable(
+          this.button,
+          500
+        ).subscribe(
           (v) => {
-            this.myHp -= this.enemyCharacter.attack * 0.3 * (1 - this.myCharacter.defence / 100);
+            this.myHp -=
+              this.enemyCharacter.attack *
+              0.3 *
+              (1 - this.myCharacter.defence / 100);
             this.setBarWidth("my-bar", this.myHp, this.myCharacter.hp);
             this.checkIfLose();
             this.handleAttackPrompt();
           },
           (err) => console.log(err),
           () => {
-            this.enemyHp -= this.myCharacter.attack * (1 - this.enemyCharacter.defence / 100);
+            this.enemyHp -=
+              this.myCharacter.attack * (1 - this.enemyCharacter.defence / 100);
             this.setBarWidth("enemy-bar", this.enemyHp, this.enemyCharacter.hp);
             this.checkIfWin();
             this.handleReset();
