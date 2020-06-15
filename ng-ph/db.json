@@ -1,0 +1,42 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "imageURL": "https://i.redd.it/rlwzi9sjpt141.jpg",
+      "title": "C++ Cheater",
+      "postedBy": "ashinsh-ji",
+      "upVotedBy": [],
+      "downVotedBy": [],
+      "comments": [
+        {
+          "commentedBy": "skadi17",
+          "body": "Wow she learned industry's best practice fairly quickly"
+        },
+        {
+          "commentedBy": "Kerbal_Guardsman",
+          "body": "Reading the documentation? Of course! /s"
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "ashinsh-ji",
+      "karma": 0,
+      "password": "123"
+    },
+    {
+      "id": 2,
+      "username": "skadi17",
+      "karma": 0,
+      "password": "123"
+    },
+    {
+      "id": 3,
+      "username": "Kerbal_Guardsman",
+      "karma": 0,
+      "password": "123"
+    }
+  ]
+}
