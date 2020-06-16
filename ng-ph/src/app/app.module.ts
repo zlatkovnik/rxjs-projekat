@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 //Material
 import { MatButtonModule } from '@angular/material/button';
@@ -35,6 +36,7 @@ import { HomeComponent } from './components/pages/home/home.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
     MatFormFieldModule,
     MatButtonModule,
     MatCardModule,
