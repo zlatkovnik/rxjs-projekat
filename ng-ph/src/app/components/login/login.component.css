@@ -8,3 +8,11 @@
 .example-full-width {
   width: 100%;
 }
+
+.error-text {
+  float: right;
+}
+
+.spinner {
+  margin: 0 auto;
+}

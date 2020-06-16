@@ -37,6 +37,12 @@
       "username": "Kerbal_Guardsman",
       "karma": 0,
       "password": "123"
+    },
+    {
+      "username": "jontron",
+      "password": "jonathan",
+      "karma": 0,
+      "id": 4
     }
   ]
 }

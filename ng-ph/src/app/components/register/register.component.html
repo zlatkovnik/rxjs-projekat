@@ -1,1 +1,42 @@
-<p>register works!</p>
+<form class="example-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-form-field class="example-full-width">
+      <mat-label>username</mat-label>
+      <input matInput formControlName="username" />
+      <div
+        *ngIf="username.invalid && (username.dirty || username.touched)"
+        class="alert alert-danger"
+      >
+        <mat-error *ngIf="username.errors.required">
+          Username is required.
+        </mat-error>
+        <mat-error *ngIf="username.errors.minlength">
+          Username must be at least <strong>4</strong> characters long.
+        </mat-error>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>password</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <div
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+        class="alert alert-danger"
+      >
+        <mat-error *ngIf="password.errors.required">
+          Password is required.
+        </mat-error>
+        <mat-error *ngIf="password.errors.minlength">
+          Password must be at least <strong>8</strong> characters long.
+        </mat-error>
+      </div>
+    </mat-form-field>
+
+    <mat-error class="error-text" name="error">{{ error }}</mat-error>
+
+    <button mat-raised-button color="primary" [disabled]="!userForm.valid">
+      Register
+    </button>
+    <mat-spinner class="spinner" *ngIf="loading"></mat-spinner>
+  </mat-card>
+</form>
