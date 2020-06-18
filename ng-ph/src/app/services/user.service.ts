@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { tap, switchMap } from 'rxjs/operators';
 
 import User from '../models/models.user';
+import { logoutUser } from '../store/user/user.actions';
 
 @Injectable({
   providedIn: 'root',

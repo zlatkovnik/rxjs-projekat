@@ -125,6 +125,7 @@
   },
   "defaultProject": "ng-ph",
   "cli": {
-    "analytics": "fa2252c3-36f5-4d6a-8648-654099c6f13a"
+    "defaultCollection": "@ngrx/schematics",
+    "analytics": false
   }
 }

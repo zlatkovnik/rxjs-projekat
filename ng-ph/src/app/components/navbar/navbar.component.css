@@ -7,3 +7,25 @@ a {
 a:hover {
   color: hotpink;
 }
+
+.icon {
+  padding: 0 10px 0 5px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.title {
+  font-size: xx-large;
+}
+
+.mat-flat-button {
+  font-size: large;
+}
+
+@media screen and (max-width: 480px) {
+  .title {
+    display: none;
+  }
+}

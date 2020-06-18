@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../../services/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Store, State, select } from '@ngrx/store';
+import { loginUser } from 'src/app/store/user/user.actions';
+import { selectUsername } from '../../store/index';
+import { Observable } from 'rxjs';
+import { UserState } from 'src/app/store/user/user.reducer';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +16,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   userForm: FormGroup;
-
   error = '';
   loading = false;
 
@@ -22,7 +27,11 @@ export class LoginComponent implements OnInit {
     return this.userForm.get('password');
   }
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
     this.userForm = new FormGroup({
@@ -45,8 +54,9 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.userService.login(this.username.value, this.password.value).subscribe(
       (user) => {
-        console.log(user);
         this.loading = false;
+        this.store.dispatch(loginUser({ username: this.username.value }));
+        this.router.navigate(['/']);
       },
       (err) => {
         this.error = err;

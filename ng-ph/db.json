@@ -43,6 +43,24 @@
       "password": "jonathan",
       "karma": 0,
       "id": 4
+    },
+    {
+      "username": "jontrona",
+      "password": "jontrona",
+      "karma": 0,
+      "id": 5
+    },
+    {
+      "username": "new",
+      "password": "newnewnew",
+      "karma": 0,
+      "id": 6
+    },
+    {
+      "username": "jon",
+      "password": "jontroncina",
+      "karma": 0,
+      "id": 7
     }
   ]
 }
