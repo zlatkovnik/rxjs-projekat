@@ -27,6 +27,8 @@ import { HomeComponent } from './components/pages/home/home.component';
 
 //Redux
 import * as fromUser from './store/user/user.reducer';
+import { FeedComponent } from './components/pages/feed/feed.component';
+import { PostComponent } from './components/post/post.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import * as fromUser from './store/user/user.reducer';
     FooterComponent,
     RegisterComponent,
     HomeComponent,
+    FeedComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,

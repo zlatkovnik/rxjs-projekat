@@ -1,5 +1,5 @@
 export default class User {
-  id: number;
+  id?: number;
   username: string;
   karma: number;
   password: string;
