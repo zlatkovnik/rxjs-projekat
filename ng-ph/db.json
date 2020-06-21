@@ -17,6 +17,20 @@
           "body": "Reading the documentation? Of course! /s"
         }
       ]
+    },
+    {
+      "id": 2,
+      "imageURL": "https://i.imgur.com/d7oJuUd.jpg",
+      "title": "Every class you break, every fix you fake, I'll be judging you",
+      "postedBy": "WTFawkDude",
+      "date": "2020-06-16T19:20:30+01:00",
+      "likedBy": [],
+      "comments": [
+        {
+          "commentedBy": "PilsburyKush",
+          "body": "Me: *writing code I’m not sure of Me: *commenting out that line IDE: Bitch."
+        }
+      ]
     }
   ],
   "users": [
@@ -68,6 +82,20 @@
       "password": "jontroncina",
       "karma": 0,
       "id": 7
+    },
+    {
+      "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "username": "WTFawkDude",
+      "password": "jontroncina",
+      "karma": 0,
+      "id": 8
+    },
+    {
+      "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "username": "PilsburyKush",
+      "password": "jontroncina",
+      "karma": 0,
+      "id": 9
     }
   ]
 }
