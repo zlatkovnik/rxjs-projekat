@@ -10,6 +10,7 @@ a:hover {
 
 .icon {
   padding: 0 10px 0 5px;
+  cursor: pointer;
 }
 
 .spacer {
@@ -18,10 +19,13 @@ a:hover {
 
 .title {
   font-size: xx-large;
+  cursor: pointer;
 }
 
-.mat-flat-button {
+.btn-username {
   font-size: large;
+  background-color: rgb(26, 27, 38);
+  color: white;
 }
 
 @media screen and (max-width: 480px) {

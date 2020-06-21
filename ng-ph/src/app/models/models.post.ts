@@ -7,7 +7,6 @@ export default class Post {
   title: string;
   date: string;
   postedBy: string;
-  upVotedBy: User[];
-  downVotedBy: User[];
+  likedBy: User[];
   comments: Comment[];
 }

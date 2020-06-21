@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, map } from 'rxjs/operators';
 
 import User from '../models/models.user';
 import { logoutUser } from '../store/user/user.actions';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,15 @@ export class UserService {
         if (user.length !== 0) throw 'User already exists';
       }),
       switchMap((_) => this.http.post(this.baseURL, user))
+    );
+  }
+
+  getProfileImage(username: string) {
+    return this.http.get<User[]>(this.baseURL + '?username=' + username).pipe(
+      tap((users) => {
+        if (users.length === 0) throw 'User does not exist';
+      }),
+      map((users) => users[0].profileImage)
     );
   }
 }

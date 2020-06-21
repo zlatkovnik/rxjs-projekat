@@ -6,8 +6,7 @@
       "title": "C++ Cheater",
       "postedBy": "ashinsh-ji",
       "date": "1997-07-16T19:20:30+01:00",
-      "upVotedBy": [],
-      "downVotedBy": [],
+      "likedBy": [],
       "comments": [
         {
           "commentedBy": "skadi17",
@@ -23,41 +22,48 @@
   "users": [
     {
       "id": 1,
+      "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       "username": "ashinsh-ji",
       "karma": 0,
       "password": "123"
     },
     {
       "id": 2,
+      "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       "username": "skadi17",
       "karma": 0,
       "password": "123"
     },
     {
       "id": 3,
+      "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       "username": "Kerbal_Guardsman",
       "karma": 0,
       "password": "123"
     },
     {
+      "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       "username": "jontron",
       "password": "jonathan",
       "karma": 0,
       "id": 4
     },
     {
+      "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       "username": "jontrona",
       "password": "jontrona",
       "karma": 0,
       "id": 5
     },
     {
+      "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       "username": "new",
       "password": "newnewnew",
       "karma": 0,
       "id": 6
     },
     {
+      "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       "username": "jon",
       "password": "jontroncina",
       "karma": 0,

@@ -1,1 +1,20 @@
-<p>home works!</p>
+<div class="container">
+  <img class="jumbotron" src="../../../../assets/images/home_code.png" />
+  <br />
+  <div
+    *ngIf="username$ | async as username; else not_logged"
+    class="btn-container"
+  >
+    <button class="btn" routerLink="/feed" mat-raised-button color="primary">
+      Bring me the latest jokes
+    </button>
+  </div>
+  <ng-template #not_logged>
+    <button class="btn" routerLink="/feed" mat-raised-button color="primary">
+      Be cool like Randy
+    </button>
+    <button class="btn" routerLink="/register" mat-raised-button color="accent">
+      Join our community
+    </button>
+  </ng-template>
+</div>

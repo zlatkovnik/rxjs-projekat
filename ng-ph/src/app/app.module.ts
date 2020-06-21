@@ -18,6 +18,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -55,6 +57,8 @@ import { PostComponent } from './components/post/post.component';
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatMenuModule,
+    MatDividerModule,
+    MatListModule,
     StoreModule.forRoot({ user: fromUser.reducer }, {}),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

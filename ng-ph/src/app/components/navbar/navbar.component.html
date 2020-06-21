@@ -1,10 +1,15 @@
 <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center">
   <mat-toolbar-row>
-    <img class="icon" width="50px" src="../../../assets/images/logo.png" />
-    <span class="title">Programmer humor</span>
+    <img
+      routerLink="/"
+      class="icon"
+      width="50px"
+      src="../../../assets/images/logo.png"
+    />
+    <span routerLink="/" class="title">Programmer humor</span>
     <span class="spacer"></span>
     <div *ngIf="username$ | async as username; else notLogged">
-      <button mat-flat-button [matMenuTriggerFor]="menu">
+      <button mat-flat-button [matMenuTriggerFor]="menu" class="btn-username">
         {{ username }}
       </button>
       <mat-menu #menu="matMenu">
