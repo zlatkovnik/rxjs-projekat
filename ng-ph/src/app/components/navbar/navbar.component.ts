@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-import { selectUsername } from 'src/app/store';
-import { UserService } from '../../services/user.service';
-import { logoutUser } from 'src/app/store/user/user.actions';
+import { fromUser, AppState } from 'src/app/store';
+import { logoutUser, loginUser } from 'src/app/store/user/user.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +16,8 @@ export class NavbarComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.username$ = this.store.pipe(select(selectUsername));
+    //@ts-ignore
+    this.username$ = this.store.select((state) => state.user.username);
   }
 
   onLogout() {

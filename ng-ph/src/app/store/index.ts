@@ -1,14 +1,35 @@
-import { createSelector } from '@ngrx/store';
-
-import * as fromUser from './user/user.reducer';
+import {
+  errorLoginUser,
+  loginUser,
+  successfulLoginUser,
+  registerUser,
+  errorRegisterUser,
+  successfulRegisterUser,
+} from './user/user.actions';
+import { userReducer, UserState } from './user/user.reducer';
+import { UserEffects } from './user/user.effects';
+import {
+  selectError,
+  selectLoading,
+  selectUsername,
+} from './user/user.selectors';
+import { PostState } from './post/post.reducer';
 
 export interface AppState {
-  user: fromUser.UserState;
+  userState: UserState;
+  postState: PostState;
 }
 
-export const selectUser = (state: AppState) => state.user;
-
-export const selectUsername = createSelector(
-  selectUser,
-  (state: fromUser.UserState) => state.username
-);
+export const fromUser = {
+  errorLoginUser,
+  loginUser,
+  successfulLoginUser,
+  registerUser,
+  errorRegisterUser,
+  successfulRegisterUser,
+  userReducer,
+  UserEffects,
+  getStateError: selectError,
+  getStateLoading: selectLoading,
+  getStateUsername: selectUsername,
+};

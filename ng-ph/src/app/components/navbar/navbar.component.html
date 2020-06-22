@@ -20,6 +20,7 @@
     <ng-template #notLogged>
       <a routerLink="/login" routerLinkActive="active">Login</a>
       <a routerLink="/register" routerLinkActive="active">Register</a>
+      <a>{{ username$ | async }}</a>
     </ng-template>
   </mat-toolbar-row>
 </mat-toolbar>

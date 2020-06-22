@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectUsername } from 'src/app/store';
+import { fromUser } from 'src/app/store';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +14,6 @@ export class HomeComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.username$ = this.store.pipe(select(selectUsername));
+    this.username$ = this.store.select(fromUser.getStateUsername);
   }
 }

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UserService } from 'src/app/services/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { loginUser } from 'src/app/store/user/user.actions';
+import { Observable } from 'rxjs';
+import { fromUser } from 'src/app/store';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +12,8 @@ import { loginUser } from 'src/app/store/user/user.actions';
 })
 export class RegisterComponent implements OnInit {
   userForm: FormGroup;
-  error = '';
-  loading = false;
+  error$: Observable<string>;
+  loading$: Observable<boolean>;
 
   get username() {
     return this.userForm.get('username');
@@ -24,11 +23,7 @@ export class RegisterComponent implements OnInit {
     return this.userForm.get('password');
   }
 
-  constructor(
-    private userService: UserService,
-    private router: Router,
-    private store: Store
-  ) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.userForm = new FormGroup({
@@ -41,26 +36,22 @@ export class RegisterComponent implements OnInit {
         Validators.minLength(8),
       ]),
     });
+    this.error$ = this.store.select(fromUser.getStateError);
+    this.loading$ = this.store.select(fromUser.getStateLoading);
   }
 
   onSubmit() {
-    this.loading = true;
     if (!this.userForm.valid) {
-      this.error = 'Form is not valid';
+      this.store.dispatch(
+        fromUser.errorRegisterUser({ error: 'Form is not valid' })
+      );
       return;
     }
-    this.userService
-      .register(this.username.value, this.password.value)
-      .subscribe(
-        (user) => {
-          this.loading = false;
-          this.store.dispatch(loginUser({ username: this.username.value }));
-          this.router.navigate(['/']);
-        },
-        (err) => {
-          this.error = err;
-          this.loading = false;
-        }
-      );
+    this.store.dispatch(
+      fromUser.registerUser({
+        username: this.username.value,
+        password: this.password.value,
+      })
+    );
   }
 }

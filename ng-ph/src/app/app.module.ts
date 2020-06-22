@@ -28,9 +28,12 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/pages/home/home.component';
 
 //Redux
-import * as fromUser from './store/user/user.reducer';
+import { fromUser, AppState } from './store/';
 import { FeedComponent } from './components/pages/feed/feed.component';
 import { PostComponent } from './components/post/post.component';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './store/user/user.effects';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -59,11 +62,12 @@ import { PostComponent } from './components/post/post.component';
     MatMenuModule,
     MatDividerModule,
     MatListModule,
-    StoreModule.forRoot({ user: fromUser.reducer }, {}),
+    StoreModule.forRoot({ user: fromUser.userReducer }, {}),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
+    EffectsModule.forRoot([fromUser.UserEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

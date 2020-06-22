@@ -33,11 +33,11 @@
       </div>
     </mat-form-field>
 
-    <mat-error class="error-text" name="error">{{ error }}</mat-error>
+    <mat-error class="error-text" name="error">{{ error$ | async }}</mat-error>
 
     <button mat-raised-button color="primary" [disabled]="!userForm.valid">
       Register
     </button>
-    <mat-spinner class="spinner" *ngIf="loading"></mat-spinner>
+    <mat-spinner class="spinner" *ngIf="loading$ | async"></mat-spinner>
   </mat-card>
 </form>
