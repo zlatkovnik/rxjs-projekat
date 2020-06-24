@@ -37,6 +37,7 @@
     {
       "id": 1,
       "profileImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTOS7KNcMLI-A9ab3kc9r83EQSpMJWjjTeNkAf1h9ebXIXlwpc6&usqp=CAU",
+      "email": "ashinsh@gmail.com",
       "username": "ashinsh-ji",
       "karma": 0,
       "password": "123"
@@ -44,6 +45,7 @@
     {
       "id": 2,
       "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "email": "skadi@gmail.com",
       "username": "skadi17",
       "karma": 0,
       "password": "123"
@@ -51,57 +53,54 @@
     {
       "id": 3,
       "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "email": "kerbal@gmail.com",
       "username": "Kerbal_Guardsman",
       "karma": 0,
       "password": "123"
     },
     {
       "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "username": "jontron",
-      "password": "jonathan",
+      "email": "jontrona@gmail.com",
+      "username": "jontrona",
+      "password": "jontrona",
       "karma": 0,
       "id": 4
     },
     {
       "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "username": "jontrona",
-      "password": "jontrona",
+      "email": "WTFawkDude@gmail.com",
+      "username": "WTFawkDude",
+      "password": "WTFawkDude",
       "karma": 0,
       "id": 5
     },
     {
-      "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "username": "new",
-      "password": "newnewnew",
+      "email": "novi@gmail.com",
+      "username": "novi",
+      "password": "novinovi",
       "karma": 0,
       "id": 6
     },
     {
-      "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "username": "jon",
-      "password": "jontroncina",
+      "email": "jontron@gmail.com",
+      "username": "jontron",
+      "password": "jontrona",
       "karma": 0,
       "id": 7
     },
     {
-      "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "username": "WTFawkDude",
-      "password": "jontroncina",
+      "email": "aaa@aaa.com",
+      "username": "aaaa",
+      "password": "aaaaaaaa",
       "karma": 0,
       "id": 8
     },
     {
-      "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "username": "PilsburyKush",
-      "password": "jontroncina",
+      "email": "bbb@bbb.com",
+      "username": "bbbb",
+      "password": "bbbbbbbb",
       "karma": 0,
       "id": 9
-    },
-    {
-      "username": "lensi",
-      "password": "lensi123",
-      "karma": 0,
-      "id": 10
     }
   ]
 }

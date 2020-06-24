@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import Post from '../../models/post.model';
 import { loadPosts } from '../../store/post.actions';
 import { selectPosts } from '../../store/post.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-posts',
@@ -14,7 +15,7 @@ import { selectPosts } from '../../store/post.selectors';
 export class PostsComponent implements OnInit {
   posts$: Observable<Post[]>;
 
-  constructor(private store: Store<PostState>) {}
+  constructor(private store: Store<PostState>, private router: Router) {}
 
   ngOnInit(): void {
     this.store.dispatch(loadPosts());

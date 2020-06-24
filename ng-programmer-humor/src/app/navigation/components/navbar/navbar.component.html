@@ -1,0 +1,26 @@
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center">
+  <mat-toolbar-row>
+    <img
+      routerLink="/"
+      class="icon"
+      width="50px"
+      src="../../../assets/images/logo.png"
+    />
+    <span routerLink="/" class="title">Programmer humor</span>
+    <span class="spacer"></span>
+    <div *ngIf="user$ | async as user; else notLogged">
+      <button mat-flat-button class="btn-username">
+        {{ user.username }}
+      </button>
+      <!-- <mat-menu #menu="matMenu">
+        <button mat-menu-item>Profile</button>
+         <button mat-menu-item (click)="onLogout()">Logout</button> 
+      </mat-menu> -->
+    </div>
+    <ng-template #notLogged>
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+      <a routerLink="/register" routerLinkActive="active">Register</a>
+      <!-- <a>{{ (user$ | async)?.username }}</a> -->
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>
