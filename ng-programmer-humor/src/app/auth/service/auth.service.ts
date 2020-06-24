@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import UserLogin from 'src/app/auth/models/user-login.model';
 import User from 'src/app/users/models/user.model';
 import { tap, map, catchError, switchMap } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { throwError, Observable, of } from 'rxjs';
 import UserRegister from 'src/app/auth/models/user-register.model';
 import Auth from '../models/auth.model';
 
@@ -50,6 +50,10 @@ export class AuthService {
         switchMap((_) => this.http.post(this.baseURL, user)),
         catchError((error) => throwError(`Request timed out`))
       );
+  }
+
+  logout() {
+    window.localStorage.removeItem('AUTH');
   }
 
   mapUserToAuth(user: User): Auth {

@@ -101,6 +101,13 @@
       "password": "bbbbbbbb",
       "karma": 0,
       "id": 9
+    },
+    {
+      "email": "djura@gmail.com",
+      "username": "djura",
+      "password": "djura123",
+      "karma": 0,
+      "id": 10
     }
   ]
 }

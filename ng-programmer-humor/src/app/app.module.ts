@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
@@ -11,6 +11,7 @@ import { PostsModule } from './posts/posts.module';
 import { AppRoutingModule } from './app-routing.module';
 import { NavigationModule } from './navigation/navigation.module';
 import { AuthModule } from './auth/auth.module';
+import { InitServiceService } from './auth/service/init-service.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +29,19 @@ import { AuthModule } from './auth/auth.module';
     }),
     EffectsModule.forRoot([]),
   ],
-  providers: [],
+  providers: [
+    InitServiceService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initFunction,
+      deps: [InitServiceService],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+export function initFunction(config: InitServiceService) {
+  return () => config.init();
+}

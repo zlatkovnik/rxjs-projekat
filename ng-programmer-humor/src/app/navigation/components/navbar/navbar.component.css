@@ -22,10 +22,57 @@ a:hover {
   cursor: pointer;
 }
 
-.btn-username {
-  font-size: large;
+.profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
   background-color: rgb(26, 27, 38);
-  color: white;
+  width: 140px;
+  height: 50px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.profile-container:hover {
+  background-color: rgb(46, 47, 58);
+  cursor: pointer;
+}
+
+.header-image {
+  background-size: cover;
+}
+
+.img {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  position: relative;
+  top: 3px;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  object-fit: cover;
+}
+
+.user-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.username {
+  font-size: small;
+  line-height: 20px;
+}
+
+.karma {
+  font-size: small;
+  color: #cbcbcb;
+  line-height: 20px;
 }
 
 @media screen and (max-width: 480px) {

@@ -15,6 +15,7 @@ export class AuthEffects {
         this.authService.login(action.userLogin).pipe(
           map((user) => this.authService.mapUserToAuth(user)),
           map((user) => {
+            window.localStorage.setItem('AUTH', JSON.stringify(user));
             this.router.navigate(['/']);
             return fromAuthActions.loginUserSuccess({ user: user });
           }),

@@ -23,6 +23,9 @@ export const initialState: AuthState = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
+  on(AuthActions.setUser, (state, action) => {
+    return { ...state, user: action.auth };
+  }),
   on(AuthActions.loginUser, (state, action) => {
     return { ...state, loading: true };
   }),
@@ -60,6 +63,12 @@ export const reducer = createReducer(
       loading: false,
       error: action.error,
       message: undefined,
+    };
+  }),
+  on(AuthActions.logoutUser, (state, action) => {
+    return {
+      ...state,
+      user: undefined,
     };
   })
 );

@@ -13,6 +13,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./posts/posts.module').then((m) => m.PostsModule),
   },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./users/users.module').then((m) => m.UsersModule),
+  },
 ];
 
 @NgModule({

@@ -8,19 +8,28 @@
     />
     <span routerLink="/" class="title">Programmer humor</span>
     <span class="spacer"></span>
-    <div *ngIf="user$ | async as user; else notLogged">
-      <button mat-flat-button class="btn-username">
-        {{ user.username }}
-      </button>
-      <!-- <mat-menu #menu="matMenu">
+    <div
+      class="profile-container"
+      [matMenuTriggerFor]="menu"
+      *ngIf="user$ | async as user; else notLogged"
+    >
+      <div mat-card-avatar class="header-image">
+        <img src="{{ user.profileImage }}" class="img" />
+      </div>
+      <div class="user-info-container">
+        <div class="username">
+          {{ user.username }}
+        </div>
+        <div class="karma">{{ user.karma }} karma</div>
+      </div>
+      <mat-menu #menu="matMenu">
         <button mat-menu-item>Profile</button>
-         <button mat-menu-item (click)="onLogout()">Logout</button> 
-      </mat-menu> -->
+        <button mat-menu-item (click)="onLogout()">Logout</button>
+      </mat-menu>
     </div>
     <ng-template #notLogged>
       <a routerLink="/login" routerLinkActive="active">Login</a>
       <a routerLink="/register" routerLinkActive="active">Register</a>
-      <!-- <a>{{ (user$ | async)?.username }}</a> -->
     </ng-template>
   </mat-toolbar-row>
 </mat-toolbar>

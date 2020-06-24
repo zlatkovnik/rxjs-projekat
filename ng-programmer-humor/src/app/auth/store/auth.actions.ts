@@ -4,6 +4,11 @@ import Auth from '../models/auth.model';
 import UserRegister from '../models/user-register.model';
 import UserLogin from '../models/user-login.model';
 
+export const setUser = createAction(
+  '[Auth Init Service] Init Auth User',
+  props<{ auth: Auth }>()
+);
+
 export const loginUser = createAction(
   '[Auth Service] Login User',
   props<{ userLogin: UserLogin }>()
@@ -32,3 +37,5 @@ export const registerUserFailure = createAction(
   '[Auth Effect] Register User Failure',
   props<{ error: any }>()
 );
+
+export const logoutUser = createAction('[Auth Service] Logout User');

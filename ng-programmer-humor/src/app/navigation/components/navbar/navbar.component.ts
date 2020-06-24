@@ -9,6 +9,8 @@ import {
   authLoading,
   authError,
 } from 'src/app/auth/store/auth.selector';
+import { UsersService } from 'src/app/users/service/users.service';
+import { logoutUser } from 'src/app/auth/store/auth.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -22,5 +24,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user$ = this.store.pipe(select(authUser));
+  }
+
+  onLogout() {
+    this.store.dispatch(logoutUser());
   }
 }
