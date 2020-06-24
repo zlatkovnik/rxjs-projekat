@@ -1,0 +1,10 @@
+.error {
+  color: #cc0000;
+  font-size: large;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.spinner {
+  margin: 20vw auto 0 auto;
+}

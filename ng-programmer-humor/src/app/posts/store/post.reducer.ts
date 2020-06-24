@@ -2,12 +2,14 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import * as PostActions from './post.actions';
 import Post from '../models/post.model';
+import { state } from '@angular/animations';
 
 export const postsFeatureKey = 'posts';
 
 export interface PostState extends EntityState<Post> {
   error: any;
   selectedPost: Post;
+  loading: boolean;
 }
 
 export const adapter: EntityAdapter<Post> = createEntityAdapter<Post>();
@@ -15,18 +17,22 @@ export const adapter: EntityAdapter<Post> = createEntityAdapter<Post>();
 export const initialState: PostState = adapter.getInitialState({
   error: undefined,
   selectedPost: undefined,
+  loading: false,
 });
 
 export const reducer = createReducer(
   initialState,
+  on(PostActions.loadPosts, (state, action) => {
+    return { ...state, loading: true };
+  }),
   on(PostActions.loadPostsSuccess, (state, action) =>
-    adapter.setAll(action.posts, state)
+    adapter.setAll(action.posts, { ...state, loading: false, error: undefined })
   ),
   on(PostActions.loadPostsFailure, (state, action) => {
-    return { ...state, error: action.error };
+    return { ...state, error: action.error, loading: false };
   }),
   on(PostActions.loadPostSuccess, (state, action) => {
-    return { ...state, error: '', selectedPost: action.post };
+    return { ...state, error: '', selectedPost: action.post, loading: false };
   }),
   on(PostActions.loadPostFailure, (state, action) => {
     return { ...state, error: action.error };

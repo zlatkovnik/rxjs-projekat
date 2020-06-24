@@ -10,3 +10,11 @@ export const selectedPost = createSelector(
   selectPostState,
   (state: PostState) => state.selectedPost
 );
+export const selectPostsError = createSelector(
+  selectPostState,
+  (state: PostState) => state.error
+);
+export const selectPostsLoading = createSelector(
+  selectPostState,
+  (state: PostState) => state.loading
+);

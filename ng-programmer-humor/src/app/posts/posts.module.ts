@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { PostComponent } from './components/post/post.component';
 import { PostsRoutingModule } from './posts-routing.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [PostsComponent, PostComponent],
@@ -22,6 +23,7 @@ import { PostsRoutingModule } from './posts-routing.module';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     StoreModule.forFeature(fromPost.postsFeatureKey, fromPost.reducer),
     EffectsModule.forFeature([PostEffects]),
   ],

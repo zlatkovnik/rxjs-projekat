@@ -1,4 +1,6 @@
 <div class="container">
+  <p class="error">{{ error$ | async }}</p>
+  <mat-spinner class="spinner" *ngIf="loading$ | async"></mat-spinner>
   <div *ngFor="let post of posts$ | async">
     <app-post [post]="post"></app-post>
   </div>

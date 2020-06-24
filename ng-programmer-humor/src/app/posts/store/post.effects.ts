@@ -14,7 +14,11 @@ export class PostEffects {
         this.postsService.getPosts().pipe(
           map((posts) => fromPostActions.loadPostsSuccess({ posts: posts })),
           catchError((error) =>
-            of(fromPostActions.loadPostsFailure({ error: error }))
+            of(
+              fromPostActions.loadPostsFailure({
+                error: 'Connection timed out',
+              })
+            )
           )
         )
       )
