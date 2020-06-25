@@ -6,7 +6,7 @@
       "title": "C++ Cheater",
       "postedBy": "ashinsh-ji",
       "date": "2020-07-16T19:20:30+01:00",
-      "likedBy": [],
+      "likedBy": [1, 2],
       "comments": [
         {
           "commentedBy": "skadi17",
@@ -40,7 +40,8 @@
       "email": "ashinsh@gmail.com",
       "username": "ashinsh-ji",
       "karma": 0,
-      "password": "123"
+      "password": "123",
+      "role": "admin"
     },
     {
       "id": 2,
@@ -48,7 +49,8 @@
       "email": "skadi@gmail.com",
       "username": "skadi17",
       "karma": 0,
-      "password": "123"
+      "password": "123",
+      "role": "user"
     },
     {
       "id": 3,
@@ -56,7 +58,8 @@
       "email": "kerbal@gmail.com",
       "username": "Kerbal_Guardsman",
       "karma": 0,
-      "password": "123"
+      "password": "123",
+      "role": "user"
     },
     {
       "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -64,7 +67,8 @@
       "username": "jontrona",
       "password": "jontrona",
       "karma": 0,
-      "id": 4
+      "id": 4,
+      "role": "user"
     },
     {
       "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -72,7 +76,8 @@
       "username": "WTFawkDude",
       "password": "WTFawkDude",
       "karma": 0,
-      "id": 5
+      "id": 5,
+      "role": "user"
     },
     {
       "email": "novi@gmail.com",
@@ -87,27 +92,6 @@
       "password": "jontrona",
       "karma": 0,
       "id": 7
-    },
-    {
-      "email": "aaa@aaa.com",
-      "username": "aaaa",
-      "password": "aaaaaaaa",
-      "karma": 0,
-      "id": 8
-    },
-    {
-      "email": "bbb@bbb.com",
-      "username": "bbbb",
-      "password": "bbbbbbbb",
-      "karma": 0,
-      "id": 9
-    },
-    {
-      "email": "djura@gmail.com",
-      "username": "djura",
-      "password": "djura123",
-      "karma": 0,
-      "id": 10
     }
   ]
 }

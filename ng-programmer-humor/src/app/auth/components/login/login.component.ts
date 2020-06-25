@@ -3,7 +3,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AuthState } from '../../store/auth.reducer';
-import { authError, authLoading, authMessage } from '../../store/auth.selector';
+import {
+  selectAuthError,
+  selectAuthLoading,
+  selectAuthMessage,
+} from '../../store/auth.selector';
 import { loginUserFailure, loginUser } from '../../store/auth.actions';
 
 @Component({
@@ -38,9 +42,9 @@ export class LoginComponent implements OnInit {
       ]),
     });
 
-    this.error$ = this.store.pipe(select(authError));
-    this.loading$ = this.store.pipe(select(authLoading));
-    this.message$ = this.store.pipe(select(authMessage));
+    this.error$ = this.store.pipe(select(selectAuthError));
+    this.loading$ = this.store.pipe(select(selectAuthLoading));
+    this.message$ = this.store.pipe(select(selectAuthMessage));
   }
 
   onSubmit() {

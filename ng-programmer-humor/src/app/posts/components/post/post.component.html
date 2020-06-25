@@ -10,11 +10,31 @@
     >
   </mat-card-header>
   <img mat-card-image src="{{ post.imageURL }}" alt="Photo of a Shiba Inu" />
-  <mat-card-content>
-    Komentari
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>Like</button>
-    <button mat-button>Comments</button>
+  <mat-card-actions class="action-container">
+    <div class="like-container">
+      <button
+        *ngIf="hasLiked; else not_liked"
+        mat-mini-fab
+        aria-label="Unlike post"
+        (click)="onLike()"
+      >
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <ng-template #not_liked>
+        <button
+          mat-icon-button
+          color="accent"
+          aria-label="Like post"
+          (click)="onLike()"
+        >
+          <mat-icon>favorite_outline</mat-icon>
+        </button>
+      </ng-template>
+      <div class="number-of-likes">
+        {{ post.likedBy.length }}
+      </div>
+    </div>
+    <button class="comment-btn" mat-button>Comments</button>
+    <div></div>
   </mat-card-actions>
 </mat-card>

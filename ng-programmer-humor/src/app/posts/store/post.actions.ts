@@ -25,6 +25,10 @@ export const loadPostFailure = createAction(
   '[Post Effect] Load Post Failure',
   props<{ error: any }>()
 );
+export const editPost = createAction(
+  '[Post Component] Edit Post',
+  props<{ post: Update<Post> }>()
+);
 
 export const addPost = createAction(
   '[Post/API] Add Post',

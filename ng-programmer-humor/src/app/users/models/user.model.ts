@@ -5,4 +5,5 @@ export default class User {
   username: string;
   karma: number;
   password: string;
+  role: string;
 }

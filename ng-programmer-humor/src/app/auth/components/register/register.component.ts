@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthState } from '../../store/auth.reducer';
 import { Store, select } from '@ngrx/store';
-import { authError, authLoading } from '../../store/auth.selector';
+import { selectAuthError, selectAuthLoading } from '../../store/auth.selector';
 import { registerUser, registerUserFailure } from '../../store/auth.actions';
 
 @Component({
@@ -40,8 +40,8 @@ export class RegisterComponent implements OnInit {
         Validators.minLength(8),
       ]),
     });
-    this.error$ = this.store.pipe(select(authError));
-    this.loading$ = this.store.pipe(select(authLoading));
+    this.error$ = this.store.pipe(select(selectAuthError));
+    this.loading$ = this.store.pipe(select(selectAuthLoading));
   }
 
   onSubmit() {

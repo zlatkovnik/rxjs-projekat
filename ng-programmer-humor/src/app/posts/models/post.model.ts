@@ -4,6 +4,6 @@ export default class Post {
   title: string;
   date: string;
   postedBy: string;
-  likedBy: string[];
+  likedBy: number[];
   //comments: Comment[];
 }

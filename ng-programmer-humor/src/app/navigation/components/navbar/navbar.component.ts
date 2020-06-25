@@ -5,9 +5,9 @@ import { AuthState } from 'src/app/auth/store/auth.reducer';
 import { Store, select } from '@ngrx/store';
 import {
   selectUserState,
-  authUser,
-  authLoading,
-  authError,
+  selectAuthUser,
+  selectAuthLoading,
+  selectAuthError,
 } from 'src/app/auth/store/auth.selector';
 import { UsersService } from 'src/app/users/service/users.service';
 import { logoutUser } from 'src/app/auth/store/auth.actions';
@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   constructor(private store: Store<AuthState>) {}
 
   ngOnInit(): void {
-    this.user$ = this.store.pipe(select(authUser));
+    this.user$ = this.store.pipe(select(selectAuthUser));
   }
 
   onLogout() {

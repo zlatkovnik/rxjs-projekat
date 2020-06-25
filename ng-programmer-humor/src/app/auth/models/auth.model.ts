@@ -4,4 +4,5 @@ export default interface Auth {
   email: string;
   karma: number;
   profileImage: string;
+  role: string;
 }

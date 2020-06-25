@@ -57,7 +57,7 @@ export class AuthService {
   }
 
   mapUserToAuth(user: User): Auth {
-    const { id, email, username, profileImage, karma } = user;
-    return { id, email, username, profileImage, karma };
+    const { id, email, username, profileImage, karma, role } = user;
+    return { id, email, username, profileImage, karma, role };
   }
 }

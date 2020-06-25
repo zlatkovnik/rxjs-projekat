@@ -37,6 +37,9 @@ export const reducer = createReducer(
   on(PostActions.loadPostFailure, (state, action) => {
     return { ...state, error: action.error };
   }),
+  on(PostActions.editPost, (state, action) =>
+    adapter.updateOne(action.post, state)
+  ),
   on(PostActions.addPost, (state, action) =>
     adapter.addOne(action.post, state)
   ),

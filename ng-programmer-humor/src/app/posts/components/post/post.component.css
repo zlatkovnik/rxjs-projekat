@@ -20,12 +20,20 @@
   object-fit: cover;
 }
 
-.like-container {
+.action-container {
   display: flex;
-  margin: auto 0 auto auto;
+  justify-content: center;
 }
 
-.points {
+.like-container {
+  display: flex;
+  align-items: center;
+}
+
+.number-of-likes {
   font-size: x-large;
-  margin: auto 10px;
+}
+
+.comment-btn {
+  margin-left: 50%;
 }

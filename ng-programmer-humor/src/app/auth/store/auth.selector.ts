@@ -3,22 +3,22 @@ import { authFeatureKey, AuthState } from './auth.reducer';
 
 export const selectUserState = createFeatureSelector<AuthState>(authFeatureKey);
 
-export const authUser = createSelector(
+export const selectAuthUser = createSelector(
   selectUserState,
   (state: AuthState) => state.user
 );
 
-export const authLoading = createSelector(
+export const selectAuthLoading = createSelector(
   selectUserState,
   (state: AuthState) => state.loading
 );
 
-export const authError = createSelector(
+export const selectAuthError = createSelector(
   selectUserState,
   (state: AuthState) => state.error
 );
 
-export const authMessage = createSelector(
+export const selectAuthMessage = createSelector(
   selectUserState,
   (state: AuthState) => state.message
 );

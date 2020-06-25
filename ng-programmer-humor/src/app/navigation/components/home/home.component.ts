@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AuthState } from 'src/app/auth/store/auth.reducer';
-import { authUser } from 'src/app/auth/store/auth.selector';
+import { selectAuthUser } from 'src/app/auth/store/auth.selector';
 import Auth from 'src/app/auth/models/auth.model';
 
 @Component({
@@ -16,6 +16,6 @@ export class HomeComponent implements OnInit {
   constructor(private store: Store<AuthState>) {}
 
   ngOnInit(): void {
-    this.username$ = this.store.pipe(select(authUser));
+    this.username$ = this.store.pipe(select(selectAuthUser));
   }
 }

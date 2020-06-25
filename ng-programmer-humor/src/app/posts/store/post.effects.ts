@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { mergeMap, map, catchError } from 'rxjs/operators';
+import { mergeMap, map, catchError, concatMap } from 'rxjs/operators';
 import * as fromPostActions from './post.actions';
 import { PostsService } from '../services/posts.service';
 import { of } from 'rxjs';
@@ -37,6 +37,17 @@ export class PostEffects {
         )
       )
     )
+  );
+
+  editPost$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromPostActions.editPost),
+        concatMap((action) =>
+          this.postsService.editPost(action.post.id, action.post.changes)
+        )
+      ),
+    { dispatch: false }
   );
 
   constructor(private actions$: Actions, private postsService: PostsService) {}
