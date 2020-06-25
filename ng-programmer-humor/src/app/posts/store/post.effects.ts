@@ -43,9 +43,12 @@ export class PostEffects {
     () =>
       this.actions$.pipe(
         ofType(fromPostActions.editPost),
-        concatMap((action) =>
-          this.postsService.editPost(action.post.id, action.post.changes)
-        )
+        concatMap((action) => {
+          return this.postsService.editPost(
+            action.post.id,
+            action.post.changes
+          );
+        })
       ),
     { dispatch: false }
   );

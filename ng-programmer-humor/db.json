@@ -6,7 +6,11 @@
       "title": "C++ Cheater",
       "postedBy": "ashinsh-ji",
       "date": "2020-07-16T19:20:30+01:00",
-      "likedBy": [1, 2],
+      "likedBy": [
+        1,
+        2,
+        4
+      ],
       "comments": [
         {
           "commentedBy": "skadi17",
@@ -24,13 +28,26 @@
       "title": "Every class you break, every fix you fake, I'll be judging you",
       "postedBy": "WTFawkDude",
       "date": "2020-06-16T19:20:30+01:00",
-      "likedBy": [],
+      "likedBy": [
+        4
+      ],
       "comments": [
         {
           "commentedBy": "PilsburyKush",
           "body": "Me: *writing code I’m not sure of Me: *commenting out that line IDE: Bitch."
         }
       ]
+    },
+    {
+      "id": 3,
+      "imageURL": "https://i.redd.it/jd25yqv8xsf31.jpg",
+      "title": "Lamo",
+      "postedBy": "jontrona",
+      "date": "2020-06-25T19:20:30+01:00",
+      "likedBy": [
+        4
+      ],
+      "comments": []
     }
   ],
   "users": [
@@ -40,8 +57,7 @@
       "email": "ashinsh@gmail.com",
       "username": "ashinsh-ji",
       "karma": 0,
-      "password": "123",
-      "role": "admin"
+      "password": "123"
     },
     {
       "id": 2,
@@ -49,8 +65,7 @@
       "email": "skadi@gmail.com",
       "username": "skadi17",
       "karma": 0,
-      "password": "123",
-      "role": "user"
+      "password": "123"
     },
     {
       "id": 3,
@@ -58,8 +73,7 @@
       "email": "kerbal@gmail.com",
       "username": "Kerbal_Guardsman",
       "karma": 0,
-      "password": "123",
-      "role": "user"
+      "password": "123"
     },
     {
       "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -67,8 +81,7 @@
       "username": "jontrona",
       "password": "jontrona",
       "karma": 0,
-      "id": 4,
-      "role": "user"
+      "id": 4
     },
     {
       "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -76,8 +89,7 @@
       "username": "WTFawkDude",
       "password": "WTFawkDude",
       "karma": 0,
-      "id": 5,
-      "role": "user"
+      "id": 5
     },
     {
       "email": "novi@gmail.com",
@@ -92,6 +104,27 @@
       "password": "jontrona",
       "karma": 0,
       "id": 7
+    },
+    {
+      "email": "aaa@aaa.com",
+      "username": "aaaa",
+      "password": "aaaaaaaa",
+      "karma": 0,
+      "id": 8
+    },
+    {
+      "email": "bbb@bbb.com",
+      "username": "bbbb",
+      "password": "bbbbbbbb",
+      "karma": 0,
+      "id": 9
+    },
+    {
+      "email": "djura@gmail.com",
+      "username": "djura",
+      "password": "djura123",
+      "karma": 0,
+      "id": 10
     }
   ]
 }

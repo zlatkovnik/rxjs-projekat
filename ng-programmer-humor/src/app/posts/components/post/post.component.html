@@ -6,7 +6,11 @@
 
     <mat-card-title>{{ post.title }}</mat-card-title>
     <mat-card-subtitle
-      >Posted by {{ post.postedBy }} {{ momentTime }}</mat-card-subtitle
+      >Posted by
+      <span [ngClass]="{ 'my-post': post.postedBy === user.username }">{{
+        post.postedBy
+      }}</span>
+      {{ momentTime }}</mat-card-subtitle
     >
   </mat-card-header>
   <img mat-card-image src="{{ post.imageURL }}" alt="Photo of a Shiba Inu" />
@@ -35,6 +39,5 @@
       </div>
     </div>
     <button class="comment-btn" mat-button>Comments</button>
-    <div></div>
   </mat-card-actions>
 </mat-card>

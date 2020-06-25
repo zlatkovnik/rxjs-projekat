@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 import Auth from 'src/app/auth/models/auth.model';
 import { selectAuthUser } from 'src/app/auth/store/auth.selector';
 import { AuthState } from 'src/app/auth/store/auth.reducer';
-import { Update } from '@ngrx/entity';
 
 @Component({
   selector: 'app-posts',
@@ -38,17 +37,5 @@ export class PostsComponent implements OnInit {
     this.error$ = this.postsStore.pipe(select(selectPostsError));
     this.loading$ = this.postsStore.pipe(select(selectPostsLoading));
     this.auth$ = this.authStore.pipe(select(selectAuthUser));
-  }
-
-  getLikeEmitted({ postId, userId }) {
-    this.posts$.subscribe((posts) => {
-      const post = posts.find((post) => post.id === postId);
-      const model = { ...post };
-      if (post.likedBy.includes(userId))
-        model.likedBy = post.likedBy.filter((id) => userId != id);
-      else model.likedBy = [post.likedBy, userId];
-      const update: Update<Post> = { id: post.id, changes: model };
-      this.postsStore.dispatch(updatePost({ post: update }));
-    });
   }
 }

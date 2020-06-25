@@ -1,10 +1,13 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import { UsersService } from 'src/app/users/service/users.service';
 import Post from '../../models/post.model';
 import Auth from 'src/app/auth/models/auth.model';
+import { Update } from '@ngrx/entity';
+import { Store } from '@ngrx/store';
+import { PostState } from '../../store/post.reducer';
+import { editPost } from '../../store/post.actions';
 
 @Component({
   selector: 'app-post',
@@ -14,15 +17,14 @@ import Auth from 'src/app/auth/models/auth.model';
 export class PostComponent implements OnInit {
   @Input() post: Post;
   @Input() user: Auth;
-  @Output() like: EventEmitter<{
-    postId: number;
-    userId: number;
-  }> = new EventEmitter();
   profileImageUrl$: Observable<string>;
   momentTime: string;
   hasLiked: boolean;
 
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private postsStore: Store<PostState>
+  ) {}
 
   ngOnInit(): void {
     this.profileImageUrl$ = this.usersService.getUserProfileImageUrl(
@@ -33,7 +35,12 @@ export class PostComponent implements OnInit {
   }
 
   onLike() {
+    const model = { ...this.post };
+    if (this.hasLiked)
+      model.likedBy = model.likedBy.filter((id) => this.user.id !== id);
+    else model.likedBy = [...model.likedBy, this.user.id];
+    const update: Update<Post> = { id: model.id, changes: model };
+    this.postsStore.dispatch(editPost({ post: update }));
     this.hasLiked = !this.hasLiked;
-    this.like.emit({ postId: this.post.id, userId: this.user.id });
   }
 }
