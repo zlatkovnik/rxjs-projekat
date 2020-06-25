@@ -32,18 +32,4 @@ export class PostsService {
   editPost(postId: number | string, changes: Partial<Post>): Observable<Post> {
     return this.http.put<Post>(this.baseUrl + postId, changes);
   }
-
-  // likePost(postId: number, userId: number): Observable<Post> {
-  //   return this.getPost(postId).pipe(
-  //     map((post) => {
-  //       let likedBy = post.likedBy;
-  //       if (likedBy.includes(userId)) {
-  //         likedBy = likedBy.filter((id) => id !== userId);
-  //       } else {
-  //         likedBy.push(userId);
-  //       }
-  //       return { ...post, likedBy: likedBy };
-  //     })
-  //   );
-  // }
 }

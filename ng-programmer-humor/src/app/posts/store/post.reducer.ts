@@ -40,9 +40,18 @@ export const reducer = createReducer(
   on(PostActions.editPost, (state, action) =>
     adapter.updateOne(action.post, state)
   ),
-  on(PostActions.addPost, (state, action) =>
-    adapter.addOne(action.post, state)
+  on(PostActions.addPost, (state, action) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+  on(PostActions.addPostSuccess, (state, action) =>
+    adapter.addOne(action.post, { ...state, loading: false, error: undefined })
   ),
+  on(PostActions.addPostFailure, (state, action) => {
+    return { ...state, loading: false, error: action.error };
+  }),
   on(PostActions.upsertPost, (state, action) =>
     adapter.upsertOne(action.post, state)
   ),

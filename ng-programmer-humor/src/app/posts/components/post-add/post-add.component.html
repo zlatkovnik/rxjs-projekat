@@ -1,0 +1,40 @@
+<form class="form" [formGroup]="postForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <div class="title">Create a post</div>
+    <mat-form-field class="full-width">
+      <mat-label>Enter an interesting title</mat-label>
+      <input matInput formControlName="title" />
+      <div
+        *ngIf="title.invalid && (title.dirty || title.touched)"
+        class="alert alert-danger"
+      >
+        <mat-error *ngIf="title.errors.required">
+          Title is required
+        </mat-error>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Enter the address of an image</mat-label>
+      <input matInput formControlName="imageURL" />
+      <div
+        *ngIf="imageURL.invalid && (imageURL.dirty || imageURL.touched)"
+        class="alert alert-danger"
+      >
+        <mat-error *ngIf="imageURL.errors.required">
+          ImageURL is required
+        </mat-error>
+        <mat-error *ngIf="imageURL.errors.minlength">
+          ImageURL must be a valid link
+        </mat-error>
+      </div>
+    </mat-form-field>
+
+    <mat-error class="error-text" name="error">{{ error$ | async }}</mat-error>
+
+    <button mat-raised-button color="primary" [disabled]="!postForm.valid">
+      Create new post
+    </button>
+    <mat-spinner class="spinner" *ngIf="loading$ | async"></mat-spinner>
+  </mat-card>
+</form>

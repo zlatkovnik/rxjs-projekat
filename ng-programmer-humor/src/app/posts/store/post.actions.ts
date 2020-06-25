@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 import Post from '../models/post.model';
+import Auth from 'src/app/auth/models/auth.model';
 
 //Loading posts
 export const loadPosts = createAction('[Post Component] Load Posts');
@@ -25,14 +26,23 @@ export const loadPostFailure = createAction(
   '[Post Effect] Load Post Failure',
   props<{ error: any }>()
 );
+//Edit single post
 export const editPost = createAction(
   '[Post Component] Edit Post',
   props<{ post: Update<Post> }>()
 );
-
+//Add new post
 export const addPost = createAction(
-  '[Post/API] Add Post',
+  '[Post Component] Add Post',
+  props<{ title: string; imageURL: string; user: Auth }>()
+);
+export const addPostSuccess = createAction(
+  '[Post Effect] Add Post Success',
   props<{ post: Post }>()
+);
+export const addPostFailure = createAction(
+  '[Post Effect] Add Post Failure',
+  props<{ error: any }>()
 );
 
 export const upsertPost = createAction(

@@ -5,12 +5,22 @@
     *ngIf="username$ | async as username; else not_logged"
     class="btn-container"
   >
-    <button class="btn" routerLink="/posts" mat-raised-button color="primary">
+    <button
+      class="btn"
+      routerLink="/posts/list"
+      mat-raised-button
+      color="primary"
+    >
       Bring me the latest jokes
     </button>
   </div>
   <ng-template #not_logged>
-    <button class="btn" routerLink="/posts" mat-raised-button color="primary">
+    <button
+      class="btn"
+      routerLink="/posts/list"
+      mat-raised-button
+      color="primary"
+    >
       Be cool like Randy
     </button>
     <button class="btn" routerLink="/register" mat-raised-button color="accent">
