@@ -68,7 +68,17 @@ export const reducer = createReducer(
   on(AuthActions.logoutUser, (state, action) => {
     return {
       ...state,
+    };
+  }),
+  on(AuthActions.logoutUserSuccess, (state, action) => {
+    return {
+      ...state,
       user: undefined,
+    };
+  }),
+  on(AuthActions.logoutUserFailure, (state, action) => {
+    return {
+      ...state,
     };
   })
 );

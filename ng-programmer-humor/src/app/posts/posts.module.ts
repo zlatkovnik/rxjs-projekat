@@ -17,9 +17,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { PostAddComponent } from './components/post-add/post-add.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
 
 @NgModule({
-  declarations: [PostsComponent, PostComponent, PostAddComponent],
+  declarations: [
+    PostsComponent,
+    PostComponent,
+    PostAddComponent,
+    PostDetailComponent,
+  ],
   imports: [
     CommonModule,
     PostsRoutingModule,
@@ -33,6 +39,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     StoreModule.forFeature(fromPost.postsFeatureKey, fromPost.reducer),
     EffectsModule.forFeature([PostEffects]),
   ],
-  exports: [PostsComponent, PostAddComponent],
+  exports: [PostsComponent, PostAddComponent, PostDetailComponent],
 })
 export class PostsModule {}

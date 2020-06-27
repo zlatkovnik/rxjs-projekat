@@ -35,7 +35,7 @@ export const reducer = createReducer(
     return { ...state, error: '', selectedPost: action.post, loading: false };
   }),
   on(PostActions.loadPostFailure, (state, action) => {
-    return { ...state, error: action.error };
+    return { ...state, error: action.error, loading: false };
   }),
   on(PostActions.editPost, (state, action) =>
     adapter.updateOne(action.post, state)

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as fromAuthActions from './auth.actions';
-import { exhaustMap, map, catchError, switchMap } from 'rxjs/operators';
+import { exhaustMap, map, catchError, mergeMap } from 'rxjs/operators';
 import { AuthService } from '../service/auth.service';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
+import { mapUserToAuth } from '../service/util';
 
 @Injectable()
 export class AuthEffects {
@@ -13,7 +14,7 @@ export class AuthEffects {
       ofType(fromAuthActions.loginUser),
       exhaustMap((action) =>
         this.authService.login(action.userLogin).pipe(
-          map((user) => this.authService.mapUserToAuth(user)),
+          map((user) => mapUserToAuth(user)),
           map((user) => {
             window.localStorage.setItem('AUTH', JSON.stringify(user));
             this.router.navigate(['/']);
@@ -39,6 +40,22 @@ export class AuthEffects {
           catchError((error) =>
             of(fromAuthActions.registerUserFailure({ error: error }))
           )
+        )
+      )
+    )
+  );
+
+  logout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromAuthActions.logoutUser),
+      exhaustMap((action) =>
+        this.authService.logout().pipe(
+          map((action) => {
+            window.localStorage.removeItem('AUTH');
+            this.authService.logout();
+            return fromAuthActions.logoutUserSuccess();
+          }),
+          catchError((error) => of(fromAuthActions.logoutUserFailure()))
         )
       )
     )

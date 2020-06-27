@@ -50,7 +50,8 @@ export class PostEffects {
           imageURL: action.imageURL,
           likedBy: [action.user.id],
           postedBy: action.user.username,
-          date: new Date().toUTCString(),
+          date: new Date().toISOString(),
+          comments: [],
         };
         return this.postsService.createPost(post).pipe(
           map((post) => fromPostActions.addPostSuccess({ post })),

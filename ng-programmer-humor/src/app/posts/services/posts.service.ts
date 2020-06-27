@@ -11,25 +11,25 @@ import { switchMap, map } from 'rxjs/operators';
 export class PostsService {
   constructor(private http: HttpClient) {}
 
-  baseUrl: string = 'http://localhost:3000/posts/';
+  baseUrl: string = 'http://localhost:3000/posts';
 
   createPost(post: Post): Observable<Post> {
     return this.http.post<Post>(this.baseUrl, post);
   }
 
   getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.baseUrl);
+    return this.http.get<Post[]>(`${this.baseUrl}?_sort=date&_order=desc`);
   }
 
   getPost(postId: number): Observable<Post> {
-    return this.http.get<Post>(this.baseUrl + postId);
+    return this.http.get<Post>(`${this.baseUrl}/${postId}`);
   }
 
   deletePost(postId: number) {
-    return this.http.delete(this.baseUrl + postId);
+    return this.http.delete(`${this.baseUrl}/${postId}`);
   }
 
   editPost(postId: number | string, changes: Partial<Post>): Observable<Post> {
-    return this.http.put<Post>(this.baseUrl + postId, changes);
+    return this.http.put<Post>(`${this.baseUrl}/${postId}`, changes);
   }
 }

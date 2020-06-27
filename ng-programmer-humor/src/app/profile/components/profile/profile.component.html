@@ -1,0 +1,14 @@
+<div>
+  <p class="error">{{ error$ | async }}</p>
+  <mat-spinner class="spinner" *ngIf="loading$ | async">Loading</mat-spinner>
+  <mat-card *ngIf="profile$ | async as profile" class="card">
+    <img
+      class="avatar"
+      src="{{ profile.profileImage }}"
+      alt="Photo of a Shiba Inu"
+    />
+    <p class="username">{{ profile.username }}</p>
+    <p>{{ profile.karma }} points</p>
+    <p>{{ profile.email }}</p>
+  </mat-card>
+</div>

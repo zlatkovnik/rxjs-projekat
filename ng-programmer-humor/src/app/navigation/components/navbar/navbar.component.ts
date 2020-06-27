@@ -3,14 +3,9 @@ import { Observable } from 'rxjs';
 import Auth from 'src/app/auth/models/auth.model';
 import { AuthState } from 'src/app/auth/store/auth.reducer';
 import { Store, select } from '@ngrx/store';
-import {
-  selectUserState,
-  selectAuthUser,
-  selectAuthLoading,
-  selectAuthError,
-} from 'src/app/auth/store/auth.selector';
-import { UsersService } from 'src/app/users/service/users.service';
+import { selectAuthUser } from 'src/app/auth/store/auth.selector';
 import { logoutUser } from 'src/app/auth/store/auth.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -20,10 +15,14 @@ import { logoutUser } from 'src/app/auth/store/auth.actions';
 export class NavbarComponent implements OnInit {
   user$: Observable<Auth>;
 
-  constructor(private store: Store<AuthState>) {}
+  constructor(private store: Store<AuthState>, private router: Router) {}
 
   ngOnInit(): void {
     this.user$ = this.store.pipe(select(selectAuthUser));
+  }
+
+  onProfile(id: number): void {
+    this.router.navigate([`/profile/view/${id}`]);
   }
 
   onLogout() {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import UserLogin from 'src/app/auth/models/user-login.model';
-import User from 'src/app/users/models/user.model';
+import User from '../../profile/models/user.model';
 import { tap, map, catchError, switchMap } from 'rxjs/operators';
 import { throwError, Observable, of } from 'rxjs';
 import UserRegister from 'src/app/auth/models/user-register.model';
@@ -53,11 +53,6 @@ export class AuthService {
   }
 
   logout() {
-    window.localStorage.removeItem('AUTH');
-  }
-
-  mapUserToAuth(user: User): Auth {
-    const { id, email, username, profileImage, karma, role } = user;
-    return { id, email, username, profileImage, karma, role };
+    return of('Ok');
   }
 }

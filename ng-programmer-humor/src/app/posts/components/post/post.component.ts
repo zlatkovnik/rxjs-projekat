@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { UsersService } from 'src/app/users/service/users.service';
+import { ProfileService } from '../../../profile/service/profile.service';
 import Post from '../../models/post.model';
 import Auth from 'src/app/auth/models/auth.model';
 import { Update } from '@ngrx/entity';
@@ -22,12 +22,12 @@ export class PostComponent implements OnInit {
   hasLiked: boolean;
 
   constructor(
-    private usersService: UsersService,
+    private profileService: ProfileService,
     private postsStore: Store<PostState>
   ) {}
 
   ngOnInit(): void {
-    this.profileImageUrl$ = this.usersService.getUserProfileImageUrl(
+    this.profileImageUrl$ = this.profileService.getUserProfileImageUrl(
       this.post.postedBy
     );
     this.momentTime = moment(this.post.date).fromNow();

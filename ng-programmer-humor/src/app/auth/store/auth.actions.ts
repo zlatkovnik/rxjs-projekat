@@ -39,3 +39,11 @@ export const registerUserFailure = createAction(
 );
 
 export const logoutUser = createAction('[Auth Service] Logout User');
+
+export const logoutUserSuccess = createAction(
+  '[Auth Effect] Logout User Success'
+);
+
+export const logoutUserFailure = createAction(
+  '[Auth Effect] Logout User Failure'
+);
