@@ -8,6 +8,7 @@ import { Update } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 import { PostState } from '../../store/post.reducer';
 import { editPost, likePost } from '../../store/post.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -23,7 +24,8 @@ export class PostComponent implements OnInit {
 
   constructor(
     private profileService: ProfileService,
-    private postsStore: Store<PostState>
+    private postsStore: Store<PostState>,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -37,5 +39,11 @@ export class PostComponent implements OnInit {
   onLike() {
     this.postsStore.dispatch(likePost({ user: this.user, post: this.post }));
     this.hasLiked = !this.hasLiked;
+  }
+
+  onProfileClick() {
+    this.profileService
+      .getUserByUsername(this.post.postedBy)
+      .subscribe((user) => this.router.navigate([`/profile/view/${user.id}`]));
   }
 }

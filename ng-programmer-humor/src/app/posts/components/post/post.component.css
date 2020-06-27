@@ -26,6 +26,13 @@
   object-fit: cover;
 }
 
+.img:hover {
+  background-color: whitesmoke;
+  width: 53px;
+  height: 53px;
+  cursor: pointer;
+}
+
 .action-container {
   display: flex;
   justify-content: center;

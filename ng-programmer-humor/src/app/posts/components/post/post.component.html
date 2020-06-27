@@ -1,7 +1,11 @@
 <mat-card class="card">
   <mat-card-header>
     <div mat-card-avatar class="header-image">
-      <img src="{{ profileImageUrl$ | async }}" class="img" />
+      <img
+        src="{{ profileImageUrl$ | async }}"
+        class="img"
+        (click)="onProfileClick()"
+      />
     </div>
 
     <mat-card-title>{{ post.title }}</mat-card-title>
