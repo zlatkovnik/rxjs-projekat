@@ -3,9 +3,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, map, catchError, concatMap, tap } from 'rxjs/operators';
 import * as fromPostActions from './post.actions';
 import { PostsService } from '../services/posts.service';
-import { of } from 'rxjs';
+import { of, concat, Observable } from 'rxjs';
 import Post from '../models/post.model';
 import { Router } from '@angular/router';
+import { Update } from '@ngrx/entity';
+import { dispatch } from 'rxjs/internal/observable/pairs';
 
 @Injectable()
 export class PostEffects {
@@ -13,8 +15,16 @@ export class PostEffects {
     this.actions$.pipe(
       ofType(fromPostActions.loadPosts),
       mergeMap((action) =>
-        this.postsService.getPosts().pipe(
-          map((posts) => fromPostActions.loadPostsSuccess({ posts: posts })),
+        this.postsService.getPosts(action.page, action.postsPerPage).pipe(
+          map((posts) => {
+            //Get posts mora da vrati ceo response
+            //Da bi iz headera izvukao broj postova
+            //Koji su mi potrebni zbog stranica
+            return fromPostActions.loadPostsSuccess({
+              posts: posts.body,
+              postsCount: posts.headers.get('X-Total-Count'),
+            });
+          }),
           catchError((error) =>
             of(
               fromPostActions.loadPostsFailure({
@@ -74,6 +84,22 @@ export class PostEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  likePost$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromPostActions.likePost),
+      concatMap((action) => {
+        const model = { ...action.post };
+        if (model.likedBy.includes(action.user.id))
+          model.likedBy = model.likedBy.filter((id) => action.user.id !== id);
+        else model.likedBy = [...model.likedBy, action.user.id];
+        const update: Update<Post> = { id: model.id, changes: model };
+        return this.postsService
+          .editPost(update.id, update.changes)
+          .pipe(map(() => fromPostActions.editPost({ post: update })));
+      })
+    )
   );
 
   constructor(

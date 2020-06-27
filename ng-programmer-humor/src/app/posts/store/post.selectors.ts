@@ -6,6 +6,12 @@ export const selectPostState = createFeatureSelector<PostState>(
 );
 
 export const selectPosts = createSelector(selectPostState, selectAll);
+
+export const selectPostsCount = createSelector(
+  selectPostState,
+  (state: PostState) => state.postsCount
+);
+
 export const selectedPost = createSelector(
   selectPostState,
   (state: PostState) => state.selectedPost

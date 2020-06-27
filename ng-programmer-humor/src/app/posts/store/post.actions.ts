@@ -4,10 +4,13 @@ import Post from '../models/post.model';
 import Auth from 'src/app/auth/models/auth.model';
 
 //Loading posts
-export const loadPosts = createAction('[Post Component] Load Posts');
+export const loadPosts = createAction(
+  '[Post Component] Load Posts',
+  props<{ page: number; postsPerPage: number }>()
+);
 export const loadPostsSuccess = createAction(
   '[Post Effect] Load Posts Success',
-  props<{ posts: Post[] }>()
+  props<{ posts: Post[]; postsCount: number }>()
 );
 export const loadPostsFailure = createAction(
   '[Post Effect] Load Posts Failure',
@@ -30,6 +33,11 @@ export const loadPostFailure = createAction(
 export const editPost = createAction(
   '[Post Component] Edit Post',
   props<{ post: Update<Post> }>()
+);
+//Like post
+export const likePost = createAction(
+  '[Post Component] Like Post',
+  props<{ user: Auth; post: Post }>()
 );
 //Add new post
 export const addPost = createAction(
@@ -81,3 +89,5 @@ export const deletePosts = createAction(
 );
 
 export const clearPosts = createAction('[Post/API] Clear Posts');
+
+export const noopActionPost = createAction('[Post Effect] Noop Action Post');

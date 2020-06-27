@@ -8,11 +8,14 @@ import {
   selectPosts,
   selectPostsError,
   selectPostsLoading,
+  selectPostsCount,
 } from '../../store/post.selectors';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import Auth from 'src/app/auth/models/auth.model';
 import { selectAuthUser } from 'src/app/auth/store/auth.selector';
 import { AuthState } from 'src/app/auth/store/auth.reducer';
+import { PageEvent } from '@angular/material/paginator';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-posts',
@@ -20,22 +23,48 @@ import { AuthState } from 'src/app/auth/store/auth.reducer';
   styleUrls: ['./posts.component.css'],
 })
 export class PostsComponent implements OnInit {
+  page: number;
+  pageSize: number = 5;
+  pageEvent: PageEvent;
+
   posts$: Observable<Post[]>;
+  postsCount$: Observable<number>;
   error$: Observable<any>;
   loading$: Observable<boolean>;
   auth$: Observable<Auth>;
 
+  //Ovako sam uradio jer mi je prettier pravio problem u html-u
+  postsCount: number;
+
   constructor(
     private postsStore: Store<PostState>,
     private authStore: Store<AuthState>,
-    private router: Router
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
-    this.postsStore.dispatch(loadPosts());
-    this.posts$ = this.postsStore.pipe(select(selectPosts));
+    const page = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.loadPosts(page);
     this.error$ = this.postsStore.pipe(select(selectPostsError));
     this.loading$ = this.postsStore.pipe(select(selectPostsLoading));
     this.auth$ = this.authStore.pipe(select(selectAuthUser));
+  }
+
+  loadPosts(page: number) {
+    this.page = page;
+    this.postsStore.dispatch(
+      loadPosts({ page: this.page, postsPerPage: this.pageSize })
+    );
+    this.posts$ = this.postsStore.pipe(select(selectPosts));
+    this.postsCount$ = this.postsStore.pipe(select(selectPostsCount));
+    this.postsCount$.subscribe((c) => (this.postsCount = c));
+  }
+
+  changePage(event?: PageEvent): PageEvent {
+    const page = event.pageIndex + 1;
+    this.location.replaceState(`posts/list/page/${page}`);
+    this.loadPosts(page);
+    return event;
   }
 }

@@ -17,8 +17,11 @@ export class PostsService {
     return this.http.post<Post>(this.baseUrl, post);
   }
 
-  getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.baseUrl}?_sort=date&_order=desc`);
+  getPosts(page: number, itemsPerPage: number): Observable<any> {
+    return this.http.get<Post[]>(
+      `${this.baseUrl}?_sort=date&_order=desc&_page=${page}&_limit=${itemsPerPage}`,
+      { observe: 'response' }
+    );
   }
 
   getPost(postId: number): Observable<Post> {

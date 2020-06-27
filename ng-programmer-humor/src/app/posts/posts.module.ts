@@ -8,6 +8,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { PostEffects } from './store/post.effects';
 import { PostComponent } from './components/post/post.component';
 import { PostsRoutingModule } from './posts-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
+import { PostAddComponent } from './components/post-add/post-add.component';
 
 //MUI
 import { MatCardModule } from '@angular/material/card';
@@ -15,9 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
-import { PostAddComponent } from './components/post-add/post-add.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PostDetailComponent } from './components/post-detail/post-detail.component';
+
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { PostDetailComponent } from './components/post-detail/post-detail.compon
     MatInputModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    MatPaginatorModule,
     StoreModule.forFeature(fromPost.postsFeatureKey, fromPost.reducer),
     EffectsModule.forFeature([PostEffects]),
   ],

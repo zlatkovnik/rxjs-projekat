@@ -10,6 +10,7 @@ export interface PostState extends EntityState<Post> {
   error: any;
   selectedPost: Post;
   loading: boolean;
+  postsCount: number;
 }
 
 export const adapter: EntityAdapter<Post> = createEntityAdapter<Post>();
@@ -18,6 +19,7 @@ export const initialState: PostState = adapter.getInitialState({
   error: undefined,
   selectedPost: undefined,
   loading: false,
+  postsCount: 0,
 });
 
 export const reducer = createReducer(
@@ -26,7 +28,12 @@ export const reducer = createReducer(
     return { ...state, loading: true };
   }),
   on(PostActions.loadPostsSuccess, (state, action) =>
-    adapter.setAll(action.posts, { ...state, loading: false, error: undefined })
+    adapter.setAll(action.posts, {
+      ...state,
+      loading: false,
+      error: undefined,
+      postsCount: action.postsCount,
+    })
   ),
   on(PostActions.loadPostsFailure, (state, action) => {
     return { ...state, error: action.error, loading: false };

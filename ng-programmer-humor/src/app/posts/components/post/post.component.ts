@@ -7,7 +7,7 @@ import Auth from 'src/app/auth/models/auth.model';
 import { Update } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 import { PostState } from '../../store/post.reducer';
-import { editPost } from '../../store/post.actions';
+import { editPost, likePost } from '../../store/post.actions';
 
 @Component({
   selector: 'app-post',
@@ -35,12 +35,7 @@ export class PostComponent implements OnInit {
   }
 
   onLike() {
-    const model = { ...this.post };
-    if (this.hasLiked)
-      model.likedBy = model.likedBy.filter((id) => this.user.id !== id);
-    else model.likedBy = [...model.likedBy, this.user.id];
-    const update: Update<Post> = { id: model.id, changes: model };
-    this.postsStore.dispatch(editPost({ post: update }));
+    this.postsStore.dispatch(likePost({ user: this.user, post: this.post }));
     this.hasLiked = !this.hasLiked;
   }
 }

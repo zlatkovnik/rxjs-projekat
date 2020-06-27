@@ -13,4 +13,11 @@
   <div *ngFor="let post of posts$ | async">
     <app-post [post]="post" [user]="auth$ | async"></app-post>
   </div>
+  <mat-paginator
+    class="paginator"
+    [length]="postsCount"
+    [pageSize]="pageSize"
+    (page)="pageEvent = changePage($event)"
+  >
+  </mat-paginator>
 </div>
