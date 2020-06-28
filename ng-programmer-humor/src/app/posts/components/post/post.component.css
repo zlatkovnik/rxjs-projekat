@@ -27,9 +27,11 @@
 }
 
 .img:hover {
-  background-color: whitesmoke;
-  width: 53px;
-  height: 53px;
+  cursor: pointer;
+}
+
+.username:hover {
+  font-weight: bold;
   cursor: pointer;
 }
 

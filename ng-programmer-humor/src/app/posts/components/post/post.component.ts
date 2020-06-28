@@ -8,6 +8,7 @@ import { Update } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 import { PostState } from '../../store/post.reducer';
 import { editPost, likePost } from '../../store/post.actions';
+import Profile from 'src/app/profile/models/profile.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,8 +18,7 @@ import { Router } from '@angular/router';
 })
 export class PostComponent implements OnInit {
   @Input() post: Post;
-  @Input() user: Auth;
-  profileImageUrl$: Observable<string>;
+  @Input() user: Profile;
   momentTime: string;
   hasLiked: boolean;
 
@@ -29,9 +29,6 @@ export class PostComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.profileImageUrl$ = this.profileService.getUserProfileImageUrl(
-      this.post.postedBy
-    );
     this.momentTime = moment(this.post.date).fromNow();
     this.hasLiked = this.post.likedBy.includes(this.user.id);
   }
@@ -42,8 +39,6 @@ export class PostComponent implements OnInit {
   }
 
   onProfileClick() {
-    this.profileService
-      .getUserByUsername(this.post.postedBy)
-      .subscribe((user) => this.router.navigate([`/profile/view/${user.id}`]));
+    this.router.navigate([`/profile/view/${this.post.postedBy.id}`]);
   }
 }

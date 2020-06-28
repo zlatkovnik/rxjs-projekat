@@ -21,12 +21,6 @@ export class ProfileService {
       .pipe(map((user) => mapUserToProfile(user)));
   }
 
-  getUserByUsername(username: string) {
-    return this.http
-      .get<User>(`${this.baseUrl}?username=${username}`)
-      .pipe(map((users) => mapUserToProfile(users[0])));
-  }
-
   getUserProfileImageUrl(username: string) {
     return this.http.get<User[]>(this.baseUrl + '?username=' + username).pipe(
       tap((users) => {

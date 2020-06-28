@@ -10,6 +10,7 @@ import { Update } from '@ngrx/entity';
 import { dispatch } from 'rxjs/internal/observable/pairs';
 
 @Injectable()
+//@ts-ignore
 export class PostEffects {
   loadPosts$ = createEffect(() =>
     this.actions$.pipe(
@@ -21,8 +22,9 @@ export class PostEffects {
             //Da bi iz headera izvukao broj postova
             //Koji su mi potrebni zbog stranica
             return fromPostActions.loadPostsSuccess({
-              posts: posts.body,
-              postsCount: posts.headers.get('X-Total-Count'),
+              posts: posts,
+              // postsCount: posts.headers.get('X-Total-Count'),
+              postsCount: 20,
             });
           }),
           catchError((error) =>
@@ -59,9 +61,9 @@ export class PostEffects {
           title: action.title,
           imageURL: action.imageURL,
           likedBy: [action.user.id],
-          postedBy: action.user.username,
+          postedBy: action.user,
           date: new Date().toISOString(),
-          comments: [],
+          // comments: [],
         };
         return this.postsService.createPost(post).pipe(
           map((post) => fromPostActions.addPostSuccess({ post })),

@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 import Post from '../models/post.model';
-import Auth from 'src/app/auth/models/auth.model';
+import Auth from '../../auth/models/auth.model';
 
 //Loading posts
 export const loadPosts = createAction(
