@@ -18,8 +18,9 @@ export class PostsService {
 
   baseUrl: string = 'http://localhost:3000/posts';
 
-  createPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(this.baseUrl, post);
+  createPost(post: Post): Observable<PostDTO> {
+    const postDTO: PostDTO = {...post, postedBy: post.postedBy.id}
+    return this.http.post<PostDTO>(this.baseUrl, postDTO);
   }
 
   getPostsDTO(page: number, itemsPerPage: number): Observable<PostDTO[]> {

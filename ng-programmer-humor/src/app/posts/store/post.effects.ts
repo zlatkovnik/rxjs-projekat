@@ -69,7 +69,7 @@ export class PostEffects {
     this.actions$.pipe(
       ofType(fromPostActions.addPost),
       mergeMap((action) => {
-        const post: Post = {
+        const model: Post = {
           title: action.title,
           imageURL: action.imageURL,
           likedBy: [action.user.id],
@@ -77,12 +77,12 @@ export class PostEffects {
           date: new Date().toISOString(),
           // comments: [],
         };
-        return this.postsService.createPost(post).pipe(
-          map((post) => fromPostActions.addPostSuccess({ post })),
+        return this.postsService.createPost(model).pipe(
+          map((post) => fromPostActions.addPostSuccess({ post: model })),
           catchError((error) => of(fromPostActions.addPostFailure({ error })))
         );
       }),
-      tap(() => this.router.navigate(['/posts/list']))
+      tap(() => this.router.navigate(['/posts/list/page/1']))
     )
   );
 
