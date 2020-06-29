@@ -36,8 +36,11 @@ export class PostsService {
     return this.http.delete(`${this.baseUrl}/${postId}`);
   }
 
-  editPost(postId: number | string, changes: Partial<Post>): Observable<Post> {
-    return this.http.put<Post>(`${this.baseUrl}/${postId}`, changes);
+  editPost(
+    postId: number | string,
+    changes: Partial<PostDTO>
+  ): Observable<PostDTO> {
+    return this.http.patch<PostDTO>(`${this.baseUrl}/${postId}`, changes);
   }
 
   getPosts(page: number, itemsPerPage: number) {

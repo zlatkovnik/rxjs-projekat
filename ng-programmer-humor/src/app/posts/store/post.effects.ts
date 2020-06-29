@@ -8,6 +8,8 @@ import Post from '../models/post.model';
 import { Router } from '@angular/router';
 import { Update } from '@ngrx/entity';
 import { dispatch } from 'rxjs/internal/observable/pairs';
+import PostDTO from '../models/postDTO.model';
+import { PostDetailComponent } from '../components/post-detail/post-detail.component';
 
 @Injectable()
 //@ts-ignore
@@ -92,14 +94,30 @@ export class PostEffects {
     this.actions$.pipe(
       ofType(fromPostActions.likePost),
       concatMap((action) => {
-        const model = { ...action.post };
-        if (model.likedBy.includes(action.user.id))
-          model.likedBy = model.likedBy.filter((id) => action.user.id !== id);
-        else model.likedBy = [...model.likedBy, action.user.id];
-        const update: Update<Post> = { id: model.id, changes: model };
+        const postModel: Partial<Post> = {
+          likedBy: action.post.likedBy,
+          id: action.post.id,
+        };
+        if (postModel.likedBy.includes(action.user.id))
+          postModel.likedBy = postModel.likedBy.filter(
+            (id) => action.user.id !== id
+          );
+        else postModel.likedBy = [...postModel.likedBy, action.user.id];
+        const postDTOModel: Partial<PostDTO> = {
+          likedBy: postModel.likedBy,
+          id: postModel.id,
+        };
+        const updatePost: Update<Post> = {
+          id: postModel.id,
+          changes: postModel,
+        };
+        const updatePostDTO: Update<PostDTO> = {
+          id: postDTOModel.id,
+          changes: postDTOModel,
+        };
         return this.postsService
-          .editPost(update.id, update.changes)
-          .pipe(map(() => fromPostActions.editPost({ post: update })));
+          .editPost(updatePostDTO.id, updatePostDTO.changes)
+          .pipe(map(() => fromPostActions.editPost({ post: updatePost })));
       })
     )
   );

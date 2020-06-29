@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 import Post from '../models/post.model';
 import Auth from '../../auth/models/auth.model';
+import PostDTO from '../models/postDTO.model';
 
 //Loading posts
 export const loadPosts = createAction(
