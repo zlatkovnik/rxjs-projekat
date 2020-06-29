@@ -102,6 +102,12 @@ export const reducer = createReducer(
       error: action.error,
     };
   }),
+  on(AuthActions.setKarma, (state, action) => {
+    return {
+      ...state,
+      user: action.user,
+    };
+  }),
   on(AuthActions.cleanupAuth, (state, action) => {
     return {
       ...state,

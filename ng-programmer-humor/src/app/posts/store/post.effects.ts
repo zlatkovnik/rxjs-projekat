@@ -10,6 +10,7 @@ import { Update } from '@ngrx/entity';
 import { dispatch } from 'rxjs/internal/observable/pairs';
 import PostDTO from '../models/postDTO.model';
 import { PostDetailComponent } from '../components/post-detail/post-detail.component';
+import { ProfileService } from 'src/app/profile/service/profile.service';
 
 @Injectable()
 //@ts-ignore
@@ -113,6 +114,7 @@ export class PostEffects {
             (id) => action.user.id !== id
           );
         else postModel.likedBy = [...postModel.likedBy, action.user.id];
+
         const postDTOModel: Partial<PostDTO> = {
           likedBy: postModel.likedBy,
           id: postModel.id,

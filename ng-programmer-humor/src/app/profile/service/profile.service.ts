@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import User from '../models/user.model';
@@ -27,6 +27,18 @@ export class ProfileService {
         if (users.length === 0) throw 'User not found';
       }),
       map((users) => users[0].profileImage)
+    );
+  }
+
+  changeKarma(userId: number, point: number) {
+    return this.http.get<User>(`${this.baseUrl}/${userId}`).pipe(
+      map((user) => {
+        const model: User = { ...user, karma: user.karma + point };
+        return model;
+      }),
+      switchMap((user) =>
+        this.http.patch<User>(`${this.baseUrl}/${userId}`, user)
+      )
     );
   }
 }

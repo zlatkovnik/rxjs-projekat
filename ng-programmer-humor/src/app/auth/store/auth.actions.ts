@@ -63,4 +63,9 @@ export const updateProfileImageFailure = createAction(
   props<{ error: any }>()
 );
 
+export const setKarma = createAction(
+  '[Auth Component] Set Karma',
+  props<{ user: Auth }>()
+);
+
 export const cleanupAuth = createAction('[Auth Component] Cleanup Auth');

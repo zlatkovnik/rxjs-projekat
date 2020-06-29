@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType, Effect } from '@ngrx/effects';
 import * as fromAuthActions from './auth.actions';
-import { exhaustMap, map, catchError, mergeMap } from 'rxjs/operators';
+import {
+  exhaustMap,
+  map,
+  catchError,
+  mergeMap,
+  switchMap,
+} from 'rxjs/operators';
 import { AuthService } from '../service/auth.service';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
@@ -87,6 +93,18 @@ export class AuthEffects {
         )
       )
     )
+  );
+
+  setKarma$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromAuthActions.setKarma),
+        map((action) => {
+          window.localStorage.removeItem('AUTH');
+          window.localStorage.setItem('AUTH', JSON.stringify(action.user));
+        })
+      ),
+    { dispatch: false }
   );
 
   constructor(

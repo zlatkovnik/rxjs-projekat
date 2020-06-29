@@ -10,6 +10,8 @@ import { PostState } from '../../store/post.reducer';
 import { editPost, likePost } from '../../store/post.actions';
 import Profile from 'src/app/profile/models/profile.model';
 import { Router } from '@angular/router';
+import { AuthState } from 'src/app/auth/store/auth.reducer';
+import { setKarma } from 'src/app/auth/store/auth.actions';
 
 @Component({
   selector: 'app-post',
@@ -24,6 +26,7 @@ export class PostComponent implements OnInit {
 
   constructor(
     private profileService: ProfileService,
+    private authStore: Store<AuthState>,
     private postsStore: Store<PostState>,
     private router: Router
   ) {}
@@ -34,7 +37,19 @@ export class PostComponent implements OnInit {
   }
 
   onLike() {
-    this.postsStore.dispatch(likePost({ user: this.user, post: this.post }));
+    const point = this.hasLiked ? -1 : 1;
+    this.profileService
+      .changeKarma(this.post.postedBy.id, point)
+      .subscribe(() => {
+        if (this.user.id === this.post.postedBy.id) {
+          const model: Auth = { ...this.user, karma: this.user.karma + point };
+          this.authStore.dispatch(setKarma({ user: model }));
+        }
+
+        this.postsStore.dispatch(
+          likePost({ user: this.user, post: this.post })
+        );
+      });
     this.hasLiked = !this.hasLiked;
   }
 

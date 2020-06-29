@@ -6,7 +6,11 @@
       "title": "C++ Cheater",
       "postedBy": 1,
       "date": "2020-06-27T09:47:12.630Z",
-      "likedBy": [1, 2, 4],
+      "likedBy": [
+        1,
+        2,
+        4
+      ],
       "comments": [
         {
           "commentedBy": "skadi17",
@@ -38,13 +42,17 @@
       "title": "Lamo",
       "postedBy": 3,
       "date": "2020-06-27T09:47:11.630Z",
-      "likedBy": [4],
+      "likedBy": [
+        4
+      ],
       "comments": []
     },
     {
       "title": "Yes? No? Well I donno.",
       "imageURL": "https://i.redd.it/zwxmf4i2az651.jpg",
-      "likedBy": [4],
+      "likedBy": [
+        4
+      ],
       "postedBy": 4,
       "date": "2020-06-05T09:47:12.630Z",
       "id": 4
@@ -60,7 +68,9 @@
     {
       "title": "Sounds familiar?",
       "imageURL": "https://i.redd.it/bv596en5x6751.jpg",
-      "likedBy": [4],
+      "likedBy": [
+        4
+      ],
       "postedBy": 6,
       "date": "2020-06-20T09:47:12.630Z",
       "comments": [],
@@ -69,7 +79,9 @@
     {
       "title": "Mods are asleep, upvote a centered div",
       "imageURL": "https://i.redd.it/obfojf3jfe751.png",
-      "likedBy": [4],
+      "likedBy": [
+        4
+      ],
       "postedBy": 7,
       "date": "2020-06-27T09:47:12.630Z",
       "comments": [],
@@ -78,7 +90,9 @@
     {
       "title": "Which one will you choose?",
       "imageURL": "https://i.redd.it/r0c91sho6o751.jpg",
-      "likedBy": [4],
+      "likedBy": [
+        4
+      ],
       "postedBy": 4,
       "date": "2020-06-29T12:09:04.340Z",
       "id": 8
@@ -86,7 +100,7 @@
     {
       "title": "Alternate version",
       "imageURL": "https://i.redd.it/9ykbrbdnws751.jpg",
-      "likedBy": [4],
+      "likedBy": [],
       "postedBy": 4,
       "date": "2020-06-29T19:12:55.471Z",
       "id": 9
@@ -94,7 +108,7 @@
     {
       "title": "When someone tells me to document my code...",
       "imageURL": "https://i.redd.it/hgcsbx3dzs751.png",
-      "likedBy": [4],
+      "likedBy": [],
       "postedBy": 4,
       "date": "2020-06-29T20:53:46.003Z",
       "id": 10
@@ -130,7 +144,7 @@
       "email": "jontrona@gmail.com",
       "username": "jontrona",
       "password": "jontrona",
-      "karma": 0,
+      "karma": -1,
       "id": 4
     },
     {
