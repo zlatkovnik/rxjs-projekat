@@ -62,7 +62,12 @@ export const reducer = createReducer(
       loading: false,
       error: action.error,
     };
-  })
+  }),
+  on(ProfileActions.cleanUpProfile, (state) => ({
+    ...state,
+    loading: false,
+    error: undefined,
+  }))
 );
 
 export const {

@@ -41,7 +41,9 @@
     </div>
 
     <button mat-stroked-button>
-      Comments<span class="material-icons"> comment </span>
+      Comments<span (click)="onCommentsClick()" class="material-icons">
+        comment
+      </span>
     </button>
     <div class="spacer"></div>
     <div *ngIf="user">

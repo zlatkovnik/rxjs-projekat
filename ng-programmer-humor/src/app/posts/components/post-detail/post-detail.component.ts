@@ -31,7 +31,6 @@ export class PostDetailComponent implements OnInit {
     this.postsStore.dispatch(
       loadPost({ id: parseInt(this.route.snapshot.paramMap.get('id')) })
     );
-
     this.post$ = this.postsStore.pipe(select(selectedPost));
     this.auth$ = this.userStore.pipe(select(selectAuthUser));
     this.error$ = this.postsStore.pipe(select(selectPostsLoading));

@@ -27,3 +27,6 @@ export const editProfileFailure = createAction(
   '[Profile Effect] Edit Profile Failure',
   props<{ error: any }>()
 );
+export const cleanUpProfile = createAction(
+  '[Profile Component] Clean Up Profile'
+);

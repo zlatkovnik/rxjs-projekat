@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProfileState } from '../../store/profile.reducer';
 import { Store, select } from '@ngrx/store';
-import { loadProfile } from '../../store/profile.actions';
+import { loadProfile, cleanUpProfile } from '../../store/profile.actions';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import {
@@ -19,7 +19,11 @@ import {
 } from 'src/app/auth/store/auth.selector';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/auth/service/auth.service';
-import { updateProfileImage } from 'src/app/auth/store/auth.actions';
+import {
+  updateProfileImage,
+  cleanupAuth,
+} from 'src/app/auth/store/auth.actions';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -77,7 +81,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    this.auth$.subscribe((auth) => {
+    this.auth$.pipe(take(1)).subscribe((auth) => {
       this.authStore.dispatch(
         updateProfileImage({ userId: auth.id, url: this.tempProfileImage })
       );

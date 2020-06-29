@@ -60,4 +60,8 @@ export class PostComponent implements OnInit {
   onProfileClick() {
     this.router.navigate([`/profile/view/${this.post.postedBy.id}`]);
   }
+
+  onCommentsClick() {
+    this.router.navigate([`/posts/detail/${this.post.id}`]);
+  }
 }

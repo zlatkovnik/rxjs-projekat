@@ -77,7 +77,12 @@ export const reducer = createReducer(
       loading: false,
     };
   }),
-  on(PostActions.clearPosts, (state) => adapter.removeAll(state))
+  on(PostActions.clearPosts, (state) => adapter.removeAll(state)),
+  on(PostActions.cleanUpPosts, (state) => ({
+    ...state,
+    loading: false,
+    error: undefined,
+  }))
 );
 
 export const {

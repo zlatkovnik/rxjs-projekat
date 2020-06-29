@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostState } from '../../store/post.reducer';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import Post from '../../models/post.model';
-import { loadPosts, updatePost, setPostsCount } from '../../store/post.actions';
+import {
+  loadPosts,
+  updatePost,
+  setPostsCount,
+  cleanUpPosts,
+} from '../../store/post.actions';
 import {
   selectPosts,
   selectPostsError,
@@ -16,6 +21,7 @@ import { selectAuthUser } from 'src/app/auth/store/auth.selector';
 import { AuthState } from 'src/app/auth/store/auth.reducer';
 import { PageEvent } from '@angular/material/paginator';
 import { Location } from '@angular/common';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-posts',
@@ -59,7 +65,7 @@ export class PostsComponent implements OnInit {
     this.postsStore.dispatch(setPostsCount());
     this.posts$ = this.postsStore.pipe(select(selectPosts));
     this.postsCount$ = this.postsStore.pipe(select(selectPostsCount));
-    this.postsCount$.subscribe((c) => (this.postsCount = c));
+    this.postsCount$.pipe(take(1)).subscribe((c) => (this.postsCount = c));
   }
 
   changePage(event?: PageEvent): PageEvent {

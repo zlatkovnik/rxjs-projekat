@@ -7,6 +7,7 @@ import {
   catchError,
   mergeMap,
   switchMap,
+  tap,
 } from 'rxjs/operators';
 import { AuthService } from '../service/auth.service';
 import { of } from 'rxjs';
@@ -77,7 +78,6 @@ export class AuthEffects {
           map((auth) => {
             window.localStorage.removeItem('AUTH');
             window.localStorage.setItem('AUTH', JSON.stringify(auth));
-            this.router.navigate([`/`]);
             const updatedUser: Auth = { ...auth, profileImage: action.url };
             return fromAuthActions.updateProfileImageSuccess({
               auth: updatedUser,
@@ -91,7 +91,8 @@ export class AuthEffects {
             )
           )
         )
-      )
+      ),
+      tap(() => this.router.navigate([`/`]))
     )
   );
 

@@ -72,6 +72,8 @@ export const deletePostFailure = createAction(
   props<{ error: any }>()
 );
 
-export const clearPosts = createAction('[Post/API] Clear Posts');
+export const clearPosts = createAction('[Post Component] Clear Posts');
+
+export const cleanUpPosts = createAction('[Post Component] Clean Up Posts');
 
 export const noopActionPost = createAction('[Post Effect] Noop Action Post');
