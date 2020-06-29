@@ -47,3 +47,20 @@ export const logoutUserSuccess = createAction(
 export const logoutUserFailure = createAction(
   '[Auth Effect] Logout User Failure'
 );
+
+export const updateProfileImage = createAction(
+  '[Auth Component] Update Profile Image',
+  props<{ userId: number; url: string }>()
+);
+
+export const updateProfileImageSuccess = createAction(
+  '[Auth Effect] Update Profile Image Success',
+  props<{ auth: Auth }>()
+);
+
+export const updateProfileImageFailure = createAction(
+  '[Auth Effect] Update Profile Image Failure',
+  props<{ error: any }>()
+);
+
+export const cleanupAuth = createAction('[Auth Component] Cleanup Auth');

@@ -80,6 +80,34 @@ export const reducer = createReducer(
     return {
       ...state,
     };
+  }),
+  on(AuthActions.updateProfileImage, (state, action) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+  on(AuthActions.updateProfileImageSuccess, (state, action) => {
+    return {
+      ...state,
+      loading: false,
+      error: undefined,
+      user: action.auth,
+    };
+  }),
+  on(AuthActions.updateProfileImageFailure, (state, action) => {
+    return {
+      ...state,
+      loading: false,
+      error: action.error,
+    };
+  }),
+  on(AuthActions.cleanupAuth, (state, action) => {
+    return {
+      ...state,
+      loading: false,
+      error: undefined,
+    };
   })
 );
 

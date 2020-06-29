@@ -1,14 +1,44 @@
 <div>
   <p class="error">{{ error$ | async }}</p>
-  <mat-spinner class="spinner" *ngIf="loading$ | async">Loading</mat-spinner>
+  <mat-spinner class="spinner" *ngIf="loading$ | async"></mat-spinner>
   <mat-card *ngIf="profile$ | async as profile" class="card">
     <img
       class="avatar"
       src="{{ profile.profileImage }}"
-      alt="Photo of a Shiba Inu"
+      alt="Photo of a cool dude"
     />
     <p class="username">{{ profile.username }}</p>
     <p>{{ profile.karma }} points</p>
     <p>{{ profile.email }}</p>
+    <div *ngIf="auth$ | async as auth">
+      <div *ngIf="auth.id === profile.id">
+        <form class="form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+          <mat-form-field class="example-full-width">
+            <mat-label>Profile image URL</mat-label>
+            <input
+              onFocus="this.select();"
+              (input)="imagePreview()"
+              matInput
+              placeholder="Cool profile image"
+              formControlName="url"
+            />
+          </mat-form-field>
+          <button (click)="onSubmit()" mat-raised-button color="primary">
+            Change profile image
+          </button>
+          <p>Preview:</p>
+          <img
+            class="avatar"
+            src="{{ tempProfileImage }}"
+            alt="Photo of a cool dude"
+          />
+          <p class="error">{{ errorImageChange$ | async }}</p>
+          <mat-spinner
+            class="spinner"
+            *ngIf="loadingImageChange$ | async"
+          ></mat-spinner>
+        </form>
+      </div>
+    </div>
   </mat-card>
 </div>

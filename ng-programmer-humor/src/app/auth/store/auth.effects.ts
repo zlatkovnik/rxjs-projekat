@@ -6,6 +6,7 @@ import { AuthService } from '../service/auth.service';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { mapUserToAuth } from '../service/util';
+import Auth from '../models/auth.model';
 
 @Injectable()
 export class AuthEffects {
@@ -56,6 +57,32 @@ export class AuthEffects {
             return fromAuthActions.logoutUserSuccess();
           }),
           catchError((error) => of(fromAuthActions.logoutUserFailure()))
+        )
+      )
+    )
+  );
+
+  updateProfileImage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromAuthActions.updateProfileImage),
+      exhaustMap((action) =>
+        this.authService.updateProfileImage(action.userId, action.url).pipe(
+          map((auth) => {
+            window.localStorage.removeItem('AUTH');
+            window.localStorage.setItem('AUTH', JSON.stringify(auth));
+            this.router.navigate([`/`]);
+            const updatedUser: Auth = { ...auth, profileImage: action.url };
+            return fromAuthActions.updateProfileImageSuccess({
+              auth: updatedUser,
+            });
+          }),
+          catchError((error) =>
+            of(
+              fromAuthActions.updateProfileImageFailure({
+                error: 'Unable to update image',
+              })
+            )
+          )
         )
       )
     )

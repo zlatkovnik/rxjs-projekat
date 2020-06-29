@@ -76,19 +76,19 @@ export class PostEffects {
     )
   );
 
-  editPost$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(fromPostActions.editPost),
-        concatMap((action) => {
-          return this.postsService.editPost(
-            action.post.id,
-            action.post.changes
-          );
-        })
-      ),
-    { dispatch: false }
-  );
+  // editPost$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(fromPostActions.editPost),
+  //       concatMap((action) => {
+  //         return this.postsService.editPost(
+  //           action.post.id,
+  //           action.post.changes
+  //         );
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   likePost$ = createEffect(() =>
     this.actions$.pipe(

@@ -55,4 +55,9 @@ export class AuthService {
   logout() {
     return of('Ok');
   }
+
+  updateProfileImage(userId: number, url: string) {
+    const changes: Partial<Auth> = { id: userId, profileImage: url };
+    return this.http.patch<Auth>(`${this.baseURL}/${userId}`, changes);
+  }
 }
