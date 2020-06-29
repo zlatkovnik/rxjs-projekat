@@ -44,7 +44,12 @@ export const reducer = createReducer(
     return { ...state, error: action.error, loading: false };
   }),
   on(PostActions.loadPostSuccess, (state, action) => {
-    return { ...state, error: '', selectedPost: action.post, loading: false };
+    return {
+      ...state,
+      error: undefined,
+      selectedPost: action.post,
+      loading: false,
+    };
   }),
   on(PostActions.loadPostFailure, (state, action) => {
     return { ...state, error: action.error, loading: false };

@@ -18,7 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
@@ -39,6 +39,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatProgressSpinnerModule,
     MatIconModule,
     MatPaginatorModule,
+    MatListModule,
     StoreModule.forFeature(fromPost.postsFeatureKey, fromPost.reducer),
     EffectsModule.forFeature([PostEffects]),
   ],

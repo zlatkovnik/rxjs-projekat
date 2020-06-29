@@ -29,14 +29,14 @@ export class PostsService {
     );
   }
 
+  getPostDTO(postId: number): Observable<PostDTO> {
+    return this.http.get<PostDTO>(`${this.baseUrl}/${postId}`);
+  }
+
   getPostsCount(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}?_page=1&_limit=1`, {
       observe: 'response',
     });
-  }
-
-  getPost(postId: number): Observable<Post> {
-    return this.http.get<Post>(`${this.baseUrl}/${postId}`);
   }
 
   deletePost(postId: number) {
@@ -48,6 +48,12 @@ export class PostsService {
     changes: Partial<PostDTO>
   ): Observable<PostDTO> {
     return this.http.patch<PostDTO>(`${this.baseUrl}/${postId}`, changes);
+  }
+
+  getPost(postId: number): Observable<Post> {
+    return this.getPostDTO(postId).pipe(
+      switchMap((post) => this.getPostFromDTO(post))
+    );
   }
 
   getPosts(page: number, itemsPerPage: number) {

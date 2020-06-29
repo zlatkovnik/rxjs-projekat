@@ -3,19 +3,14 @@ import { PostState } from '../../store/post.reducer';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import Post from '../../models/post.model';
-import {
-  loadPosts,
-  updatePost,
-  setPostsCount,
-  cleanUpPosts,
-} from '../../store/post.actions';
+import { loadPosts, setPostsCount } from '../../store/post.actions';
 import {
   selectPosts,
   selectPostsError,
   selectPostsLoading,
   selectPostsCount,
 } from '../../store/post.selectors';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import Auth from 'src/app/auth/models/auth.model';
 import { selectAuthUser } from 'src/app/auth/store/auth.selector';
 import { AuthState } from 'src/app/auth/store/auth.reducer';

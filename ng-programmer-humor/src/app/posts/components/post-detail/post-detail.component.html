@@ -1,5 +1,23 @@
 <div class="container">
   <mat-spinner *ngIf="loading$ | async" class="spinner"></mat-spinner>
-  <p class="error">{{ error$ | async }}</p>
-  Works
+  <p *ngIf="error$ | async as error" class="error">{{ error }}</p>
+  <div *ngIf="post$ | async as post">
+    <app-post
+      [post]="post"
+      [user]="auth$ | async"
+      [detailedMode]="true"
+    ></app-post>
+    <mat-card class="card">
+      <mat-list role="list" *ngIf="post.comments; else no_comments">
+        <mat-list-item role="listitem" *ngFor="let comment of post.comments">
+          <h3 matLine>{{ comment.commentedBy }}</h3>
+          <p matLine>{{ comment.body }}</p>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+      <ng-template #no_comments
+        ><div class="label">Be the first to comment</div></ng-template
+      ></mat-card
+    >
+  </div>
 </div>

@@ -21,6 +21,7 @@ import { setKarma } from 'src/app/auth/store/auth.actions';
 export class PostComponent implements OnInit {
   @Input() post: Post;
   @Input() user: Profile;
+  @Input() detailedMode: boolean;
   momentTime: string;
   hasLiked: boolean;
 
@@ -62,6 +63,7 @@ export class PostComponent implements OnInit {
   }
 
   onCommentsClick() {
+    console.log('klik');
     this.router.navigate([`/posts/detail/${this.post.id}`]);
   }
 }

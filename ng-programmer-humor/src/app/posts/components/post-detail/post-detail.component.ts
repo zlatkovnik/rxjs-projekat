@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
-import { selectedPost, selectPostsLoading } from '../../store/post.selectors';
+import {
+  selectedPost,
+  selectPostsLoading,
+  selectPostsError,
+} from '../../store/post.selectors';
 import { loadPost } from '../../store/post.actions';
 import { PostState } from '../../store/post.reducer';
 import { Observable } from 'rxjs';
 import { selectAuthUser } from 'src/app/auth/store/auth.selector';
 import Post from '../../models/post.model';
 import Auth from 'src/app/auth/models/auth.model';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-post-detail',
@@ -33,7 +38,7 @@ export class PostDetailComponent implements OnInit {
     );
     this.post$ = this.postsStore.pipe(select(selectedPost));
     this.auth$ = this.userStore.pipe(select(selectAuthUser));
-    this.error$ = this.postsStore.pipe(select(selectPostsLoading));
+    this.error$ = this.postsStore.pipe(select(selectPostsError));
     this.loading$ = this.postsStore.pipe(select(selectPostsLoading));
   }
 }

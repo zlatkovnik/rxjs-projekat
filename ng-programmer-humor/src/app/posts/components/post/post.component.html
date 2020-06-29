@@ -14,7 +14,7 @@
     >
   </mat-card-header>
   <img mat-card-image src="{{ post.imageURL }}" alt="Photo of a Shiba Inu" />
-  <mat-card-actions class="action-container">
+  <mat-card-actions *ngIf="!detailedMode" class="action-container">
     <div class="like-container">
       <div *ngIf="user">
         <button
@@ -39,9 +39,8 @@
       </div>
       <div class="number-of-likes">{{ post.likedBy.length }} likes</div>
     </div>
-
-    <button mat-stroked-button>
-      Comments<span (click)="onCommentsClick()" class="material-icons">
+    <button (click)="onCommentsClick()" mat-stroked-button>
+      Comments<span class="material-icons">
         comment
       </span>
     </button>

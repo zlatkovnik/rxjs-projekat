@@ -9,49 +9,14 @@
   margin: 20vw auto 0 auto;
 }
 
-.card {
-  max-width: 600px;
-  margin: 0 auto;
-  margin-top: 20px;
+.label {
+  text-align: center;
+  font-size: xx-large;
   margin-bottom: 20px;
 }
 
-.my-post {
-  color: orangered;
-  font-weight: bold;
-}
-
-.header-image {
-  background-size: cover;
-}
-
-.img {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  object-fit: cover;
-}
-
-.action-container {
-  display: flex;
-  justify-content: center;
-}
-
-.like-container {
-  display: flex;
-  align-items: center;
-}
-
-.number-of-likes {
-  margin-left: 7px;
-  font-size: x-large;
-}
-
-.comment-btn {
-  margin-left: 50%;
+.card {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-bottom: 30px;
 }

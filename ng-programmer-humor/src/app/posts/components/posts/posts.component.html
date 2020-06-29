@@ -11,7 +11,11 @@
     Add post
   </button>
   <div *ngFor="let post of posts$ | async">
-    <app-post [post]="post" [user]="auth$ | async"></app-post>
+    <app-post
+      [post]="post"
+      [user]="auth$ | async"
+      [detailedMode]="false"
+    ></app-post>
   </div>
   <mat-paginator
     class="paginator"

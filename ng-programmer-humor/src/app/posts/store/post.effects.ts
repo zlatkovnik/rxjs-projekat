@@ -28,7 +28,7 @@ export class PostEffects {
           catchError((error) =>
             of(
               fromPostActions.loadPostsFailure({
-                error: 'Connection timed out',
+                error: 'Connection timed out' + error.message,
               })
             )
           )
@@ -59,7 +59,7 @@ export class PostEffects {
         this.postsService.getPost(action.id).pipe(
           map((post) => fromPostActions.loadPostSuccess({ post: post })),
           catchError((error) =>
-            of(fromPostActions.loadPostFailure({ error: error }))
+            of(fromPostActions.loadPostFailure({ error: error.message }))
           )
         )
       )
@@ -80,7 +80,9 @@ export class PostEffects {
         };
         return this.postsService.createPost(model).pipe(
           map((post) => fromPostActions.addPostSuccess({ post: model })),
-          catchError((error) => of(fromPostActions.addPostFailure({ error })))
+          catchError((error) =>
+            of(fromPostActions.addPostFailure({ error: error.message }))
+          )
         );
       }),
       tap(() => this.router.navigate(['/posts/list/page/1']))
@@ -94,7 +96,7 @@ export class PostEffects {
         this.postsService.deletePost(action.id).pipe(
           map(() => fromPostActions.deletePostSuccess({ id: action.id })),
           catchError((error) =>
-            of(fromPostActions.deletePostFailure({ error }))
+            of(fromPostActions.deletePostFailure({ error: error.message }))
           )
         )
       )
