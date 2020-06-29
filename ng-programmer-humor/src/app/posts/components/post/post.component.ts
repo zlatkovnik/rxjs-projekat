@@ -63,7 +63,6 @@ export class PostComponent implements OnInit {
   }
 
   onCommentsClick() {
-    console.log('klik');
     this.router.navigate([`/posts/detail/${this.post.id}`]);
   }
 }
