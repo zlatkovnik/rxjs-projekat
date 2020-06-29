@@ -1,3 +1,5 @@
+import Comment from './comment.model';
+
 export default class PostDTO {
   id?: number;
   imageURL: string;
@@ -5,5 +7,5 @@ export default class PostDTO {
   date: string;
   postedBy: number;
   likedBy: number[];
-  // comments: number[];
+  comments: Comment[];
 }

@@ -8,5 +8,5 @@ export default class Post {
   date: string;
   postedBy: Profile;
   likedBy: number[];
-  //comments: Comment[];
+  comments: Comment[];
 }

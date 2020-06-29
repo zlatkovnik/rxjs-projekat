@@ -64,28 +64,19 @@ export const reducer = createReducer(
   on(PostActions.addPostFailure, (state, action) => {
     return { ...state, loading: false, error: action.error };
   }),
-  on(PostActions.upsertPost, (state, action) =>
-    adapter.upsertOne(action.post, state)
+  on(PostActions.deletePost, (state, action) => {
+    return { ...state, loading: true };
+  }),
+  on(PostActions.deletePostSuccess, (state, action) =>
+    adapter.removeOne(action.id, { ...state, loading: false, error: undefined })
   ),
-  on(PostActions.addPosts, (state, action) =>
-    adapter.addMany(action.posts, state)
-  ),
-  on(PostActions.upsertPosts, (state, action) =>
-    adapter.upsertMany(action.posts, state)
-  ),
-  on(PostActions.updatePost, (state, action) =>
-    adapter.updateOne(action.post, state)
-  ),
-  on(PostActions.updatePosts, (state, action) =>
-    adapter.updateMany(action.posts, state)
-  ),
-  on(PostActions.deletePost, (state, action) =>
-    adapter.removeOne(action.id, state)
-  ),
-  on(PostActions.deletePosts, (state, action) =>
-    adapter.removeMany(action.ids, state)
-  ),
-
+  on(PostActions.deletePostFailure, (state, action) => {
+    return {
+      ...state,
+      error: action.error,
+      loading: false,
+    };
+  }),
   on(PostActions.clearPosts, (state) => adapter.removeAll(state))
 );
 

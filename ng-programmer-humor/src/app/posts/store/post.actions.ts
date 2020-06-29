@@ -58,40 +58,18 @@ export const addPostFailure = createAction(
   '[Post Effect] Add Post Failure',
   props<{ error: any }>()
 );
-
-export const upsertPost = createAction(
-  '[Post/API] Upsert Post',
-  props<{ post: Post }>()
-);
-
-export const addPosts = createAction(
-  '[Post/API] Add Posts',
-  props<{ posts: Post[] }>()
-);
-
-export const upsertPosts = createAction(
-  '[Post/API] Upsert Posts',
-  props<{ posts: Post[] }>()
-);
-
-export const updatePost = createAction(
-  '[Post/API] Update Post',
-  props<{ post: Update<Post> }>()
-);
-
-export const updatePosts = createAction(
-  '[Post/API] Update Posts',
-  props<{ posts: Update<Post>[] }>()
-);
-
+//Delete post
 export const deletePost = createAction(
-  '[Post/API] Delete Post',
-  props<{ id: string }>()
+  '[Post Component] Delete Post',
+  props<{ id: number }>()
 );
-
-export const deletePosts = createAction(
-  '[Post/API] Delete Posts',
-  props<{ ids: string[] }>()
+export const deletePostSuccess = createAction(
+  '[Post Effect] Delete Post Success',
+  props<{ id: number }>()
+);
+export const deletePostFailure = createAction(
+  '[Post Effect] Delete Post Failure',
+  props<{ error: any }>()
 );
 
 export const clearPosts = createAction('[Post/API] Clear Posts');

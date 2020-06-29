@@ -7,40 +7,55 @@
     <mat-card-title>{{ post.title }}</mat-card-title>
     <mat-card-subtitle
       >Posted by
-      <span
-        (click)="onProfileClick()"
-        class="username"
-        [ngClass]="{ 'my-post': post.postedBy.id === user.id }"
-        >{{ post.postedBy.username }}</span
-      >
+      <span (click)="onProfileClick()" class="username">{{
+        post.postedBy.username
+      }}</span>
       {{ momentTime }}</mat-card-subtitle
     >
   </mat-card-header>
   <img mat-card-image src="{{ post.imageURL }}" alt="Photo of a Shiba Inu" />
   <mat-card-actions class="action-container">
     <div class="like-container">
-      <button
-        *ngIf="hasLiked; else not_liked"
-        mat-mini-fab
-        aria-label="Unlike post"
-        (click)="onLike()"
-      >
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <ng-template #not_liked>
+      <div *ngIf="user">
         <button
-          mat-icon-button
-          color="accent"
-          aria-label="Like post"
+          *ngIf="hasLiked; else not_liked"
+          color="primary"
+          mat-mini-fab
+          aria-label="Unlike post"
           (click)="onLike()"
         >
-          <mat-icon>favorite_outline</mat-icon>
+          <mat-icon>favorite</mat-icon>
         </button>
-      </ng-template>
-      <div class="number-of-likes">
-        {{ post.likedBy.length }}
+        <ng-template #not_liked>
+          <button
+            mat-icon-button
+            color="primary"
+            aria-label="Like post"
+            (click)="onLike()"
+          >
+            <mat-icon>favorite_outline</mat-icon>
+          </button>
+        </ng-template>
       </div>
+      <div class="number-of-likes">{{ post.likedBy.length }} likes</div>
     </div>
-    <button class="comment-btn" mat-button>Comments</button>
+
+    <button mat-stroked-button>
+      Comments<span class="material-icons"> comment </span>
+    </button>
+    <div class="spacer"></div>
+    <div *ngIf="user">
+      <button
+        color="accent"
+        mat-raised-button
+        *ngIf="post.postedBy.id === user.id"
+        (click)="onDelete()"
+      >
+        Delete post
+        <span class="material-icons">
+          delete_forever
+        </span>
+      </button>
+    </div>
   </mat-card-actions>
 </mat-card>

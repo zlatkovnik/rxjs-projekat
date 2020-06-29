@@ -50,6 +50,6 @@
   font-size: x-large;
 }
 
-.comment-btn {
-  margin-left: 50%;
+.spacer {
+  flex-grow: 1;
 }

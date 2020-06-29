@@ -19,7 +19,7 @@ export class PostsService {
   baseUrl: string = 'http://localhost:3000/posts';
 
   createPost(post: Post): Observable<PostDTO> {
-    const postDTO: PostDTO = {...post, postedBy: post.postedBy.id}
+    const postDTO: PostDTO = { ...post, postedBy: post.postedBy.id };
     return this.http.post<PostDTO>(this.baseUrl, postDTO);
   }
 
@@ -40,7 +40,7 @@ export class PostsService {
   }
 
   deletePost(postId: number) {
-    return this.http.delete(`${this.baseUrl}/${postId}`);
+    return this.http.delete<PostDTO>(`${this.baseUrl}/${postId}`);
   }
 
   editPost(

@@ -28,7 +28,9 @@
       "title": "Every class you break, every fix you fake, I'll be judging you",
       "postedBy": 2,
       "date": "2019-06-27T09:47:12.630Z",
-      "likedBy": [],
+      "likedBy": [
+        4
+      ],
       "comments": [
         {
           "commentedBy": "PilsburyKush",
@@ -60,7 +62,9 @@
     {
       "title": "No no he's got a point",
       "imageURL": "https://i.redd.it/jwaxwldnq1751.jpg",
-      "likedBy": [],
+      "likedBy": [
+        4
+      ],
       "postedBy": 5,
       "date": "2020-03-27T09:47:12.630Z",
       "id": 5
@@ -100,7 +104,9 @@
     {
       "title": "Alternate version",
       "imageURL": "https://i.redd.it/9ykbrbdnws751.jpg",
-      "likedBy": [],
+      "likedBy": [
+        4
+      ],
       "postedBy": 4,
       "date": "2020-06-29T19:12:55.471Z",
       "id": 9
@@ -108,7 +114,9 @@
     {
       "title": "When someone tells me to document my code...",
       "imageURL": "https://i.redd.it/hgcsbx3dzs751.png",
-      "likedBy": [],
+      "likedBy": [
+        4
+      ],
       "postedBy": 4,
       "date": "2020-06-29T20:53:46.003Z",
       "id": 10
@@ -128,7 +136,7 @@
       "profileImage": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       "email": "skadi@gmail.com",
       "username": "skadi17",
-      "karma": 0,
+      "karma": 1,
       "password": "123"
     },
     {
@@ -144,7 +152,7 @@
       "email": "jontrona@gmail.com",
       "username": "jontrona",
       "password": "jontrona",
-      "karma": -1,
+      "karma": 1,
       "id": 4
     },
     {
@@ -152,7 +160,7 @@
       "email": "WTFawkDude@gmail.com",
       "username": "WTFawkDude",
       "password": "WTFawkDude",
-      "karma": 0,
+      "karma": 1,
       "id": 5
     },
     {

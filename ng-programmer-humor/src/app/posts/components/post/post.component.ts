@@ -7,7 +7,7 @@ import Auth from 'src/app/auth/models/auth.model';
 import { Update } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 import { PostState } from '../../store/post.reducer';
-import { editPost, likePost } from '../../store/post.actions';
+import { editPost, likePost, deletePost } from '../../store/post.actions';
 import Profile from 'src/app/profile/models/profile.model';
 import { Router } from '@angular/router';
 import { AuthState } from 'src/app/auth/store/auth.reducer';
@@ -33,7 +33,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     this.momentTime = moment(this.post.date).fromNow();
-    this.hasLiked = this.post.likedBy.includes(this.user.id);
+    if (this.user) this.hasLiked = this.post.likedBy.includes(this.user.id);
   }
 
   onLike() {
@@ -51,6 +51,10 @@ export class PostComponent implements OnInit {
         );
       });
     this.hasLiked = !this.hasLiked;
+  }
+
+  onDelete() {
+    this.postsStore.dispatch(deletePost({ id: this.post.id }));
   }
 
   onProfileClick() {

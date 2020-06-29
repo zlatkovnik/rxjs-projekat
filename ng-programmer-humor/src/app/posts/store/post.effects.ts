@@ -76,7 +76,7 @@ export class PostEffects {
           likedBy: [action.user.id],
           postedBy: action.user,
           date: new Date().toISOString(),
-          // comments: [],
+          comments: [],
         };
         return this.postsService.createPost(model).pipe(
           map((post) => fromPostActions.addPostSuccess({ post: model })),
@@ -84,6 +84,20 @@ export class PostEffects {
         );
       }),
       tap(() => this.router.navigate(['/posts/list/page/1']))
+    )
+  );
+
+  deletePost$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromPostActions.deletePost),
+      mergeMap((action) =>
+        this.postsService.deletePost(action.id).pipe(
+          map(() => fromPostActions.deletePostSuccess({ id: action.id })),
+          catchError((error) =>
+            of(fromPostActions.deletePostFailure({ error }))
+          )
+        )
+      )
     )
   );
 
