@@ -27,12 +27,17 @@ export const reducer = createReducer(
   on(PostActions.loadPosts, (state, action) => {
     return { ...state, loading: true };
   }),
+  on(PostActions.setPostsCount, (state, action) => {
+    return { ...state };
+  }),
+  on(PostActions.setPostsCountSucces, (state, action) => {
+    return { ...state, postsCount: action.postsCount };
+  }),
   on(PostActions.loadPostsSuccess, (state, action) =>
     adapter.setAll(action.posts, {
       ...state,
       loading: false,
       error: undefined,
-      postsCount: action.postsCount,
     })
   ),
   on(PostActions.loadPostsFailure, (state, action) => {

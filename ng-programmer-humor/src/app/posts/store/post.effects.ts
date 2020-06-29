@@ -20,13 +20,8 @@ export class PostEffects {
       mergeMap((action) =>
         this.postsService.getPosts(action.page, action.postsPerPage).pipe(
           map((posts) => {
-            //Get posts mora da vrati ceo response
-            //Da bi iz headera izvukao broj postova
-            //Koji su mi potrebni zbog stranica
             return fromPostActions.loadPostsSuccess({
               posts: posts,
-              // postsCount: posts.headers.get('X-Total-Count'),
-              postsCount: 20,
             });
           }),
           catchError((error) =>
@@ -35,6 +30,21 @@ export class PostEffects {
                 error: 'Connection timed out',
               })
             )
+          )
+        )
+      )
+    )
+  );
+
+  setPostCount$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromPostActions.setPostsCount),
+      mergeMap((action) =>
+        this.postsService.getPostsCount().pipe(
+          map((res) =>
+            fromPostActions.setPostsCountSucces({
+              postsCount: res.headers.get('X-Total-Count'),
+            })
           )
         )
       )

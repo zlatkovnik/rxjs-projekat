@@ -54,6 +54,7 @@ export class AuthEffects {
           map((action) => {
             window.localStorage.removeItem('AUTH');
             this.authService.logout();
+            location.reload();
             return fromAuthActions.logoutUserSuccess();
           }),
           catchError((error) => of(fromAuthActions.logoutUserFailure()))

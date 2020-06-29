@@ -86,6 +86,16 @@
       "date": "2020-06-27T09:47:12.630Z",
       "comments": [],
       "id": 7
+    },
+    {
+      "title": "Which one will you choose?",
+      "imageURL": "https://i.redd.it/r0c91sho6o751.jpg",
+      "likedBy": [
+        4
+      ],
+      "postedBy": 4,
+      "date": "2020-06-29T12:09:04.340Z",
+      "id": 8
     }
   ],
   "users": [
@@ -114,7 +124,7 @@
       "password": "123"
     },
     {
-      "profileImage": "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg",
+      "profileImage": "https://image.freepik.com/free-vector/glitch-error-404-page-background_23-2148072533.jpg",
       "email": "jontrona@gmail.com",
       "username": "jontrona",
       "password": "jontrona",

@@ -9,9 +9,14 @@ export const loadPosts = createAction(
   '[Post Component] Load Posts',
   props<{ page: number; postsPerPage: number }>()
 );
+export const setPostsCount = createAction('[Post Component] Set Post Count');
+export const setPostsCountSucces = createAction(
+  '[Post Effect] Set Posts Count Success',
+  props<{ postsCount: number }>()
+);
 export const loadPostsSuccess = createAction(
   '[Post Effect] Load Posts Success',
-  props<{ posts: Post[]; postsCount: number }>()
+  props<{ posts: Post[] }>()
 );
 export const loadPostsFailure = createAction(
   '[Post Effect] Load Posts Failure',

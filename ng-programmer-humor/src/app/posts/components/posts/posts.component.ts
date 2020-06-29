@@ -3,7 +3,7 @@ import { PostState } from '../../store/post.reducer';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import Post from '../../models/post.model';
-import { loadPosts, updatePost } from '../../store/post.actions';
+import { loadPosts, updatePost, setPostsCount } from '../../store/post.actions';
 import {
   selectPosts,
   selectPostsError,
@@ -56,6 +56,7 @@ export class PostsComponent implements OnInit {
     this.postsStore.dispatch(
       loadPosts({ page: this.page, postsPerPage: this.pageSize })
     );
+    this.postsStore.dispatch(setPostsCount());
     this.posts$ = this.postsStore.pipe(select(selectPosts));
     this.postsCount$ = this.postsStore.pipe(select(selectPostsCount));
     this.postsCount$.subscribe((c) => (this.postsCount = c));

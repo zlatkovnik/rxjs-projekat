@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Post from '../models/post.model';
 import { Observable, forkJoin } from 'rxjs';
-import { switchMap, map, take } from 'rxjs/operators';
+import { switchMap, map, take, tap } from 'rxjs/operators';
 import PostDTO from '../models/postDTO.model';
 import { ProfileService } from '../../profile/service/profile.service';
 
@@ -26,6 +26,12 @@ export class PostsService {
     return this.http.get<PostDTO[]>(
       `${this.baseUrl}?_sort=date&_order=desc&_page=${page}&_limit=${itemsPerPage}`
     );
+  }
+
+  getPostsCount(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}?_page=1&_limit=1`, {
+      observe: 'response',
+    });
   }
 
   getPost(postId: number): Observable<Post> {
