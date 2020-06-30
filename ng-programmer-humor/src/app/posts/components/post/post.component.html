@@ -11,12 +11,10 @@
     <mat-card-title>{{ post.title }}</mat-card-title>
     <mat-card-subtitle
       >Posted by
-      <span *ngIf="user">
-        <span *ngIf="user.id === post.postedBy.id; else not_me">
-          <span (click)="onProfileClick()" class="username my-post">{{
-            post.postedBy.username
-          }}</span>
-        </span>
+      <span *ngIf="user && user.id === post.postedBy.id; else not_me">
+        <span (click)="onProfileClick()" class="username my-post">{{
+          post.postedBy.username
+        }}</span>
       </span>
       <ng-template #not_me>
         <span (click)="onProfileClick()" class="username">{{
