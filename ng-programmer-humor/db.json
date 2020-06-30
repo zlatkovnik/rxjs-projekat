@@ -90,15 +90,20 @@
       ],
       "postedBy": 7,
       "date": "2020-06-27T09:47:12.630Z",
-      "comments": [],
+      "comments": [
+        {
+          "commentedBy": "jontrona",
+          "body": "Impossible..."
+        }
+      ],
       "id": 7
     },
     {
       "title": "When someone tells me to document my code...",
       "imageURL": "https://i.redd.it/hgcsbx3dzs751.png",
       "likedBy": [
-        4,
-        8
+        8,
+        4
       ],
       "postedBy": 4,
       "date": "2020-06-29T20:53:46.003Z",
@@ -126,7 +131,8 @@
       "title": "Alternate version",
       "imageURL": "https://i.redd.it/db8qvupywu751.jpg",
       "likedBy": [
-        8
+        8,
+        4
       ],
       "postedBy": 8,
       "date": "2020-06-30T10:05:24.167Z",
@@ -198,7 +204,7 @@
       "email": "lela@gmail.com",
       "username": "lela",
       "password": "11111111",
-      "karma": 0,
+      "karma": 1,
       "id": 8,
       "profileImage": "https://www.mojenterijer.rs/storage/posts/seo/2020/Apr/136367/koje-cvece-bi-trebalo-izbegavati-ako-ste-alegicni-na-polen.jpeg"
     }

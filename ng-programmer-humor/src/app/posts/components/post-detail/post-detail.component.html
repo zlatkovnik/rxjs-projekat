@@ -48,10 +48,27 @@
         </p>
       </ng-template>
       <mat-list role="list" *ngIf="post.comments.length; else no_comments">
-        <mat-list-item role="listitem" *ngFor="let comment of post.comments">
+        <mat-list-item
+          class="list-item"
+          role="listitem"
+          *ngFor="let comment of post.comments"
+        >
           <h3 matLine>{{ comment.commentedBy }}</h3>
           <p matLine>{{ comment.body }}</p>
           <mat-divider></mat-divider>
+          <div *ngIf="auth$ | async as auth">
+            <button
+              color="accent"
+              mat-raised-button
+              *ngIf="auth.username === comment.commentedBy"
+              (click)="onDeleteComment(comment)"
+            >
+              Delete
+              <span class="material-icons">
+                delete_forever
+              </span>
+            </button>
+          </div>
         </mat-list-item>
       </mat-list>
       <ng-template #no_comments

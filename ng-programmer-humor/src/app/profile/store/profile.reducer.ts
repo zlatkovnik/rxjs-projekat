@@ -5,19 +5,17 @@ import * as ProfileActions from './profile.actions';
 
 export const profilesFeatureKey = 'profiles';
 
-export interface ProfileState extends EntityState<Profile> {
+export interface ProfileState {
   selectedProfile: Profile;
   loading: boolean;
   error: any;
 }
 
-export const adapter: EntityAdapter<Profile> = createEntityAdapter<Profile>();
-
-export const initialState: ProfileState = adapter.getInitialState({
+export const initialState: ProfileState = {
   selectedProfile: undefined,
   loading: false,
   error: undefined,
-});
+};
 
 export const reducer = createReducer(
   initialState,
@@ -69,10 +67,3 @@ export const reducer = createReducer(
     error: undefined,
   }))
 );
-
-export const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal,
-} = adapter.getSelectors();

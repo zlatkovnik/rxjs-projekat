@@ -82,14 +82,14 @@ export const reducer = createReducer(
       loading: false,
     };
   }),
-  on(PostActions.addComment, (state, action) => {
+  on(PostActions.editComments, (state, action) => {
     return {
       ...state,
       loading: true,
       error: undefined,
     };
   }),
-  on(PostActions.addCommentSuccessful, (state, action) => {
+  on(PostActions.editCommentsSuccessful, (state, action) => {
     return {
       ...state,
       selectedPost: action.post,
@@ -97,7 +97,7 @@ export const reducer = createReducer(
       error: undefined,
     };
   }),
-  on(PostActions.addCommentFailure, (state, action) => {
+  on(PostActions.editCommentsFailure, (state, action) => {
     return {
       ...state,
       loading: false,

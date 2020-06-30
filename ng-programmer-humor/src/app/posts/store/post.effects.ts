@@ -135,7 +135,7 @@ export class PostEffects {
 
   commentPost$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromPostActions.addComment),
+      ofType(fromPostActions.editComments),
       mergeMap((action) => {
         const post = action.post;
         const changes: Partial<PostDTO> = {
@@ -143,9 +143,9 @@ export class PostEffects {
           comments: post.comments,
         };
         return this.postsService.editPost(post.id, changes).pipe(
-          map(() => fromPostActions.addCommentSuccessful({ post: post })),
+          map(() => fromPostActions.editCommentsSuccessful({ post: post })),
           catchError((error) =>
-            of(fromPostActions.addCommentFailure({ error: error.message }))
+            of(fromPostActions.editCommentsFailure({ error: error.message }))
           )
         );
       })

@@ -5,21 +5,19 @@ import Auth from '../models/auth.model';
 
 export const authFeatureKey = 'auth';
 
-export interface AuthState extends EntityState<Auth> {
+export interface AuthState {
   error: any;
   user: Auth;
   loading: boolean;
   message: string;
 }
 
-export const adapter: EntityAdapter<Auth> = createEntityAdapter<Auth>();
-
-export const initialState: AuthState = adapter.getInitialState({
+export const initialState: AuthState = {
   error: undefined,
   user: undefined,
   loading: false,
   message: undefined,
-});
+};
 
 export const reducer = createReducer(
   initialState,
@@ -116,10 +114,3 @@ export const reducer = createReducer(
     };
   })
 );
-
-export const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal,
-} = adapter.getSelectors();

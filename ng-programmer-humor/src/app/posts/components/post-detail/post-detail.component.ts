@@ -6,7 +6,7 @@ import {
   selectPostsLoading,
   selectPostsError,
 } from '../../store/post.selectors';
-import { loadPost, addComment } from '../../store/post.actions';
+import { loadPost, editComments } from '../../store/post.actions';
 import { PostState } from '../../store/post.reducer';
 import { Observable } from 'rxjs';
 import { selectAuthUser } from 'src/app/auth/store/auth.selector';
@@ -64,7 +64,26 @@ export class PostDetailComponent implements OnInit {
           ...post,
           comments: [comment, ...post.comments],
         };
-        this.postsStore.dispatch(addComment({ user: user, post: postModel }));
+        this.postsStore.dispatch(editComments({ user: user, post: postModel }));
+        this.commentForm.reset();
+      });
+    });
+  }
+
+  onDeleteComment(comment: Comment) {
+    this.auth$.pipe(take(1)).subscribe((auth) => {
+      const user = auth;
+      this.post$.pipe(take(1)).subscribe((post) => {
+        const postModel: Post = {
+          ...post,
+          comments: post.comments.filter((com) => {
+            if (
+              !(com.body === comment.body && com.commentedBy === auth.username)
+            )
+              return com;
+          }),
+        };
+        this.postsStore.dispatch(editComments({ user: user, post: postModel }));
       });
     });
   }

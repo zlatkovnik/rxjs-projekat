@@ -45,17 +45,17 @@ export const likePost = createAction(
   '[Post Component] Like Post',
   props<{ user: Auth; post: Post }>()
 );
-//Add comments
-export const addComment = createAction(
-  '[Post Component] Add Comment',
+//Add comment
+export const editComments = createAction(
+  '[Post Component] Edit Comments',
   props<{ user: Auth; post: Post }>()
 );
-export const addCommentSuccessful = createAction(
-  '[Post Effect] Add Comment Successful',
+export const editCommentsSuccessful = createAction(
+  '[Post Effect] Edit Comments Successful',
   props<{ post: Post }>()
 );
-export const addCommentFailure = createAction(
-  '[Post Effect] Add Comment Failure',
+export const editCommentsFailure = createAction(
+  '[Post Effect] Edit Comments Failure',
   props<{ error: any }>()
 );
 //Add new post
