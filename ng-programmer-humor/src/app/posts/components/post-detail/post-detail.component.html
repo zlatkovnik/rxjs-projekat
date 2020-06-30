@@ -9,7 +9,7 @@
     <p *ngIf="error$ | async as error" class="error">{{ error }}</p>
     <mat-card class="card comment-card">
       <form
-        *ngIf="auth$ | async"
+        *ngIf="auth$ | async; else not_logged"
         class="form"
         [formGroup]="commentForm"
         (ngSubmit)="onSubmitComment()"
@@ -41,6 +41,12 @@
           Submit
         </button>
       </form>
+      <ng-template #not_logged>
+        <p class="not-logged">
+          You need to be a registered user to comment. <br />
+          Click <a class="link" routerLink="/register">here</a> to register.
+        </p>
+      </ng-template>
       <mat-list role="list" *ngIf="post.comments.length; else no_comments">
         <mat-list-item role="listitem" *ngFor="let comment of post.comments">
           <h3 matLine>{{ comment.commentedBy }}</h3>

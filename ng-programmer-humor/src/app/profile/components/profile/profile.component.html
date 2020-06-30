@@ -5,7 +5,7 @@
     <img
       class="avatar"
       src="{{ profile.profileImage }}"
-      alt="Photo of a cool dude"
+      onerror="this.onerror=null;this.src='../../../../assets/images/profile.jpg';"
     />
     <p class="username">{{ profile.username }}</p>
     <p>{{ profile.karma }} points</p>

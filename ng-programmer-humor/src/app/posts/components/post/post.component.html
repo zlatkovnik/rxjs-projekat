@@ -1,7 +1,11 @@
 <mat-card class="card">
   <mat-card-header>
     <div (click)="onProfileClick()" mat-card-avatar class="header-image">
-      <img src="{{ post.postedBy.profileImage }}" class="img" />
+      <img
+        src="{{ post.postedBy.profileImage }}"
+        class="img"
+        onerror="this.onerror=null;this.src='../../../../assets/images/profile.jpg';"
+      />
     </div>
 
     <mat-card-title>{{ post.title }}</mat-card-title>
@@ -13,7 +17,7 @@
       {{ momentTime }}</mat-card-subtitle
     >
   </mat-card-header>
-  <img mat-card-image src="{{ post.imageURL }}" alt="Photo of a Shiba Inu" />
+  <img mat-card-image src="{{ post.imageURL }}" alt="Photo of a cool post" />
   <mat-card-actions *ngIf="!detailedMode" class="action-container">
     <div class="like-container">
       <div *ngIf="user">
