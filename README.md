@@ -21,5 +21,40 @@ Postoje 5 stranice.
 #### Instrukcije:
 
   U borbi je bitno da što pre pritisne dugme za napad nakon protivničkog napada, kako bi se sačuvao život našeg lika.
+  
+  
+## 2. Angular + ngrx
+
+#### Pokretanje:
+
+```
+ng serve -o
+json-server db.json
+```
+  Pokreće se angular dev server (otvara se tab) i json server.
+  
+#### Pregled:
+
+Postoje stranice.
+  - Prva je home stranica, gde se nalazi dugme za odlazak na postove. A u slučaju da korisnik nije prijavljen takođe i dugme koje vodi na formu za registraciju.
+  - Forma za registraciju
+  - Forma za prijavu
+  - Stranica sa postovima, podeljena u stranice sa po 5 postova.
+  - Klikom na komentare, ulazi se u komentare posta.
+  - Klikom na nečiji ili svoj profil odlazi se na više informacija o korisniku
+  - U slučaju da je profil naš postoji i forma za izmenu
+  
+#### Mogućnosti:
+  - Registracija
+  - Logovanje
+  - Pregled postova
+  - Dodavanje novog posta
+  - Lajkovanje postova (ta akcija menja karmu korisnika, sem u slučaju kada lajkujemo svoj post)
+  - Promena stranice
+  - Odlazak na komentare posta
+  - Listanje i ostavljanje komentara
+  - Brisanje svojih postova
+  - Odlazak na nečiji profil
+  - Izmena profilne slike na profilu
 
 Nikola Zlatkov, 16593
