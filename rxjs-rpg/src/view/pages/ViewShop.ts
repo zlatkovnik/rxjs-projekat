@@ -1,5 +1,13 @@
-import { ICharacter, changeWeapon, changeArmor, updateCharacter } from "../../models/Character";
-import { allWeaponsObservable, allArmorsObservable } from "../../service/rxjsService";
+import {
+  ICharacter,
+  changeWeapon,
+  changeArmor,
+  updateCharacter,
+} from "../../models/Character";
+import {
+  allWeaponsObservable,
+  allArmorsObservable,
+} from "../../service/rxjsService";
 import { fetchWeaponCount, IWeapon } from "../../models/Weapon";
 import { fetchArmorCount, IArmor } from "../../models/Armor";
 import renderWeaponCard from "../components/ViewWeaponCard";
@@ -18,11 +26,18 @@ export default class ViewShop {
   }
 
   async render() {
+    const navCharacter = document.querySelector("#nav-character");
+    navCharacter.innerHTML = this.myCharacter.gold + " gold";
+
     this.container.innerHTML = "<h1>Loading...</h1>";
     const weaponCount = await fetchWeaponCount();
     const armorCount = await fetchArmorCount();
-    allWeaponsObservable(weaponCount).subscribe(async (promise) => this.renderWeapon(await promise));
-    allArmorsObservable(armorCount).subscribe(async (promise) => this.renderArmor(await promise));
+    allWeaponsObservable(weaponCount).subscribe(async (promise) =>
+      this.renderWeapon(await promise)
+    );
+    allArmorsObservable(armorCount).subscribe(async (promise) =>
+      this.renderArmor(await promise)
+    );
     this.container.innerHTML = "";
   }
 
@@ -33,7 +48,7 @@ export default class ViewShop {
     this.container.appendChild(col);
 
     const button = document.createElement("button");
-    button.value = weapon.id.toString();
+    button.value = weapon.cost.toString();
     if (this.myCharacter.gold >= weapon.cost) {
       button.className = "wbtn btn btn-primary btn-lg";
       button.innerHTML = "Select";
@@ -60,7 +75,7 @@ export default class ViewShop {
     this.container.appendChild(col);
 
     const button = document.createElement("button");
-    button.value = armor.id.toString();
+    button.value = armor.cost.toString();
 
     if (this.myCharacter.gold >= armor.cost) {
       button.className = "abtn btn btn-primary btn-lg";
@@ -88,7 +103,7 @@ export default class ViewShop {
     this.myCharacter.gold -= armor.cost;
     changeArmor(this.myCharacter, armor);
     updateCharacter(this.myCharacter);
-    this.setChosen(armor.id, "a", armor.cost);
+    this.setChosen(armor.id, "a");
   }
 
   handleSelectWeapon(ev: MouseEvent, weapon: IWeapon) {
@@ -97,13 +112,15 @@ export default class ViewShop {
     this.myCharacter.gold -= weapon.cost;
     changeWeapon(this.myCharacter, weapon);
     updateCharacter(this.myCharacter);
-    this.setChosen(weapon.id, "w", weapon.cost);
+    this.setChosen(weapon.id, "w");
   }
 
-  setChosen(id: number, type: string, cost: number) {
-    const buttons: HTMLButtonElement[] = Array.from(document.querySelectorAll(`.${type}btn`));
+  setChosen(id: number, type: string) {
+    const buttons: HTMLButtonElement[] = Array.from(
+      document.querySelectorAll(`.${type}btn`)
+    );
     buttons.forEach((button) => {
-      if (this.myCharacter.gold >= cost) {
+      if (parseInt(button.value) <= this.myCharacter.gold) {
         button.className = type + "btn btn btn-primary btn-lg";
         button.innerHTML = "Select";
         button.disabled = false;
@@ -117,9 +134,14 @@ export default class ViewShop {
     button[0].className = type + "btn btn btn-secondary btn-lg";
     button[0].disabled = true;
     button[0].innerHTML = "Chosen";
+
+    const navCharacter = document.querySelector("#nav-character");
+    navCharacter.innerHTML = this.myCharacter.gold + " gold";
   }
 
   cleanUp() {
     this.container.innerHTML = "";
+    const navCharacter = document.querySelector("#nav-character");
+    navCharacter.innerHTML = this.myCharacter.name;
   }
 }

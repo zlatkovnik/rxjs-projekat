@@ -3,7 +3,7 @@ import { pollingObservable } from "../../service/rxjsService";
 import { Subscription } from "rxjs";
 
 export default class ViewHome {
-  container: HTMLDivElement;
+  container: HTMLElement;
   subscriber: Subscription;
   constructor(parent: HTMLElement) {
     this.container = document.createElement("div");
