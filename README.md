@@ -53,6 +53,7 @@ Postoje stranice.
   - Promena stranice
   - Odlazak na komentare posta
   - Listanje i ostavljanje komentara
+  - Brisanje svojih komentara
   - Brisanje svojih postova
   - Odlazak na nečiji profil
   - Izmena profilne slike na profilu
