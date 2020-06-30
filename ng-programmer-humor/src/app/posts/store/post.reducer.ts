@@ -82,6 +82,28 @@ export const reducer = createReducer(
       loading: false,
     };
   }),
+  on(PostActions.addComment, (state, action) => {
+    return {
+      ...state,
+      loading: true,
+      error: undefined,
+    };
+  }),
+  on(PostActions.addCommentSuccessful, (state, action) => {
+    return {
+      ...state,
+      selectedPost: action.post,
+      loading: false,
+      error: undefined,
+    };
+  }),
+  on(PostActions.addCommentFailure, (state, action) => {
+    return {
+      ...state,
+      loading: false,
+      error: action.error,
+    };
+  }),
   on(PostActions.clearPosts, (state) => adapter.removeAll(state)),
   on(PostActions.cleanUpPosts, (state) => ({
     ...state,

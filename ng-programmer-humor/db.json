@@ -6,7 +6,11 @@
       "title": "C++ Cheater",
       "postedBy": 1,
       "date": "2020-06-27T09:47:12.630Z",
-      "likedBy": [1, 2, 4],
+      "likedBy": [
+        1,
+        2,
+        4
+      ],
       "comments": [
         {
           "commentedBy": "skadi17",
@@ -24,7 +28,9 @@
       "title": "Every class you break, every fix you fake, I'll be judging you",
       "postedBy": 2,
       "date": "2019-06-27T09:47:12.630Z",
-      "likedBy": [4],
+      "likedBy": [
+        4
+      ],
       "comments": [
         {
           "commentedBy": "PilsburyKush",
@@ -38,13 +44,17 @@
       "title": "Lamo",
       "postedBy": 3,
       "date": "2020-06-27T09:47:11.630Z",
-      "likedBy": [4],
+      "likedBy": [
+        4
+      ],
       "comments": []
     },
     {
       "title": "Yes? No? Well I donno.",
       "imageURL": "https://i.redd.it/zwxmf4i2az651.jpg",
-      "likedBy": [4],
+      "likedBy": [
+        4
+      ],
       "postedBy": 4,
       "date": "2020-06-05T09:47:12.630Z",
       "comments": [],
@@ -53,7 +63,9 @@
     {
       "title": "No no he's got a point",
       "imageURL": "https://i.redd.it/jwaxwldnq1751.jpg",
-      "likedBy": [4],
+      "likedBy": [
+        4
+      ],
       "postedBy": 5,
       "date": "2020-03-27T09:47:12.630Z",
       "comments": [],
@@ -62,7 +74,9 @@
     {
       "title": "Sounds familiar?",
       "imageURL": "https://i.redd.it/bv596en5x6751.jpg",
-      "likedBy": [4],
+      "likedBy": [
+        4
+      ],
       "postedBy": 6,
       "date": "2020-06-20T09:47:12.630Z",
       "comments": [],
@@ -71,7 +85,9 @@
     {
       "title": "Mods are asleep, upvote a centered div",
       "imageURL": "https://i.redd.it/obfojf3jfe751.png",
-      "likedBy": [4],
+      "likedBy": [
+        4
+      ],
       "postedBy": 7,
       "date": "2020-06-27T09:47:12.630Z",
       "comments": [],
@@ -80,7 +96,10 @@
     {
       "title": "When someone tells me to document my code...",
       "imageURL": "https://i.redd.it/hgcsbx3dzs751.png",
-      "likedBy": [4],
+      "likedBy": [
+        4,
+        8
+      ],
       "postedBy": 4,
       "date": "2020-06-29T20:53:46.003Z",
       "id": 10,
@@ -98,6 +117,22 @@
           "body": "Me: *writing code I’m not sure of Me: *commenting out that line IDE: Bitch."
         }
       ]
+    },
+    {
+      "title": "Alternate version",
+      "imageURL": "https://i.redd.it/db8qvupywu751.jpg",
+      "likedBy": [
+        8
+      ],
+      "postedBy": 8,
+      "date": "2020-06-30T10:05:24.167Z",
+      "comments": [
+        {
+          "commentedBy": "lela",
+          "body": "First comment"
+        }
+      ],
+      "id": 11
     }
   ],
   "users": [
@@ -130,7 +165,7 @@
       "email": "jontrona@gmail.com",
       "username": "jontrona",
       "password": "jontrona",
-      "karma": 4,
+      "karma": 5,
       "id": 4
     },
     {
@@ -154,6 +189,14 @@
       "password": "jontrona",
       "karma": 0,
       "id": 7
+    },
+    {
+      "email": "lela@gmail.com",
+      "username": "lela",
+      "password": "11111111",
+      "karma": 0,
+      "id": 8,
+      "profileImage": "https://www.mojenterijer.rs/storage/posts/seo/2020/Apr/136367/koje-cvece-bi-trebalo-izbegavati-ako-ste-alegicni-na-polen.jpeg"
     }
   ]
 }

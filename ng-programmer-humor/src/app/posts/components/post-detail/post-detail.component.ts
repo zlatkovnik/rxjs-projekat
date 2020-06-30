@@ -6,13 +6,15 @@ import {
   selectPostsLoading,
   selectPostsError,
 } from '../../store/post.selectors';
-import { loadPost } from '../../store/post.actions';
+import { loadPost, addComment } from '../../store/post.actions';
 import { PostState } from '../../store/post.reducer';
 import { Observable } from 'rxjs';
 import { selectAuthUser } from 'src/app/auth/store/auth.selector';
 import Post from '../../models/post.model';
 import Auth from 'src/app/auth/models/auth.model';
+import Comment from '../../models/comment.model';
 import { take } from 'rxjs/operators';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-post-detail',
@@ -24,6 +26,14 @@ export class PostDetailComponent implements OnInit {
   auth$: Observable<Auth>;
   error$: Observable<any>;
   loading$: Observable<boolean>;
+
+  commentForm: FormGroup = new FormGroup({
+    comment: new FormControl('', [Validators.required]),
+  });
+
+  get comment() {
+    return this.commentForm.get('comment');
+  }
 
   constructor(
     private postsStore: Store<PostState>,
@@ -40,5 +50,22 @@ export class PostDetailComponent implements OnInit {
     this.auth$ = this.userStore.pipe(select(selectAuthUser));
     this.error$ = this.postsStore.pipe(select(selectPostsError));
     this.loading$ = this.postsStore.pipe(select(selectPostsLoading));
+  }
+
+  onSubmitComment() {
+    this.auth$.pipe(take(1)).subscribe((auth) => {
+      const user = auth;
+      this.post$.pipe(take(1)).subscribe((post) => {
+        const comment: Comment = {
+          commentedBy: user.username,
+          body: this.comment.value,
+        };
+        const postModel: Post = {
+          ...post,
+          comments: [comment, ...post.comments],
+        };
+        this.postsStore.dispatch(addComment({ user: user, post: postModel }));
+      });
+    });
   }
 }

@@ -103,20 +103,6 @@ export class PostEffects {
     )
   );
 
-  // editPost$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(fromPostActions.editPost),
-  //       concatMap((action) => {
-  //         return this.postsService.editPost(
-  //           action.post.id,
-  //           action.post.changes
-  //         );
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
   likePost$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromPostActions.likePost),
@@ -146,6 +132,25 @@ export class PostEffects {
         return this.postsService
           .editPost(updatePostDTO.id, updatePostDTO.changes)
           .pipe(map(() => fromPostActions.editPost({ post: updatePost })));
+      })
+    )
+  );
+
+  commentPost$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromPostActions.addComment),
+      mergeMap((action) => {
+        const post = action.post;
+        const changes: Partial<PostDTO> = {
+          id: post.id,
+          comments: post.comments,
+        };
+        return this.postsService.editPost(post.id, changes).pipe(
+          map(() => fromPostActions.addCommentSuccessful({ post: post })),
+          catchError((error) =>
+            of(fromPostActions.addCommentFailure({ error: error.message }))
+          )
+        );
       })
     )
   );

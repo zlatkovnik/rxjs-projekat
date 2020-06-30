@@ -6,7 +6,7 @@
 }
 
 .spinner {
-  margin: 20vw auto 0 auto;
+  margin: 5vw auto 0 auto;
 }
 
 .label {
@@ -19,4 +19,20 @@
   max-width: 600px;
   margin: 0 auto;
   margin-bottom: 30px;
+}
+
+.comment-card {
+  background-color: whitesmoke;
+}
+
+.comment-container {
+  width: 100%;
+}
+
+.comment-box {
+  height: 60px;
+}
+
+.btn {
+  margin: 3px auto 0 auto;
 }

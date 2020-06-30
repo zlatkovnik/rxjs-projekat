@@ -1,14 +1,47 @@
 <div class="container">
-  <mat-spinner *ngIf="loading$ | async" class="spinner"></mat-spinner>
-  <p *ngIf="error$ | async as error" class="error">{{ error }}</p>
   <div *ngIf="post$ | async as post">
     <app-post
       [post]="post"
       [user]="auth$ | async"
       [detailedMode]="true"
     ></app-post>
-    <mat-card class="card">
-      <mat-list role="list" *ngIf="post.comments; else no_comments">
+    <mat-spinner *ngIf="loading$ | async" class="spinner"></mat-spinner>
+    <p *ngIf="error$ | async as error" class="error">{{ error }}</p>
+    <mat-card class="card comment-card">
+      <form
+        *ngIf="auth$ | async"
+        class="form"
+        [formGroup]="commentForm"
+        (ngSubmit)="onSubmitComment()"
+      >
+        <mat-form-field class="comment-container">
+          <mat-label>Leave a comment</mat-label>
+          <textarea
+            class="comment-box"
+            matInput
+            placeholder="What are your thoughts?"
+            formControlName="comment"
+          ></textarea>
+          <div
+            *ngIf="comment.invalid && (comment.dirty || comment.touched)"
+            class="alert alert-danger"
+          >
+            <mat-error *ngIf="comment.errors.required">
+              You can't post an empty comment
+            </mat-error>
+          </div>
+        </mat-form-field>
+        <button
+          type="submit"
+          [disabled]="!commentForm.valid"
+          class="btn"
+          mat-raised-button
+          color="primary"
+        >
+          Submit
+        </button>
+      </form>
+      <mat-list role="list" *ngIf="post.comments.length; else no_comments">
         <mat-list-item role="listitem" *ngFor="let comment of post.comments">
           <h3 matLine>{{ comment.commentedBy }}</h3>
           <p matLine>{{ comment.body }}</p>
@@ -17,7 +50,7 @@
       </mat-list>
       <ng-template #no_comments
         ><div class="label">Be the first to comment</div></ng-template
-      ></mat-card
-    >
+      >
+    </mat-card>
   </div>
 </div>
