@@ -34,9 +34,6 @@ export class PostsComponent implements OnInit {
   loading$: Observable<boolean>;
   auth$: Observable<Auth>;
 
-  //Ovako sam uradio jer mi je prettier pravio problem u html-u
-  postsCount: number;
-
   constructor(
     private postsStore: Store<PostState>,
     private authStore: Store<AuthState>,
@@ -60,7 +57,6 @@ export class PostsComponent implements OnInit {
     this.postsStore.dispatch(setPostsCount());
     this.posts$ = this.postsStore.pipe(select(selectPosts));
     this.postsCount$ = this.postsStore.pipe(select(selectPostsCount));
-    this.postsCount$.pipe(take(1)).subscribe((c) => (this.postsCount = c));
   }
 
   changePage(event?: PageEvent): PageEvent {

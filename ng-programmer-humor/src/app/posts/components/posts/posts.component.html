@@ -19,7 +19,7 @@
   </div>
   <mat-paginator
     class="paginator"
-    [length]="postsCount"
+    [length]="postsCount$ | async"
     [pageSize]="pageSize"
     (page)="pageEvent = changePage($event)"
   >

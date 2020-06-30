@@ -3,14 +3,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, map, catchError, concatMap, tap } from 'rxjs/operators';
 import * as fromPostActions from './post.actions';
 import { PostsService } from '../services/posts.service';
-import { of, concat, Observable } from 'rxjs';
+import { of } from 'rxjs';
 import Post from '../models/post.model';
 import { Router } from '@angular/router';
 import { Update } from '@ngrx/entity';
-import { dispatch } from 'rxjs/internal/observable/pairs';
 import PostDTO from '../models/postDTO.model';
-import { PostDetailComponent } from '../components/post-detail/post-detail.component';
-import { ProfileService } from 'src/app/profile/service/profile.service';
 
 @Injectable()
 //@ts-ignore
